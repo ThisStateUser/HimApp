@@ -6,21 +6,60 @@
         xmlns:local="clr-namespace:HimApp.Views.Windows"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
+        Icon="/Resources/icon.ico"
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Title="AuthWindow" Height="450" Width="300">
-    <Border CornerRadius="10" Background="{DynamicResource Background}">
+    <Border CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource Basic}" Background="{DynamicResource Background}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0"></StackPanel>
-            <StackPanel Grid.Row="1"></StackPanel>
-            <StackPanel Grid.Row="2"></StackPanel>
+            <DockPanel x:Name="ToolBar" MouseDown="ToolBar_MouseDown" Background="Transparent" Grid.Row="0" Height="35">
+                <TextBlock Margin="10 0" Text="Авторизация" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource ResMinBtn}" Click="CollapseWin_Click">
+                        <Icon:PackIconMaterial Kind="Minus"/>
+                    </Button>
+                    <Button Style="{DynamicResource CloseBtn}" Click="CloseWin_Click">
+                        <Icon:PackIconMaterial Kind="Close"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" Visibility="Visible">
+                <StackPanel Width="270" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Логин" Margin="0 0 0 5"/>
+                    <TextBox Style="{DynamicResource AuthBox}" x:Name="login"/>
+                    <TextBlock Text="Пароль" Margin="0 0 0 5"/>
+                    <Grid Margin="0 0 0 20">
+                        <PasswordBox Margin="0" Style="{DynamicResource AuthPBox}" Padding="5 5 30 5" x:Name="password"/>
+                        <TextBox Margin="0" Visibility="Collapsed" Padding="5 5 30 5" Style="{DynamicResource AuthBox}" x:Name="password_visible"/>
+                        <Border MouseDown="ShowPassword_MouseDown" BorderThickness="0" Background="Transparent" HorizontalAlignment="Right" Width="30">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Icon:PackIconMaterial Kind="Eye" Width="20" x:Name="SHicon" Foreground="{DynamicResource Basic}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <DockPanel>
+                        <CheckBox Content="Запомнить меня?" Style="{DynamicResource Remember}"/>
+                        <Button HorizontalAlignment="Right" x:Name="Auth" Click="Auth_Click">
+                            <TextBlock Text="Войти" Foreground="{DynamicResource TextBtn}"/>
+                        </Button>
+                    </DockPanel>
+                </StackPanel>
+            </DockPanel>
         </Grid>
     </Border>
 </Window>

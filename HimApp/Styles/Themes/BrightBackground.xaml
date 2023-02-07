@@ -11,6 +11,20 @@
     <Color x:Key="Panel2Color">#e8eaee</Color>
     <Color x:Key="ShadowColor">#e1e4e9</Color>
 
+
+    <SolidColorBrush x:Key="SysBasic" Color="#F7F8FA"/>
+    <SolidColorBrush x:Key="SysHover" Color="#DEDFE0"/>
+    <SolidColorBrush x:Key="SysPressed" Color="#868687"/>
+    <SolidColorBrush x:Key="SysDisabled" Color="#CACBCC"/>
+
+    <Color x:Key="SysBasicColor">#F7F8FA</Color>
+    <Color x:Key="SysHoverColor">#DEDFE0</Color>
+    <Color x:Key="SysPressedColor">#868687</Color>
+    <Color x:Key="SysDisabledColor">#CACBCC</Color>
+
+    <SolidColorBrush x:Key="Text" Color="#2a2d48"/>
+    <Color x:Key="TextColor">#2a2d48</Color>
+
     <Style TargetType="Border" x:Key="BorderPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
         <Setter Property="CornerRadius" Value="10"/>

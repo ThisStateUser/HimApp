@@ -10,5 +10,7 @@
     <Color x:Key="HoverColor">#D1322A</Color>
     <Color x:Key="PressedColor">#E6372E</Color>
     <Color x:Key="DisabledColor">#801F19</Color>
-    
+
+    <SolidColorBrush x:Key="TextBtn" Color="#fbfcfd"/>
+    <Color x:Key="TextBtnColor">#fbfcfd</Color>
 </ResourceDictionary>

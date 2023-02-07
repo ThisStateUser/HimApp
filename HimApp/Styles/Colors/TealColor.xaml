@@ -11,4 +11,6 @@
     <Color x:Key="PressedColor">#1AB88D</Color>
     <Color x:Key="DisabledColor">#128062</Color>
 
+    <SolidColorBrush x:Key="TextBtn" Color="#fbfcfd"/>
+    <Color x:Key="TextBtnColor">#fbfcfd</Color>
 </ResourceDictionary>
