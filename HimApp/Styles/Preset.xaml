@@ -113,6 +113,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
+                            <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect BlurRadius="3"
@@ -122,7 +123,6 @@
                                                       RenderingBias="Performance"/>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Panel1}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -177,6 +177,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
+                            <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect BlurRadius="3"
@@ -186,7 +187,6 @@
                                                       RenderingBias="Performance"/>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Panel1}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
