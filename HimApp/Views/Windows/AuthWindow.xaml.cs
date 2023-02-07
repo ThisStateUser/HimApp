@@ -79,6 +79,13 @@ namespace HimApp.Views.Windows
         {
             UIObj.UpdateColor("Styles/Themes/BrightBackground.xaml");
             UIObj.UpdateColor("Styles/Colors/IndigoColor.xaml");
+
+            if(login.Text != "1234")
+            {
+                login.BorderThickness = new Thickness(1);
+                login.BorderBrush = (SolidColorBrush)FindResource("redcolor");
+            }
+
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
