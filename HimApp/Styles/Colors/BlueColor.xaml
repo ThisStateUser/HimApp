@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="Basic" Color="#4BCFFA"/>
+    <SolidColorBrush x:Key="Hover" Color="#3DA8CC"/>
+    <SolidColorBrush x:Key="Pressed" Color="#43B9E0"/>
+    <SolidColorBrush x:Key="Disabled" Color="#266980"/>
+
+    <Color x:Key="BasicColor">#4BCFFA</Color>
+    <Color x:Key="HoverColor">#3DA8CC</Color>
+    <Color x:Key="PressedColor">#43B9E0</Color>
+    <Color x:Key="DisabledColor">#266980</Color>
+</ResourceDictionary>
