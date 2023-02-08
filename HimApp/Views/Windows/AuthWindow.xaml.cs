@@ -26,11 +26,13 @@ namespace HimApp.Views.Windows
         public AuthWindow()
         {
             InitializeComponent();
+            login.Focus();
+            UIObj.SwithThemeCheck();
         }
 
         private void CloseWin_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Application.Current.Shutdown();
         }
 
         private void CollapseWin_Click(object sender, RoutedEventArgs e)
@@ -77,15 +79,43 @@ namespace HimApp.Views.Windows
 
         private void Auth_Click(object sender, RoutedEventArgs e)
         {
-            UIObj.UpdateColor("Styles/Themes/BrightBackground.xaml");
-            UIObj.UpdateColor("Styles/Colors/IndigoColor.xaml");
-
             if(login.Text != "1234")
             {
                 login.BorderThickness = new Thickness(1);
                 login.BorderBrush = (SolidColorBrush)FindResource("redcolor");
+                return;
             }
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
 
+        private void login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                switch (TbOrPb_pass)
+                {
+                    case true:
+                        password_visible.Focus();
+                        break;
+                    case false:
+                        password.Focus();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void password_KeyDown(object sender, KeyEventArgs e)
+        {
+            Auth_Click(null, null);
+        }
+
+        private void password_visible_KeyDown(object sender, KeyEventArgs e)
+        {
+            Auth_Click(null, null);
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)

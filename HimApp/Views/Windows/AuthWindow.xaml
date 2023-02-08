@@ -34,11 +34,11 @@
             <DockPanel Grid.Row="1" Visibility="Visible">
                 <StackPanel Width="270" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Text="Логин" Margin="0 0 0 5"/>
-                    <TextBox Style="{DynamicResource AuthBox}" x:Name="login"/>
+                    <TextBox Style="{DynamicResource AuthBox}" KeyDown="login_KeyDown" x:Name="login"/>
                     <TextBlock Text="Пароль" Margin="0 0 0 5"/>
                     <Grid Margin="0 0 0 20">
-                        <PasswordBox Margin="0" Style="{DynamicResource AuthPBox}" Padding="5 5 30 5" x:Name="password"/>
-                        <TextBox Margin="0" Visibility="Collapsed" Padding="5 5 30 5" Style="{DynamicResource AuthBox}" x:Name="password_visible"/>
+                        <PasswordBox Margin="0" Style="{DynamicResource AuthPBox}" KeyDown="password_KeyDown" Padding="5 5 30 5" x:Name="password"/>
+                        <TextBox Margin="0" Visibility="Collapsed" KeyDown="password_visible_KeyDown" Padding="5 5 30 5" Style="{DynamicResource AuthBox}" x:Name="password_visible"/>
                         <Border MouseDown="ShowPassword_MouseDown" BorderThickness="0" Background="Transparent" HorizontalAlignment="Right" Width="30">
                             <Border.Style>
                                 <Style TargetType="Border">

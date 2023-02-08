@@ -4,9 +4,75 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HimApp.Views.Windows"
+         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
+        Icon="/Resources/icon.ico"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="800" Width="1280">
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="10" BorderThickness="1" BorderBrush="{DynamicResource Basic}" Background="{DynamicResource Background}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DockPanel x:Name="ToolBar" MouseDown="ToolBar_MouseDown" Background="Transparent" Grid.Row="0" Height="35">
+                <TextBlock Margin="10 0" Text="HimApp" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource ResMinBtn}" Click="CollapseWin_Click">
+                        <Icon:PackIconMaterial Kind="Minus"/>
+                    </Button>
+                    <Button Style="{DynamicResource ResMinBtn}" Click="ResizeWin_Click">
+                        <Icon:PackIconMaterial x:Name="ResizeIcon" Kind="SquareOutline"/>
+                    </Button>
+                    <Button Style="{DynamicResource CloseBtn}" Click="CloseWin_Click">
+                        <Icon:PackIconMaterial Kind="Close"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="96"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" CornerRadius="0 10 0 10" Style="{DynamicResource ShadowPanel}">
+                    <DockPanel Margin="0 20" LastChildFill="True">
+                        <Separator DockPanel.Dock="Top" Visibility="Hidden"/>
+                        
+                        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                            <Button Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtnOnly}"  x:Name="ThemeSwitch" Click="ThemeSwitch_Click">
+                                <Icon:PackIconMaterial Kind="Lightbulb" x:Name="ThemeSwitchIcon" Style="{DynamicResource menuBtnIcon}"/>
+                            </Button>                            
+                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                                <Icon:PackIconMaterial Kind="Cog" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>       
+                        </StackPanel>
+                        
+                        <StackPanel VerticalAlignment="Center">
+                            <RadioButton IsChecked="True" Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                                <Icon:PackIconMaterial Kind="HomeVariant" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
+                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                                <Icon:PackIconMaterial Kind="ViewList" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
+                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                                <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
+                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                                <Icon:PackIconMaterial Kind="Pencil" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+                <Frame Grid.Column="1" x:Name="FrameM" Margin="40 20 40 20"/>
+            </Grid>
+
+
+        </Grid>
+    </Border>
 </Window>

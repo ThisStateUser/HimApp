@@ -23,7 +23,9 @@
     <Color x:Key="SysDisabledColor">#CACBCC</Color>
 
     <SolidColorBrush x:Key="Text" Color="#2a2d48"/>
+    <SolidColorBrush x:Key="SysText" Color="#cfd6dc"/>
     <Color x:Key="TextColor">#2a2d48</Color>
+    <Color x:Key="SysTextColor">#cfd6dc</Color>
 
     <Style TargetType="Border" x:Key="BorderPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
@@ -37,6 +39,19 @@
                                   Color="{DynamicResource ShadowColor}"
                                   Opacity="100"
                                   ShadowDepth="3"
+                                  RenderingBias="Performance"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="ShadowPanel">
+        <Setter Property="Background" Value="{DynamicResource Panel1}" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="3"
+                                  Color="{DynamicResource SysBasicColor}"
+                                  Opacity="1"
+                                  ShadowDepth="1"
                                   RenderingBias="Performance"/>
             </Setter.Value>
         </Setter>
