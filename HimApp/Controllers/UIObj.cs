@@ -17,6 +17,7 @@ namespace HimApp.Controllers
             Application.Current.Resources.Clear();
             Application.Current.Resources.MergedDictionaries.Add(Dictionary);
         }
+
         public static void SwithThemeVoid()
         {
             bool theme = Properties.Settings.Default.Theme;

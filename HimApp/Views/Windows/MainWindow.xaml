@@ -42,34 +42,33 @@
 
                 <Border Grid.Column="0" CornerRadius="0 10 0 10" Style="{DynamicResource ShadowPanel}">
                     <DockPanel Margin="0 20" LastChildFill="True">
-                        <Separator DockPanel.Dock="Top" Visibility="Hidden"/>
                         
                         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                             <Button Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtnOnly}"  x:Name="ThemeSwitch" Click="ThemeSwitch_Click">
                                 <Icon:PackIconMaterial Kind="Lightbulb" x:Name="ThemeSwitchIcon" Style="{DynamicResource menuBtnIcon}"/>
                             </Button>                            
-                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoSettingPage" Click="GoSettingPage_Click">
                                 <Icon:PackIconMaterial Kind="Cog" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>       
                         </StackPanel>
                         
                         <StackPanel VerticalAlignment="Center">
-                            <RadioButton IsChecked="True" Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                            <RadioButton IsChecked="True" Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="HomeVariant" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="ViewList" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="Pencil" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                         </StackPanel>
                     </DockPanel>
                 </Border>
-                <Frame Grid.Column="1" x:Name="FrameM" Margin="40 20 40 20"/>
+                <Frame Grid.Column="1" x:Name="FrameM" NavigationUIVisibility="Hidden" Margin="40 20 40 20"/>
             </Grid>
 
 

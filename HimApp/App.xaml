@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="./Styles/Themes/DarkBackground.xaml"/>
                 <ResourceDictionary Source="./Styles/Colors/TealColor.xaml"/>
+                <ResourceDictionary Source="./Styles/Themes/DarkBackground.xaml"/>
                 <ResourceDictionary Source="./Styles/Colors/BootStrapColor.xaml"/>
                 
                 <ResourceDictionary Source="./Styles/Preset.xaml"/>

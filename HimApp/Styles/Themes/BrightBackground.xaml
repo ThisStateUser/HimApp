@@ -4,12 +4,10 @@
     <SolidColorBrush x:Key="Background" Color="#f7f8fa"/>
     <SolidColorBrush x:Key="Panel1" Color="#ffffff"/>
     <SolidColorBrush x:Key="Panel2" Color="#e8eaee"/>
-    <SolidColorBrush x:Key="Shadow" Color="#e1e4e9"/>
 
     <Color x:Key="BackgroundColor">#f7f8fa</Color>
     <Color x:Key="Panel1Color">#ffffff</Color>
     <Color x:Key="Panel2Color">#e8eaee</Color>
-    <Color x:Key="ShadowColor">#e1e4e9</Color>
 
 
     <SolidColorBrush x:Key="SysBasic" Color="#F7F8FA"/>
@@ -22,38 +20,14 @@
     <Color x:Key="SysPressedColor">#868687</Color>
     <Color x:Key="SysDisabledColor">#CACBCC</Color>
 
+    
+    <SolidColorBrush x:Key="Shadow" Color="#e1e4e9"/>
+    <Color x:Key="ShadowColor">#e1e4e9</Color>
+    
+    
     <SolidColorBrush x:Key="Text" Color="#2a2d48"/>
     <SolidColorBrush x:Key="SysText" Color="#cfd6dc"/>
+    
     <Color x:Key="TextColor">#2a2d48</Color>
     <Color x:Key="SysTextColor">#cfd6dc</Color>
-
-    <Style TargetType="Border" x:Key="BorderPanel">
-        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="MinHeight" Value="10"/>
-        <Setter Property="MinWidth" Value="10"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="5"
-                                  Color="{DynamicResource ShadowColor}"
-                                  Opacity="100"
-                                  ShadowDepth="3"
-                                  RenderingBias="Performance"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="Border" x:Key="ShadowPanel">
-        <Setter Property="Background" Value="{DynamicResource Panel1}" />
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="3"
-                                  Color="{DynamicResource SysBasicColor}"
-                                  Opacity="1"
-                                  ShadowDepth="1"
-                                  RenderingBias="Performance"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>

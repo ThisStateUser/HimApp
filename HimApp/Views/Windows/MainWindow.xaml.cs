@@ -1,4 +1,5 @@
 ﻿using HimApp.Controllers;
+using HimApp.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace HimApp.Views.Windows
         {
             InitializeComponent();
             UpdIconTheme();
+            FrameM.Navigate(new HomePage());
         }
 
         //ToolBar
@@ -84,6 +86,9 @@ namespace HimApp.Views.Windows
                 ThemeSwitchIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.Lightbulb;
         }
 
-
+        private void GoSettingPage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new SettingPage());
+        }
     }
 }
