@@ -62,8 +62,11 @@
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
+                                <Icon:PackIconMaterial Kind="AccountMultiple" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoClientPage" Click="GoClientPage_Click">
-                                <Icon:PackIconMaterial Kind="Pencil" Style="{DynamicResource menuBtnIcon}"/>
+                                <Icon:PackIconMaterial Kind="ShieldKey" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                         </StackPanel>
                     </DockPanel>

@@ -1,4 +1,4 @@
-﻿<Page x:Class="HimApp.Views.Pages.SettingPage"
+﻿<Page x:Class="HimApp.Views.Pages.ProfilePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,12 +7,9 @@
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="637" d:DesignWidth="1104"
-      Title="SettingPage">
-    <DockPanel>
-        <Border Style="{DynamicResource BorderPanel}" DockPanel.Dock="Left" Width="500" Height="200">
-            <DockPanel>
-                <TextBlock Text="Настройки приложения" Style="{DynamicResource TitleText}"/>
-            </DockPanel>
-        </Border>
-    </DockPanel>
+      Title="ProfilePage">
+
+    <Grid>
+        
+    </Grid>
 </Page>

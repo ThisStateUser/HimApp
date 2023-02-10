@@ -372,7 +372,7 @@
         <Setter Property="ValidationErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
-                    <TextBlock Foreground="Red" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="{DynamicResource redcolor}" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
