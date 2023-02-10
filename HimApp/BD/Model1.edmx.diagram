@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd7da8f9791c402e9a4b1390bd3cb112" Name="Diagram1">
+        <EntityTypeShape EntityType="HimBDModel.CarBody" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Cars" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Client" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.ClientCar" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.ClientStat" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Conditions" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Order" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.OrderGroup" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.OrderSet" Width="1.5" PointX="12.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.PresetGroup" Width="1.5" PointX="10" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Product" Width="1.5" PointX="8" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.ProductCategory" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Roles" Width="1.5" PointX="1.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.ServiceCategory" Width="1.5" PointX="7.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.ServicePreset" Width="1.5" PointX="12.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Services" Width="1.5" PointX="10" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Status" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Unit" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.UserInfo" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Users" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <AssociationConnector Association="HimBDModel.FK_Cars_CarBody" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_ClientCar_Cars" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_ClientCar_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_ClientStat_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Order_ClientCar" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Order_Conditions" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Order_OrderGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Order_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Order_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_OrderSet_OrderGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_OrderSet_PresetGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_OrderSet_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_ServicePreset_PresetGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Product_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Product_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_UserInfo_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Services_ServiceCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_ServicePreset_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="HimBDModel.FK_Users_UserInfo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

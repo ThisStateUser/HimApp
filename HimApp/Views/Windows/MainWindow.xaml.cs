@@ -29,6 +29,7 @@ namespace HimApp.Views.Windows
         {
             InitializeComponent();
             UpdIconTheme();
+            UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
             FrameM.Navigate(new HomePage());
         }
 
@@ -89,6 +90,11 @@ namespace HimApp.Views.Windows
         private void GoSettingPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new SettingPage());
+        }
+
+        private void GoClientPage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new ClientPage());
         }
     }
 }

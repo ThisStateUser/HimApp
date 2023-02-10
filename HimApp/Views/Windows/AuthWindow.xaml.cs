@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HimApp.BD;
+using HimApp.Controllers;
+using MahApps.Metro.IconPacks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +14,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using HimApp.Controllers;
-using MahApps.Metro.IconPacks;
 
 namespace HimApp.Views.Windows
 {
@@ -26,8 +27,19 @@ namespace HimApp.Views.Windows
         public AuthWindow()
         {
             InitializeComponent();
-            login.Focus();
             UIObj.SwithThemeCheck();
+            if (Properties.Settings.Default.IsRemember)
+            {
+                Users user = HimBDEntities.GetContext().Users.Where
+                                (x => x.login == Properties.Settings.Default.Login.Trim()).FirstOrDefault();
+                if (user != null)
+                {
+                    UserObj.UserAcc = user;
+                    new MainWindow().Show();
+                    this.Close();
+                }
+            }
+            login.Focus();
         }
 
         private void CloseWin_Click(object sender, RoutedEventArgs e)
@@ -79,14 +91,10 @@ namespace HimApp.Views.Windows
 
         private void Auth_Click(object sender, RoutedEventArgs e)
         {
-            if(login.Text != "1234")
-            {
-                login.BorderThickness = new Thickness(1);
-                login.BorderBrush = (SolidColorBrush)FindResource("redcolor");
+            if (!UserAuth())
                 return;
-            }
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            UserObj.UserAcc = FindUser();
+            new MainWindow().Show();
             this.Close();
         }
 
@@ -110,12 +118,57 @@ namespace HimApp.Views.Windows
 
         private void password_KeyDown(object sender, KeyEventArgs e)
         {
-            Auth_Click(null, null);
+            if (e.Key == Key.Enter)
+            {
+                Auth_Click(null, null);
+            }
         }
 
         private void password_visible_KeyDown(object sender, KeyEventArgs e)
         {
-            Auth_Click(null, null);
+            if (e.Key == Key.Enter)
+            {
+                Auth_Click(null, null);
+            }
+        }
+
+        private bool UserAuth()
+        {
+            switch (TbOrPb_pass)
+            {
+                case true:
+                    password.Password = password_visible.Text;
+                    break;
+                default:
+                    password_visible.Text = password.Password;
+                    break;
+            }
+
+            Users user = FindUser();
+
+            if (user == null)
+            {
+                MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Stop);
+                return false;
+            }
+
+            if (Remember.IsChecked.Value)
+            {
+                Properties.Settings.Default.IsRemember = true;
+                Properties.Settings.Default.Login = user.login;
+            }
+
+            return true;
+        }
+
+        private Users FindUser()
+        {
+            Users user = HimBDEntities.GetContext().Users.Where
+                            (x =>
+                                x.login == login.Text.Trim() &&
+                                x.password == password_visible.Text.Trim()
+                            ).FirstOrDefault();
+            return user;
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:HimApp.Views.Pages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
-      d:DesignHeight="760" d:DesignWidth="1104"
+      d:DesignHeight="637" d:DesignWidth="1104"
       Title="SettingPage">
 
     <Grid>

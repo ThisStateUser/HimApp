@@ -62,13 +62,34 @@
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoClientPage" Click="GoClientPage_Click">
                                 <Icon:PackIconMaterial Kind="Pencil" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                         </StackPanel>
                     </DockPanel>
                 </Border>
-                <Frame Grid.Column="1" x:Name="FrameM" NavigationUIVisibility="Hidden" Margin="40 20 40 20"/>
+                <Grid Grid.Column="1" Margin="40 24 40 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48"/>
+                        <RowDefinition Height="56"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <TextBlock Text="Страница" x:Name="PageTitle" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock x:Name="UserName" Style="{DynamicResource TitleText}" Text="Пользователь" VerticalAlignment="Center"/>
+                            <Border CornerRadius="50" Width="48" Height="48" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black">
+                                <Ellipse Width="44" Height="44">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="/Resources/icon.png"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Border>
+                        </StackPanel>
+
+                    </DockPanel>
+                    <Frame Grid.Row="2" x:Name="FrameM" NavigationUIVisibility="Hidden"/>
+                </Grid>
             </Grid>
 
 

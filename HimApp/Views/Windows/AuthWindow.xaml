@@ -53,7 +53,7 @@
                         </Border>
                     </Grid>
                     <DockPanel>
-                        <CheckBox Content="Запомнить меня?" Style="{DynamicResource Remember}"/>
+                        <CheckBox Content="Запомнить меня" x:Name="Remember" Style="{DynamicResource Remember}"/>
                         <Button HorizontalAlignment="Right" x:Name="Auth" Click="Auth_Click">
                             <TextBlock Text="Войти" Foreground="{DynamicResource TextBtn}"/>
                         </Button>

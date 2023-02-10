@@ -1,0 +1,125 @@
+﻿<Page x:Class="HimApp.Views.Pages.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HimApp.Views.Pages"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="637" d:DesignWidth="1104"
+      Title="ClientPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Width="200" HorizontalAlignment="Left">
+            <Border Margin="0 0 0 40" Style="{DynamicResource BorderPanel}">
+                <DockPanel Width="180">
+                    <Border DockPanel.Dock="Top" CornerRadius="5" Background="{DynamicResource Panel2}" Height="180">
+                        <Icon:PackIconMaterial Kind="Account" Width="128" VerticalAlignment="Center" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" Height="128"/>
+                    </Border>
+                    <StackPanel>
+                        <TextBlock x:Name="ClientFirstName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 5" Text="Имя"/>
+                        <TextBlock x:Name="ClientLastName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 15" Text="Фамилия"/>
+                        <TextBlock x:Name="ClientPhone" HorizontalAlignment="Center" Text="+7 999 999 99 99"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <Button x:Name="s2d" Margin="0 0 0 20" Width="200">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Редактировать" Foreground="{DynamicResource TextBtn}"/>
+                    <Icon:PackIconMaterial VerticalAlignment="Center" Kind="Pencil" Margin="10 0 0 0"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="sd" Background="{StaticResource redcolor}" Width="200">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Удалить" Foreground="{DynamicResource TextBtn}"/>
+                    <Icon:PackIconMaterial VerticalAlignment="Center" Kind="TrashCan" Margin="10 0 0 0"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
+            <DataGrid x:Name="dg" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="120*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="№ заказа"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="160*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Исполнитель"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding executor_id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="170*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Автомобиль"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Icon:PackIconMaterial Kind="Car" Margin="0 0 10 0"/>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding client_car_id}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="130*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Статус"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding status_id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="110*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Цена"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding custom_cost}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Width="140*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Прочее"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Детали заказа" Foreground="{DynamicResource TextBtn}"/>
+                                        <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Page>
