@@ -11,7 +11,7 @@
     <DockPanel>
         <Border Style="{DynamicResource BorderPanel}" DockPanel.Dock="Left" Width="500" Height="200">
             <DockPanel>
-                <TextBlock Text="Настройки приложения" Style="{DynamicResource TitleText}"/>
+                <TextBlock Text="Настройки приложения ghbvth" Style="{DynamicResource TitleText}"/>
             </DockPanel>
         </Border>
     </DockPanel>
