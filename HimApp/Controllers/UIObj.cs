@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace HimApp.Controllers
 {
@@ -18,7 +19,7 @@ namespace HimApp.Controllers
             Application.Current.Resources.MergedDictionaries.Add(Dictionary);
         }
 
-        public static void SwithThemeVoid()
+        public static void SwitchThemeVoid()
         {
             bool theme = Properties.Settings.Default.Theme;
 
@@ -26,11 +27,11 @@ namespace HimApp.Controllers
             {
                 case true:
                     Properties.Settings.Default.Theme = false;
-                    SwithThemeCheck();
+                    SwitchThemeCheck();
                     break;
                 case false:
                     Properties.Settings.Default.Theme = true;
-                    SwithThemeCheck();
+                    SwitchThemeCheck();
                     break;
                 default:
                     break;
@@ -38,13 +39,27 @@ namespace HimApp.Controllers
             Properties.Settings.Default.Save();
         }
 
-        public static void SwithThemeCheck()
+        public static void SwitchThemeCheck()
         {
-            if (Properties.Settings.Default.Theme == false)
-                UpdateColor("Styles/Themes/DarkBackground.xaml");
-            else
+            if (Properties.Settings.Default.Theme)
+            {
                 UpdateColor("Styles/Themes/BrightBackground.xaml");
+                
+            }
+            else
+                UpdateColor("Styles/Themes/DarkBackground.xaml");
+        }
 
+        public static void SwitchColor()
+        {
+            UpdateColor("Styles/Colors/" + Properties.Settings.Default.Color + ".xaml");
+        }
+
+        public static void SweepColor(string colorname)
+        {
+            Properties.Settings.Default.Color = colorname;
+            Properties.Settings.Default.Save();
+            SwitchColor();
         }
     }
 }

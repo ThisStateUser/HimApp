@@ -37,10 +37,10 @@ namespace HimApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Color {
+        [global::System.Configuration.DefaultSettingValueAttribute("TealColor")]
+        public string Color {
             get {
-                return ((int)(this["Color"]));
+                return ((string)(this["Color"]));
             }
             set {
                 this["Color"] = value;

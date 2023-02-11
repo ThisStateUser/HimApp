@@ -29,7 +29,7 @@ namespace HimApp.Views.Windows
         {
             InitializeComponent();
             UpdIconTheme();
-            UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
+            //UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
             FrameM.Navigate(new HomePage());
         }
 
@@ -73,12 +73,20 @@ namespace HimApp.Views.Windows
             }
         }
 
+
+
         private void ThemeSwitch_Click(object sender, RoutedEventArgs e)
         {
-            UIObj.SwithThemeVoid();
+            UIObj.SwitchThemeVoid();
             UpdIconTheme();
+            if (Properties.Settings.Default.Theme)
+                if (Properties.Settings.Default.Color == "WhiteColor")
+                    UIObj.SweepColor("DarkColor");
+                else return;
+            else if (Properties.Settings.Default.Color == "DarkColor")
+                UIObj.SweepColor("WhiteColor");
+            else return;
         }
-
         private void UpdIconTheme()
         {
             if (Properties.Settings.Default.Theme == true)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HimApp.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,42 @@ namespace HimApp.Views.Pages
         public SettingPage()
         {
             InitializeComponent();
+        }
+
+        private void BlueColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("BlueColor");
+        }
+        private void IndigoColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("IndigoColor");
+        }
+        private void OrangeColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("OrangeColor");
+        }
+        private void PinkColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("PinkColor");
+        }
+        private void RedColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("RedColor");
+        }        
+        private void TealColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("TealColor");
+        }
+        private void YellowColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            UIObj.SweepColor("YellowColor");
+        }
+        private void WhiteDarkColor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Properties.Settings.Default.Theme)
+                UIObj.SweepColor("DarkColor");
+            else
+                UIObj.SweepColor("WhiteColor");
         }
     }
 }

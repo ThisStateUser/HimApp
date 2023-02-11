@@ -5,8 +5,8 @@
     <Setting Name="Theme" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Color" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="Color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TealColor</Value>
     </Setting>
     <Setting Name="IsRemember" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

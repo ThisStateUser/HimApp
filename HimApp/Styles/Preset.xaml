@@ -9,11 +9,8 @@
         <Setter Property="FontFamily" Value="Trebuchet MS"/>
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="TitleText">
+    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock" x:Key="TitleText">
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
-        <Setter Property="FontFamily" Value="Trebuchet MS"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="SmallText">
@@ -58,6 +55,46 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Pressed}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Button" x:Key="DeleteBtn">
+        <Setter Property="Background" Value="#FF3F34"/>
+        <Setter Property="MinWidth" Value="50"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="Foreground" Value="#fbfcfd"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Trebuchet MS"/>
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5"
+                            Width="{TemplateBinding Width}"
+                            Padding="{TemplateBinding Padding}" 
+                            Background="{TemplateBinding Background}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#D1322A"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#801F19"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#E6372E"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -333,35 +370,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="Border" x:Key="BorderPanel">
-        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="MinHeight" Value="10"/>
-        <Setter Property="MinWidth" Value="10"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="3"
-                                  Color="{DynamicResource ShadowColor}"
-                                  Opacity="1"
-                                  ShadowDepth="2"
-                                  RenderingBias="Performance"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="Border" x:Key="ShadowPanel">
-        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="3"
-                                  Color="{DynamicResource ShadowColor}"
-                                  Opacity="1"
-                                  ShadowDepth="2"
-                                  RenderingBias="Performance"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style x:Key="DataGridRowShow" TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
@@ -514,5 +522,18 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
-        
+
+    <Style x:Key="SetElipBorder" TargetType="Border">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Height" Value="38"/>
+        <Setter Property="Width" Value="38"/>
+        <Setter Property="CornerRadius" Value="50"/>
+        <Setter Property="Margin" Value="0 0 10 0"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Basic}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

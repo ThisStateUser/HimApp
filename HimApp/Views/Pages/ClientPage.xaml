@@ -34,9 +34,9 @@
                 </StackPanel>
             </Button>
 
-            <Button x:Name="sd" Background="{StaticResource redcolor}" Width="200">
+            <Button x:Name="sd" Style="{StaticResource DeleteBtn}" Width="200">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="Удалить" Foreground="{DynamicResource TextBtn}"/>
+                    <TextBlock Text="Удалить" Foreground="#fbfcfd"/>
                     <Icon:PackIconMaterial VerticalAlignment="Center" Kind="TrashCan" Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>

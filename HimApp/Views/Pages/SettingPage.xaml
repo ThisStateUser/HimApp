@@ -9,10 +9,73 @@
       d:DesignHeight="637" d:DesignWidth="1104"
       Title="SettingPage">
     <DockPanel>
-        <Border Style="{DynamicResource BorderPanel}" DockPanel.Dock="Left" Width="500" Height="200">
-            <DockPanel>
-                <TextBlock Text="Настройки приложения ghbvth" Style="{DynamicResource TitleText}"/>
-            </DockPanel>
+        <Border DockPanel.Dock="Top" Style="{DynamicResource BorderPanel}" Width="500" Height="200">
+            <StackPanel>
+                <TextBlock Text="Настройки приложения" Style="{DynamicResource TitleText}"/>
+                <Separator Background="{DynamicResource Panel2}" Height="1"  Margin="0 5"/>
+                <TextBlock Text="Цвет функциональных кнопок" Margin="0 0 0 10"/>
+                <StackPanel Orientation="Horizontal">
+                    <Border MouseDown="BlueColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#4BCFFA"/>
+                    </Border>
+
+                    <Border MouseDown="IndigoColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#BA87F6"/>
+                    </Border>
+
+                    <Border MouseDown="OrangeColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#FF9F43"/>
+                    </Border>
+
+                    <Border MouseDown="PinkColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#FE5068"/>
+                    </Border>
+
+                    <Border MouseDown="RedColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#FF3F34"/>
+                    </Border>
+
+                    <Border MouseDown="TealColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#1DD1A1"/>
+                    </Border>
+
+                    <Border MouseDown="YellowColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Ellipse Width="28" Height="28" Fill="#FFDD59"/>
+                    </Border>
+
+                    <Border MouseDown="WhiteDarkColor_MouseDown" Style="{DynamicResource SetElipBorder}">
+                        <Border CornerRadius="50" Width="28" Height="28">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#f7f8fa" Offset="0.5"/>
+                                    <GradientStop Color="#2A2D48" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Top" Style="{DynamicResource BorderPanel}" Width="500" Height="200">
+            <StackPanel>
+                <TextBlock Text="Настройки аккаунта" Style="{DynamicResource TitleText}"/>
+                <Separator Background="{DynamicResource Panel2}" Height="1" Margin="0 5"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Не выходить из аккаунта" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                    <ToggleButton Grid.Column="1" Grid.Row="0" Style="{DynamicResource ToggleSettings}"/>
+                </Grid>
+            </StackPanel>
         </Border>
     </DockPanel>
 </Page>

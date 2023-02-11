@@ -27,7 +27,15 @@ namespace HimApp.Views.Windows
         public AuthWindow()
         {
             InitializeComponent();
-            UIObj.SwithThemeCheck();
+            CheckApp();
+            UIObj.SwitchThemeCheck();
+            UIObj.SwitchColor();
+            if (!RememberAuth()) 
+                login.Focus();
+        }
+
+        private bool RememberAuth()
+        {
             if (Properties.Settings.Default.IsRemember)
             {
                 Users user = HimBDEntities.GetContext().Users.Where
@@ -37,9 +45,18 @@ namespace HimApp.Views.Windows
                     UserObj.UserAcc = user;
                     new MainWindow().Show();
                     this.Close();
+                    return true;
                 }
             }
-            login.Focus();
+            return false;
+        }
+
+        private void CheckApp()
+        {
+            if (Properties.Settings.Default.Color == null)
+            {
+                UIObj.SweepColor("TealColor");
+            }
         }
 
         private void CloseWin_Click(object sender, RoutedEventArgs e)
@@ -91,9 +108,9 @@ namespace HimApp.Views.Windows
 
         private void Auth_Click(object sender, RoutedEventArgs e)
         {
-            if (!UserAuth())
-                return;
-            UserObj.UserAcc = FindUser();
+            //if (!UserAuth())
+            //    return;
+            //UserObj.UserAcc = FindUser();
             new MainWindow().Show();
             this.Close();
         }
@@ -170,10 +187,5 @@ namespace HimApp.Views.Windows
                             ).FirstOrDefault();
             return user;
         }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    UIObj.UpdateColor("Styles/Themes/DarkBackground.xaml");
-        //}
     }
 }
