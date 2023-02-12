@@ -24,5 +24,14 @@ namespace HimApp.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+                FOrder.LineLeft();
+            else if (e.Delta < 0)
+                FOrder.LineRight();
+            e.Handled = true;
+        }
     }
 }

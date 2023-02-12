@@ -9,7 +9,22 @@
       d:DesignHeight="637" d:DesignWidth="1104"
       Title="HomePage">
 
-    <Grid>
-        <Border Style="{DynamicResource BorderPanel}" Width="300" Height="150"/>
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <StackPanel>
+            <TextBlock Text="Ближайшие записи" Style="{DynamicResource TitleText}"/>
+            <ScrollViewer Style="{DynamicResource ScrollViewerShow}" VerticalAlignment="Top" Background="Transparent" HorizontalScrollBarVisibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" PreviewMouseWheel="FOrder_PreviewMouseWheel" Height="230">
+                <StackPanel Orientation="Horizontal">
+                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
+                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
+                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
+                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
+                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
+                </StackPanel>
+            </ScrollViewer>
+            <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
+            <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
+            <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
+            <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

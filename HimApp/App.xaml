@@ -10,6 +10,8 @@
                 <ResourceDictionary Source="./Styles/Themes/DarkBackground.xaml"/>
                 <ResourceDictionary Source="./Styles/Colors/BootStrapColor.xaml"/>
                 
+                <ResourceDictionary Source="./Styles/Elements/ScrollBar.xaml"/>
+                
                 <ResourceDictionary Source="./Styles/Preset.xaml"/>
                 <ResourceDictionary Source="./Styles/Elements/SystemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
