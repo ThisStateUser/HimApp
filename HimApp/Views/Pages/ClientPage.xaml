@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:HimApp.Views.Pages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
-      d:DesignHeight="637" d:DesignWidth="1104"
+      d:DesignHeight="660" d:DesignWidth="1104"
       Title="ClientPage">
 
     <Grid>
@@ -43,73 +43,73 @@
         </StackPanel>
 
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
-            <DataGrid x:Name="dg" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+            <DataGrid x:Name="dg" d:ItemsSource="{d:SampleData ItemCount=23}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="120*">
+                    <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Style="{DynamicResource TitleText}" Text="№ заказа"/>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="№"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding id}"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="160*">
+                    <DataGridTemplateColumn Width="6*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="Исполнитель"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding executor_id}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding executor_id}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="170*">
+                    <DataGridTemplateColumn Width="7*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="Автомобиль"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Car" Margin="0 0 10 0"/>
-                                    <TextBlock TextWrapping="Wrap" Text="{Binding client_car_id}"/>
+                                    <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding client_car_id}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="130*">
+                    <DataGridTemplateColumn Width="4*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="Статус"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding status_id}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding status_id}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="110*">
+                    <DataGridTemplateColumn Width="4*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="Цена"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding custom_cost}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding custom_cost}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     
-                    <DataGridTemplateColumn Width="140*">
+                    <DataGridTemplateColumn Width="6*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="Прочее"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button>
+                                <Button HorizontalAlignment="Right" Margin="0 5">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Детали заказа" Foreground="{DynamicResource TextBtn}"/>
                                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>
@@ -118,6 +118,8 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="1"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

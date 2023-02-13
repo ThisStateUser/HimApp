@@ -6,21 +6,47 @@
       xmlns:local="clr-namespace:HimApp.Views.Pages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
-      d:DesignHeight="637" d:DesignWidth="1104"
+      d:DesignHeight="660" d:DesignWidth="1104"
       Title="HomePage">
 
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" Style="{DynamicResource ScrollViewerShow}">
         <StackPanel>
             <TextBlock Text="Ближайшие записи" Style="{DynamicResource TitleText}"/>
-            <ScrollViewer Style="{DynamicResource ScrollViewerShow}" VerticalAlignment="Top" Background="Transparent" HorizontalScrollBarVisibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" PreviewMouseWheel="FOrder_PreviewMouseWheel" Height="230">
+            <ScrollViewer Style="{DynamicResource ScrollViewerShow}" VerticalAlignment="Top" Background="Transparent" 
+                          HorizontalScrollBarVisibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" 
+                          PreviewMouseWheel="FOrder_PreviewMouseWheel" Margin="0 0 0 20" Height="180">
                 <StackPanel Orientation="Horizontal">
-                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
+                    <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top">
+                                <TextBlock Text="Заказ № 1"/>
+                                <Separator Height="1" Background="{DynamicResource Panel2}"/>
+                                <TextBlock Text="Lada Priora 2015 "/>
+                                <TextBlock Text="в работе" Foreground="{DynamicResource Basic}"/>
+                                <TextBlock Text="100000 руб"/>
+                            </StackPanel>
+
+                            <DockPanel VerticalAlignment="Bottom" DockPanel.Dock="Top">
+                                <StackPanel>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="П- 21.02.23 18:00"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="В- 21.03.23 18:10"/>
+                                </StackPanel>
+                                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                    <TextBlock Text="Подробнее" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
+                            </DockPanel>
+                        </DockPanel>
+                    </Border>
                     <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
                     <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
                     <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 40 0" Height="150"/>
                     <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
                 </StackPanel>
             </ScrollViewer>
+            <TextBlock Text="Быстрые действия" Margin="0 0 0 20" Style="{DynamicResource TitleText}"/>
+            <StackPanel Orientation="Horizontal">
+
+            </StackPanel>
             <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
             <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>
             <Border Style="{DynamicResource BorderPanel}" Width="300" Margin="0 0 0 0" Height="150"/>

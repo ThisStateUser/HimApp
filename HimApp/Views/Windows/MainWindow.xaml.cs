@@ -104,5 +104,15 @@ namespace HimApp.Views.Windows
         {
             FrameM.Navigate(new ClientPage());
         }
+
+        private void HomePage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new HomePage());
+        }
+
+        private void EmployeesPage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new EmployeesPage());
+        }
     }
 }

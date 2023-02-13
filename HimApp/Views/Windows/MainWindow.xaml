@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HimApp.Views.Windows"
-         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Icon="/Resources/icon.ico"
         AllowsTransparency="True"
@@ -53,7 +53,7 @@
                         </StackPanel>
                         
                         <StackPanel VerticalAlignment="Center">
-                            <RadioButton IsChecked="True" Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
+                            <RadioButton IsChecked="True" Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" Click="HomePage_Click">
                                 <Icon:PackIconMaterial Kind="HomeVariant" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
@@ -62,7 +62,7 @@
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
                                 <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" Click="EmployeesPage_Click">
                                 <Icon:PackIconMaterial Kind="AccountMultiple" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoClientPage" Click="GoClientPage_Click">
@@ -74,12 +74,20 @@
                 <Grid Grid.Column="1" Margin="40 24 40 20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="48"/>
-                        <RowDefinition Height="56"/>
+                        <RowDefinition Height="28"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0">
                         <TextBlock Text="Страница" x:Name="PageTitle" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                            <Button Margin="0 0 20 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Добавить заказ" Foreground="{DynamicResource TextBtn}" Margin="0 0 10 0"/>
+                                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            
                             <TextBlock x:Name="UserName" Style="{DynamicResource TitleText}" Text="Пользователь" VerticalAlignment="Center"/>
                             <Border CornerRadius="50" Width="48" Height="48" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black">
                                 <Ellipse Width="44" Height="44">

@@ -6,10 +6,127 @@
       xmlns:local="clr-namespace:HimApp.Views.Pages"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
-      d:DesignHeight="637" d:DesignWidth="1104"
+      d:DesignHeight="660" d:DesignWidth="1104"
       Title="EmployeesPage">
-
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Width="200" HorizontalAlignment="Left">
+            <Border Margin="0 0 0 40" Style="{DynamicResource BorderPanel}">
+                <DockPanel Width="180">
+                    <Border DockPanel.Dock="Top" CornerRadius="5" Background="{DynamicResource Panel2}" Height="180">
+                        <Icon:PackIconMaterial Kind="Account" Width="128" VerticalAlignment="Center" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" Height="128"/>
+                    </Border>
+                    <StackPanel>
+                        <TextBlock x:Name="ClientFirstName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 5" Text="Имя"/>
+                        <TextBlock x:Name="ClientLastName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 15" Text="Фамилия"/>
+                        <TextBlock x:Name="role" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="Сотрудник"/>
+                        <TextBlock x:Name="personal_account" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="154785621458"/>
+                        <TextBlock x:Name="location" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="Вольск"/>
+                        <TextBlock x:Name="salary" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="32000,50 руб"/>
+                        <TextBlock x:Name="schedule" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="2/2"/>
+                        <TextBlock x:Name="ClientPhone" HorizontalAlignment="Center" Margin="0 10 0 5" Text="+7 999 999 99 99"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <Button x:Name="edit" Margin="0 0 0 20" Width="200">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Редактировать" Foreground="{DynamicResource TextBtn}"/>
+                    <Icon:PackIconMaterial VerticalAlignment="Center" Kind="Pencil" Margin="10 0 0 0"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="delete" Style="{StaticResource DeleteBtn}" Width="200">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Удалить" Foreground="#fbfcfd"/>
+                    <Icon:PackIconMaterial VerticalAlignment="Center" Kind="TrashCan" Margin="10 0 0 0"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <Button x:Name="add" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
+                <Icon:PackIconMaterial VerticalAlignment="Center" Kind="Plus" Margin="10 0 0 0"/>
+            </StackPanel>
+        </Button>
+
+        <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
+            <DataGrid d:ItemsSource="{d:SampleData ItemCount=100}" x:Name="dg" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="2*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="№"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Имя"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding first_name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="6*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Фамилия"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding last_name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Телефон"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding phone}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Средний оклад"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding salary}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button HorizontalAlignment="Right" Margin="0 5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Подробнее" Foreground="{DynamicResource TextBtn}"/>
+                                        <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Width="1"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
     </Grid>
 </Page>
