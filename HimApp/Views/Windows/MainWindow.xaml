@@ -65,6 +65,9 @@
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" Click="EmployeesPage_Click">
                                 <Icon:PackIconMaterial Kind="AccountMultiple" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" Click="EmployeesPage_Click">
+                                <Icon:PackIconMaterial Kind="Bookmark" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoClientPage" Click="GoClientPage_Click">
                                 <Icon:PackIconMaterial Kind="ShieldKey" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>

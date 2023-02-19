@@ -70,5 +70,17 @@ namespace HimApp.Properties {
                 this["Login"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("HomePage")]
+        public string StartupPage {
+            get {
+                return ((string)(this["StartupPage"]));
+            }
+            set {
+                this["StartupPage"] = value;
+            }
+        }
     }
 }

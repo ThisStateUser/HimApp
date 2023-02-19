@@ -61,5 +61,30 @@ namespace HimApp.Views.Pages
             else
                 UIObj.SweepColor("WhiteColor");
         }
+
+        private void HomePage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void OrdersPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ProductPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void EmployeesPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Border_MouseDown_4(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

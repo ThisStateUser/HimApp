@@ -73,8 +73,6 @@ namespace HimApp.Views.Windows
             }
         }
 
-
-
         private void ThemeSwitch_Click(object sender, RoutedEventArgs e)
         {
             UIObj.SwitchThemeVoid();
