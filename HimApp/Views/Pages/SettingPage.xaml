@@ -90,7 +90,7 @@
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Не выходить из аккаунта" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Выйти из аккаунта" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
                     <ToggleButton Grid.Column="1" Grid.Row="0" Style="{DynamicResource ToggleSettings}"/>
                 </Grid>
             </StackPanel>
