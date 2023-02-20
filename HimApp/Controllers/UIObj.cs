@@ -21,9 +21,7 @@ namespace HimApp.Controllers
 
         public static void SwitchThemeVoid()
         {
-            bool theme = Properties.Settings.Default.Theme;
-
-            switch (theme)
+            switch (Properties.Settings.Default.Theme)
             {
                 case true:
                     Properties.Settings.Default.Theme = false;
@@ -42,10 +40,7 @@ namespace HimApp.Controllers
         public static void SwitchThemeCheck()
         {
             if (Properties.Settings.Default.Theme)
-            {
                 UpdateColor("Styles/Themes/BrightBackground.xaml");
-                
-            }
             else
                 UpdateColor("Styles/Themes/DarkBackground.xaml");
         }
@@ -60,6 +55,12 @@ namespace HimApp.Controllers
             Properties.Settings.Default.Color = colorname;
             Properties.Settings.Default.Save();
             SwitchColor();
+        }
+
+        public static void StartUp(string page)
+        {
+            Properties.Settings.Default.StartupPage = page;
+            Properties.Settings.Default.Save();
         }
     }
 }

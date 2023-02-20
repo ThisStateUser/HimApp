@@ -40,6 +40,7 @@ namespace HimApp.Views.Windows
         {
             if (Properties.Settings.Default.IsRemember)
             {
+                LoaderShow("Вход в аккаунт");
                 Users user = HimBDEntities.GetContext().Users.Where
                                 (x => x.login == Properties.Settings.Default.Login.Trim()).FirstOrDefault();
                 if (user != null)
@@ -49,6 +50,15 @@ namespace HimApp.Views.Windows
                     this.Close();
                     return true;
                 }
+                else
+                {
+                    Loading(false);
+                    Dispatcher.Invoke(() =>
+                    {
+                        ErrorShow("Ошибка входа");
+                    });
+                    return false;
+                }
             }
             return false;
         }
@@ -57,13 +67,11 @@ namespace HimApp.Views.Windows
         {
             Dispatcher.Invoke(() =>
             {
+                if (RememberAuth())
+                    return;
                 Loading(false);
-                if (!RememberAuth())
-                    login.Focus();
-                else
-                    LoadPage.Visibility = Visibility.Collapsed;
-                AuthForm.Visibility = Visibility.Visible;
-                return;
+                ReturnForm();
+                login.Focus();
             });
         }
 
@@ -91,23 +99,18 @@ namespace HimApp.Views.Windows
         private void CheckApp()
         {
             if (Properties.Settings.Default.Color == null)
-            {
                 UIObj.SweepColor("TealColor");
-            }
-            Loading(true);
-            Dispatcher.Invoke(() => msgload.Text = "Соединение с базой данных");
+            LoaderShow("Соединение с базой данных");
             try
             {
                 HimBDEntities.GetContext().Roles.ToList();
             }
             catch (EntityException)
             {
-                Loading(false);
+                
                 Dispatcher.Invoke(() =>
                 {
-                    msgload.Text = "Соединение отсутствует";
-                    Loader.Visibility = Visibility.Collapsed;
-                    Error.Visibility = Visibility.Visible;
+                    ErrorShow("Соединение отсутствует");
                 });
                 return;
             }
@@ -127,9 +130,7 @@ namespace HimApp.Views.Windows
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-            {
                 this.DragMove();
-            }
         }
 
         private void ShowPassword_MouseDown(object sender, MouseButtonEventArgs e)
@@ -165,6 +166,7 @@ namespace HimApp.Views.Windows
         {
             if (!UserAuth())
                 return;
+            LoaderShow("Вход в аккаунт");
             UserObj.UserAcc = FindUser();
             new MainWindow().Show();
             this.Close();
@@ -191,17 +193,13 @@ namespace HimApp.Views.Windows
         private void password_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
                 Auth_Click(null, null);
-            }
         }
 
         private void password_visible_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
                 Auth_Click(null, null);
-            }
         }
 
         private bool UserAuth()
@@ -228,9 +226,52 @@ namespace HimApp.Views.Windows
             {
                 Properties.Settings.Default.IsRemember = true;
                 Properties.Settings.Default.Login = user.login;
+                Properties.Settings.Default.Save();
             }
 
             return true;
+        }
+
+        private void ErrorShow(string errormsg)
+        {
+            ReturnLoader();
+            Loading(false);
+            Dispatcher.Invoke(() => 
+            {
+                Loader.Visibility = Visibility.Collapsed;
+                Error.Visibility = Visibility.Visible;
+                msgload.Text = errormsg;
+            });
+        }
+
+        private void LoaderShow(string msg)
+        {
+            ReturnLoader();
+            Loading(true);
+            Dispatcher.Invoke(() =>
+            {
+                Loader.Visibility = Visibility.Visible;
+                Error.Visibility = Visibility.Collapsed;
+                msgload.Text = msg;
+            });
+        }
+
+        private void ReturnLoader()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                LoadPage.Visibility = Visibility.Visible;
+                AuthForm.Visibility = Visibility.Collapsed;
+            });
+        }
+
+        private void ReturnForm()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                LoadPage.Visibility = Visibility.Collapsed;
+                AuthForm.Visibility = Visibility.Visible;
+            });
         }
 
         private Users FindUser()

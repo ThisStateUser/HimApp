@@ -14,5 +14,8 @@
     <Setting Name="Login" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="StartupPage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HomePage</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

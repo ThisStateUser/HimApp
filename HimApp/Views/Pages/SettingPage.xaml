@@ -57,20 +57,23 @@
 
                 <TextBlock Text="Начальное окно" Margin="0 0 0 10"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <Border Style="{DynamicResource SetElipBorder}">
-                        <Icon:PackIconMaterial Kind="HomeVariant" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="HomePage_MouseDown">
+                        <Icon:PackIconMaterial Kind="HomeVariant" x:Name="HomePageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                     </Border>
-                    <Border Style="{DynamicResource SetElipBorder}">
-                        <Icon:PackIconMaterial Kind="ViewList" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="OrdersPage_MouseDown">
+                        <Icon:PackIconMaterial Kind="ViewList" x:Name="OrdersPageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                     </Border>
-                    <Border Style="{DynamicResource SetElipBorder}">
-                        <Icon:PackIconMaterial Kind="Store" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="ProductPage_MouseDown">
+                        <Icon:PackIconMaterial Kind="Store" x:Name="ProductPageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                     </Border>
-                    <Border Style="{DynamicResource SetElipBorder}">
-                        <Icon:PackIconMaterial Kind="AccountMultiple" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="EmployeesPage_MouseDown">
+                        <Icon:PackIconMaterial Kind="AccountMultiple" x:Name="EmployeesPageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                     </Border>
-                    <Border Style="{DynamicResource SetElipBorder}">
-                        <Icon:PackIconMaterial Kind="ShieldKey" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="ServicePage_MouseDown">
+                        <Icon:PackIconMaterial Kind="Bookmark" x:Name="ServicePageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    </Border>
+                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="AdminPage_MouseDown">
+                        <Icon:PackIconMaterial Kind="ShieldKey" x:Name="AdminPageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                     </Border>
                 </StackPanel>
 

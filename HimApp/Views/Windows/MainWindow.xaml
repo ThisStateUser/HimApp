@@ -51,21 +51,24 @@
                                 <Icon:PackIconMaterial Kind="Cog" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>       
                         </StackPanel>
-                        
+
                         <StackPanel VerticalAlignment="Center">
-                            <RadioButton IsChecked="True" Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" Click="HomePage_Click">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="HomePageBtn" Click="HomePage_Click">
                                 <Icon:PackIconMaterial Kind="HomeVariant" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="OrdersPageBtn" Click="OrdersPage_Click">
                                 <Icon:PackIconMaterial Kind="ViewList" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ProductPageBtn" Click="ProductPage_Click">
                                 <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" Click="EmployeesPage_Click">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="EmployessPageBtn" Click="EmployeesPage_Click">
                                 <Icon:PackIconMaterial Kind="AccountMultiple" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoClientPage" Click="GoClientPage_Click">
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ServicePageBtn" Click="ServicePage_Click">
+                                <Icon:PackIconMaterial Kind="Bookmark" Style="{DynamicResource menuBtnIcon}"/>
+                            </RadioButton>
+                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="AdminPageBtn" Click="AdminPage_Click">
                                 <Icon:PackIconMaterial Kind="ShieldKey" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                         </StackPanel>

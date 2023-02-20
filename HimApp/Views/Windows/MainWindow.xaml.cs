@@ -31,7 +31,39 @@ namespace HimApp.Views.Windows
             InitializeComponent();
             UpdIconTheme();
             UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
-            FrameM.Navigate(new HomePage());
+            RdStartPage();
+
+        }
+
+        private void RdStartPage()
+        {
+            switch (Properties.Settings.Default.StartupPage)
+            {
+                case "HomePage":
+                    FrameM.Navigate(new HomePage());
+                    HomePageBtn.IsChecked = true;
+                    break;
+                case "OrdersPage":
+                    FrameM.Navigate(new OrdersPage());
+                    OrdersPageBtn.IsChecked = true;
+                    break;
+                case "ProductPage":
+                    FrameM.Navigate(new ProductPage());
+                    ProductPageBtn.IsChecked = true;
+                    break;
+                case "EmployessPage":
+                    FrameM.Navigate(new EmployeesPage());
+                    EmployessPageBtn.IsChecked = true;
+                    break;
+                case "ServicePage":
+                    FrameM.Navigate(new ServicePage());
+                    ServicePageBtn.IsChecked = true;
+                    break;
+                case "AdminPage":
+                    FrameM.Navigate(new AdminPage());
+                    AdminPageBtn.IsChecked = true;
+                    break;
+            }
         }
 
         //ToolBar
@@ -49,9 +81,7 @@ namespace HimApp.Views.Windows
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-            {
                 this.DragMove();
-            }
         }
 
         private void ResizeWin_Click(object sender, RoutedEventArgs e)
@@ -87,6 +117,12 @@ namespace HimApp.Views.Windows
             else if (Properties.Settings.Default.Color == "DarkColor")
                 UIObj.SweepColor("WhiteColor");
             else return;
+
+            if (FrameM.Content.ToString().Contains("SettingPage"))
+            {
+                SettingPage curPage = FrameM.Content as SettingPage;
+                curPage.RdStartPage();
+            };
         }
         private void UpdIconTheme()
         {
@@ -100,25 +136,43 @@ namespace HimApp.Views.Windows
         {
             FrameM.Navigate(new SettingPage());
         }
-
         private void GoClientPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new ClientPage());
         }
+        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new AddOrder());
+        }
+
 
         private void HomePage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new HomePage());
         }
 
+        private void OrdersPage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new OrdersPage());
+        }
+
+        private void ProductPage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new ProductPage());
+        }
         private void EmployeesPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new EmployeesPage());
         }
 
-        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        private void ServicePage_Click(object sender, RoutedEventArgs e)
         {
-            FrameM.Navigate(new AddOrder());
+            FrameM.Navigate(new ServicePage());
+        }
+
+        private void AdminPage_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new AdminPage());
         }
     }
 }

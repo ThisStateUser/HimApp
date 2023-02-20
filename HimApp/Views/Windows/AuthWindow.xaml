@@ -32,8 +32,8 @@
             </DockPanel>
 
             <StackPanel VerticalAlignment="Center" Grid.Row="1">
-                <Grid x:Name="LoadPage">
-                    <Icon:PackIconMaterial Kind="Loading" x:Name="Loader" Width="25" Height="25" Foreground="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.02,1.02">
+                <Grid x:Name="LoadPage" Margin="0 0 0 10">
+                    <Icon:PackIconMaterial Kind="Loading" x:Name="Loader" Width="25" Height="25" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1.02,1.02">
                         <Icon:PackIconMaterial.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -44,7 +44,7 @@
                         </Icon:PackIconMaterial.RenderTransform>
                     </Icon:PackIconMaterial>
                     <Icon:PackIconMaterialDesign x:Name="Error" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Warning" Width="50" Height="50" Foreground="{StaticResource Text}"/>
-                    <TextBlock x:Name="msgload" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 85" Foreground="{DynamicResource Text}"/>
+                    <TextBlock x:Name="msgload" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 100 0 0" Foreground="{DynamicResource Text}"/>
                 </Grid>
 
                 <StackPanel Width="270" Name="AuthForm" Visibility="Collapsed" HorizontalAlignment="Center">
