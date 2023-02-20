@@ -54,7 +54,7 @@
         </Button>
 
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
-            <DataGrid d:ItemsSource="{d:SampleData ItemCount=100}" x:Name="dg" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+            <DataGrid x:Name="EmployUser" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.Header>
@@ -73,7 +73,7 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding first_name}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.first_name}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -84,7 +84,7 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding last_name}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.last_name}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -95,7 +95,7 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding phone}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.phone}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -106,7 +106,7 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding salary}"/>
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.salary}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

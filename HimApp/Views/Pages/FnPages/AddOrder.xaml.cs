@@ -1,5 +1,4 @@
-﻿using HimApp.BD;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HimApp.Views.Pages
+namespace HimApp.Views.Pages.FnPages
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeesPage.xaml
+    /// Логика взаимодействия для AddOrder.xaml
     /// </summary>
-    public partial class EmployeesPage : Page
+    public partial class AddOrder : Page
     {
-        public EmployeesPage()
+        public AddOrder()
         {
             InitializeComponent();
-            EmployUser.ItemsSource = HimBDEntities.GetContext().Users.Where(x => x.UserInfo.role_id == 2).ToList();
         }
     }
 }

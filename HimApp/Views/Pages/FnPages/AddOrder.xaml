@@ -1,0 +1,48 @@
+﻿<Page x:Class="HimApp.Views.Pages.FnPages.AddOrder"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HimApp.Views.Pages.FnPages"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="660" d:DesignWidth="1104"
+      Title="AddOrder">
+    <Grid>
+        <Border Style="{DynamicResource BorderPanel}" Width="400" Height="500">
+            <StackPanel>
+                <TextBlock Text="Ответственный за заказ"/>
+                <ComboBox Style="{DynamicResource settingCB}" x:Name="executor"/>
+                <TextBlock Text="Автомобиль"/>
+                <ComboBox Style="{DynamicResource settingCB}" x:Name="car"/>
+                <TextBlock Text="номер автомобиля"/>
+                <TextBox x:Name="car_num"/>
+                <TextBlock Text="Состояние автомобиля"/>
+                <ComboBox Style="{DynamicResource settingCB}" x:Name="condition"/>
+                <TextBlock Text="Состав заказа"/>
+                <WrapPanel>
+                    <Button>
+                        <Icon:PackIconMaterial Kind="Plus"/>
+                    </Button>
+                </WrapPanel>
+                <TextBlock Text="Заметка к заказу"/>
+                <RichTextBox x:Name="comments"/>
+                <TextBlock Text="Стоимость работ"/>
+                <TextBox x:Name="cost"/>
+                <TextBlock Text="Предоплата (при наличии)"/>
+                <TextBox x:Name="prepay"/>
+                <TextBlock Text="Дата записи"/>
+                <DatePicker x:Name="arrival"/>
+                <TextBlock Text="Дата выдачи"/>
+                <DatePicker x:Name="departure"/>
+                
+                <Button Margin="0 10 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>    
+        </Border>
+    </Grid>
+</Page>

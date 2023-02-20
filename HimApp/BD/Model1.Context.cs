@@ -21,13 +21,14 @@ namespace HimApp.BD
             : base("name=HimBDEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<CarBody> CarBody { get; set; }
+        public virtual DbSet<CarBrand> CarBrand { get; set; }
         public virtual DbSet<Cars> Cars { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<ClientCar> ClientCar { get; set; }

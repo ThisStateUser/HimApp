@@ -1,5 +1,6 @@
 ﻿using HimApp.Controllers;
 using HimApp.Views.Pages;
+using HimApp.Views.Pages.FnPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace HimApp.Views.Windows
         {
             InitializeComponent();
             UpdIconTheme();
-            //UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
+            UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
             FrameM.Navigate(new HomePage());
         }
 
@@ -113,6 +114,11 @@ namespace HimApp.Views.Windows
         private void EmployeesPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new EmployeesPage());
+        }
+
+        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            FrameM.Navigate(new AddOrder());
         }
     }
 }

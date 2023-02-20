@@ -81,9 +81,9 @@
                         <TextBlock Text="Страница" x:Name="PageTitle" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-                            <Button Margin="0 0 20 0">
+                            <Button Margin="0 0 20 0" Click="AddOrder_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Добавить заказ" Foreground="{DynamicResource TextBtn}" Margin="0 0 10 0"/>
+                                    <TextBlock Text="Новый заказ" Foreground="{DynamicResource TextBtn}" Margin="0 0 10 0"/>
                                     <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
@@ -102,8 +102,6 @@
                     <Frame Grid.Row="2" x:Name="FrameM" NavigationUIVisibility="Hidden"/>
                 </Grid>
             </Grid>
-
-
         </Grid>
     </Border>
 </Window>

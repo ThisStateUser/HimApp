@@ -3,7 +3,9 @@ using HimApp.Controllers;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -27,11 +30,10 @@ namespace HimApp.Views.Windows
         public AuthWindow()
         {
             InitializeComponent();
-            CheckApp();
             UIObj.SwitchThemeCheck();
             UIObj.SwitchColor();
-            if (!RememberAuth()) 
-                login.Focus();
+            Task check = new Task(CheckApp);
+            check.Start();
         }
 
         private bool RememberAuth()
@@ -51,12 +53,65 @@ namespace HimApp.Views.Windows
             return false;
         }
 
+        private void ReturnFormAuth()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Loading(false);
+                if (!RememberAuth())
+                    login.Focus();
+                else
+                    LoadPage.Visibility = Visibility.Collapsed;
+                AuthForm.Visibility = Visibility.Visible;
+                return;
+            });
+        }
+
+        public void Loading(bool condition)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (condition == false)
+                {
+                    RotateLoad.BeginAnimation(RotateTransform.AngleProperty, null);
+                    return;
+                }
+                DoubleAnimation animation = new DoubleAnimation()
+                {
+                    From = 0,
+                    To = 360,
+                    Duration = TimeSpan.FromSeconds(1),
+                    RepeatBehavior = RepeatBehavior.Forever,
+                };
+                RotateLoad.BeginAnimation(RotateTransform.AngleProperty, animation);
+            });
+        }
+
+
         private void CheckApp()
         {
             if (Properties.Settings.Default.Color == null)
             {
                 UIObj.SweepColor("TealColor");
             }
+            Loading(true);
+            Dispatcher.Invoke(() => msgload.Text = "Соединение с базой данных");
+            try
+            {
+                HimBDEntities.GetContext().Roles.ToList();
+            }
+            catch (EntityException)
+            {
+                Loading(false);
+                Dispatcher.Invoke(() =>
+                {
+                    msgload.Text = "Соединение отсутствует";
+                    Loader.Visibility = Visibility.Collapsed;
+                    Error.Visibility = Visibility.Visible;
+                });
+                return;
+            }
+            ReturnFormAuth();
         }
 
         private void CloseWin_Click(object sender, RoutedEventArgs e)
@@ -108,9 +163,9 @@ namespace HimApp.Views.Windows
 
         private void Auth_Click(object sender, RoutedEventArgs e)
         {
-            //if (!UserAuth())
-            //    return;
-            //UserObj.UserAcc = FindUser();
+            if (!UserAuth())
+                return;
+            UserObj.UserAcc = FindUser();
             new MainWindow().Show();
             this.Close();
         }

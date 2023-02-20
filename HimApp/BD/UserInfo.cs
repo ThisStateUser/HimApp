@@ -27,6 +27,10 @@ namespace HimApp.BD
         public int role_id { get; set; }
         public System.DateTime created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
+        public string personal_account { get; set; }
+        public string location { get; set; }
+        public string schedule { get; set; }
+        public Nullable<double> salary { get; set; }
     
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

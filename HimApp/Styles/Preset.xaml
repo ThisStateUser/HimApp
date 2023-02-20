@@ -94,13 +94,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="templateRoot" CornerRadius="10" 
-                            Background="{StaticResource graycolor}" BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                         <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" 
                                 HorizontalAlignment="Right" Margin="0 1 4 0" SnapsToDevicePixels="true" 
                                 Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
                             <Path x:Name="arrow" Data="F1 M1.4644.201a.9.9 0 00-1.1087 1.418l4.0966 3.2033a.9.9 0 001.1085.0002l4.0999-3.2032a.9.9 0 10-1.1082-1.4185L5.0069 2.971l-3.5425-2.77Z" 
-                                  Fill="{StaticResource whitecolor}" HorizontalAlignment="Center" 
+                                  Fill="{DynamicResource Text}" HorizontalAlignment="Center" 
                                   Margin="0" VerticalAlignment="Center"/>
                         </Border>
                     </Border>
@@ -124,13 +124,14 @@
 
             <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" 
                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                   Margin="1" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                <theme:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                    <Border Width="{TemplateBinding MinWidth}" CornerRadius="0 0 5 5" 
+                   Margin="1" Placement="Bottom" 
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <Border Width="{TemplateBinding MinWidth}" 
+                            CornerRadius="0 0 5 5" 
                         Padding="0 0 0 5" x:Name="dropDownBorder"
                         Background="{TemplateBinding Background}"
                         BorderThickness="0">
-                        <ScrollViewer x:Name="DropDownScrollViewer">
+                    <ScrollViewer x:Name="DropDownScrollViewer">
                             <StackPanel RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
                                     <Rectangle x:Name="opaqueRect" 
@@ -142,8 +143,7 @@
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </StackPanel>
                         </ScrollViewer>
-                    </Border>
-                </theme:SystemDropShadowChrome>
+                </Border>
             </Popup>
 
             <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" 
@@ -166,10 +166,6 @@
             <Trigger Property="HasItems" Value="false">
                 <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
             </Trigger>
-            <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
-                <Setter Property="Margin" TargetName="shadow" Value="0,5,5,5"/>
-                <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
-            </Trigger>
             <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
                 <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
                 <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
@@ -178,7 +174,7 @@
     </ControlTemplate>
 
     <Style x:Key="settingCB" TargetType="{x:Type ComboBox}">
-        <Setter Property="Background" Value="red"/>
+        <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Height" Value="30" />
         <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource Mode=Self}}"/>
         <Setter Property="Foreground" Value="{StaticResource darkcolor}"/>
@@ -447,6 +443,7 @@
                 <Setter Property="BorderBrush" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Background" Value="{DynamicResource Background}"/>
                 <Setter Property="Foreground" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
                 <Setter Property="BorderBrush" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
             </Trigger>

@@ -12,22 +12,18 @@ namespace HimApp.BD
     using System;
     using System.Collections.Generic;
     
-    public partial class Cars
+    public partial class CarBrand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cars()
+        public CarBrand()
         {
-            this.ClientCar = new HashSet<ClientCar>();
+            this.Cars = new HashSet<Cars>();
         }
     
         public int id { get; set; }
-        public int car_brand_id { get; set; }
-        public string car_model { get; set; }
-        public int car_body_id { get; set; }
+        public string car_brand { get; set; }
     
-        public virtual CarBody CarBody { get; set; }
-        public virtual CarBrand CarBrand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientCar> ClientCar { get; set; }
+        public virtual ICollection<Cars> Cars { get; set; }
     }
 }
