@@ -49,7 +49,10 @@
                             </Button>                            
                             <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoSettingPage" Click="GoSettingPage_Click">
                                 <Icon:PackIconMaterial Kind="Cog" Style="{DynamicResource menuBtnIcon}"/>
-                            </RadioButton>       
+                            </RadioButton>
+                            <Button Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtnOnly}" Click="LogOut_Click">
+                                <Icon:PackIconMaterial Kind="Logout" Style="{DynamicResource menuBtnIcon}"/>
+                            </Button>
                         </StackPanel>
 
                         <StackPanel VerticalAlignment="Center">

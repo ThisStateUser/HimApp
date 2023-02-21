@@ -9,7 +9,7 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="SettingPage">
     <DockPanel>
-        <Border DockPanel.Dock="Top" Style="{DynamicResource BorderPanel}" Width="500" Height="300">
+        <Border Style="{DynamicResource BorderPanel}" Width="500" Height="300">
             <StackPanel>
                 <TextBlock Text="Приложение" Style="{DynamicResource TitleText}"/>
                 <Separator Background="{DynamicResource Panel2}" Height="1"  Margin="0 5"/>
@@ -90,8 +90,10 @@
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Выйти из аккаунта" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                    <ToggleButton Grid.Column="1" Grid.Row="0" Style="{DynamicResource ToggleSettings}"/>
+                    <TextBlock Text="Двухфакторная аутентификация (admin)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Grid.Row="0" Click="AuthCodeSet_Click">
+                        <TextBlock Text="Установить" Foreground="{DynamicResource TextBtn}"/>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Border>

@@ -28,9 +28,9 @@ namespace HimApp.Views.Pages
         private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
-                FOrder.LineLeft();
+                FOrder.ScrollToHorizontalOffset(FOrder.HorizontalOffset + (e.Delta - 10) * -1);
             else if (e.Delta < 0)
-                FOrder.LineRight();
+                FOrder.ScrollToHorizontalOffset(FOrder.HorizontalOffset + (e.Delta + 10) * -1);
             e.Handled = true;
         }
     }

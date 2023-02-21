@@ -1,10 +1,13 @@
 ﻿using HimApp.Controllers;
+using HimApp.Views.Windows;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.WebRequestMethods;
 
 namespace HimApp.Views.Pages
 {
@@ -138,6 +142,35 @@ namespace HimApp.Views.Pages
         {
             UIObj.StartUp("AdminPage");
             RdStartPage();
+        }
+
+        private async void AuthCodeSet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                HttpClient hc = new HttpClient();
+                HttpResponseMessage hpm = await hc
+                    .GetAsync("https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo=" + UserObj.UserAcc + "&SecretCode=230b793597bf40365f18cb98bf9aa8e3");
+
+                if (hpm.IsSuccessStatusCode)
+                {
+                    MatchCollection matches = new Regex(@"src='.*?'").Matches(await hpm.Content.ReadAsStringAsync());
+                    string ShortVal = matches[0].Value.Remove(0, 5);
+                    ShortVal = ShortVal.Remove(ShortVal.Length - 1, 1);
+                    new DoubleAuth(ShortVal).Show();
+                }
+            }
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ");
+                return;
+            }
+
+            //HimAppCours3
+            //Uri http = new Uri();
+            //http.
+            //https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo=UserName&SecretCode=230b793597bf40365f18cb98bf9aa8e3
         }
     }
 }

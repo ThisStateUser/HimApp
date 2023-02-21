@@ -174,5 +174,15 @@ namespace HimApp.Views.Windows
         {
             FrameM.Navigate(new AdminPage());
         }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Login = "";
+            Properties.Settings.Default.IsRemember = false;
+            Properties.Settings.Default.Save();
+            UserObj.UserAcc = null;
+            new AuthWindow().Show();
+            this.Close();
+        }
     }
 }
