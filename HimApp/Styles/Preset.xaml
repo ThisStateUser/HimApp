@@ -428,7 +428,7 @@
                         <Border BorderThickness="2 0 2 0"
                             CornerRadius="0 3 3 0"
                             BorderBrush="{TemplateBinding BorderBrush}">
-                    </Border>
+                        </Border>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
 
@@ -440,12 +440,12 @@
                 <Setter Property="Margin" Value="0 0 0 5"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Background" Value="{DynamicResource Panel2}"/>
-                <Setter Property="BorderBrush" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Hover}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="true">
                 <Setter Property="Background" Value="{DynamicResource Background}"/>
-                <Setter Property="Foreground" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
-                <Setter Property="BorderBrush" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Basic}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Basic}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -476,7 +476,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Foreground" Value="{Binding Tag, RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Hover}"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Background" Value="{DynamicResource Panel2}"/>
             </Trigger>

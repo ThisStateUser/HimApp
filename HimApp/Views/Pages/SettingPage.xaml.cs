@@ -143,34 +143,50 @@ namespace HimApp.Views.Pages
             UIObj.StartUp("AdminPage");
             RdStartPage();
         }
+        private string news_code()
+        {
+            Random random = new Random();
+            char[] tokenMas = new char[]
+            {
+                'A','b','c','D','e','F',
+                'f','J','j','w','W','g',
+                '0','1','2','C','V','G',
+                '9','5','3','7','N','q',
+                'Q','L','s','S','Z','z',
+                'o','O','a','P','p','n'
+            };
+
+            string s_code = "";
+
+            for (int i = 0; i <= 32; i++)
+            {
+                int ti = random.Next(0, tokenMas.Length - 1);
+                s_code += tokenMas[ti];
+            }
+            return s_code;
+        }
 
         private async void AuthCodeSet_Click(object sender, RoutedEventArgs e)
         {
+            string code = news_code();
             try
             {
                 HttpClient hc = new HttpClient();
                 HttpResponseMessage hpm = await hc
-                    .GetAsync("https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo=" + UserObj.UserAcc + "&SecretCode=230b793597bf40365f18cb98bf9aa8e3");
+                    .GetAsync($"https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo={UserObj.UserAcc.login}&SecretCode={code}");
 
                 if (hpm.IsSuccessStatusCode)
                 {
-                    MatchCollection matches = new Regex(@"src='.*?'").Matches(await hpm.Content.ReadAsStringAsync());
-                    string ShortVal = matches[0].Value.Remove(0, 5);
+                    MatchCollection ImgPath = new Regex(@"src='.*?'").Matches(await hpm.Content.ReadAsStringAsync());
+                    string ShortVal = ImgPath[0].Value.Remove(0, 5);
                     ShortVal = ShortVal.Remove(ShortVal.Length - 1, 1);
-                    new DoubleAuth(ShortVal).Show();
+                    new DoubleAuth(ShortVal, code).Show();
                 }
             }
             catch (HttpRequestException)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ");
                 return;
             }
-
-            //HimAppCours3
-            //Uri http = new Uri();
-            //http.
-            //https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo=UserName&SecretCode=230b793597bf40365f18cb98bf9aa8e3
         }
     }
 }

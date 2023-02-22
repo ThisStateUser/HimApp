@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище HimBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuthDouble">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="s_code" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="CarBody">
           <Key>
             <PropertyRef Name="id" />
@@ -204,6 +212,18 @@
           <Property Name="password" Type="nvarchar" MaxLength="70" Nullable="false" />
           <Property Name="userinfo_id" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AuthDouble_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AuthDouble" Type="Self.AuthDouble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AuthDouble">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cars_CarBody">
           <End Role="CarBody" Type="Self.CarBody" Multiplicity="1" />
           <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
@@ -479,6 +499,7 @@
           <Parameter Name="client" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="Хранилище HimBDModelContainer">
+          <EntitySet Name="AuthDouble" EntityType="Self.AuthDouble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarBody" EntityType="Self.CarBody" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarBrand" EntityType="Self.CarBrand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
@@ -501,6 +522,10 @@
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AuthDouble_Users" Association="Self.FK_AuthDouble_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AuthDouble" EntitySet="AuthDouble" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cars_CarBody" Association="Self.FK_Cars_CarBody">
             <End Role="CarBody" EntitySet="CarBody" />
             <End Role="Cars" EntitySet="Cars" />
@@ -587,6 +612,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HimBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AuthDouble">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="s_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_AuthDouble_Users" FromRole="AuthDouble" ToRole="Users" />
+        </EntityType>
         <EntityType Name="CarBody">
           <Key>
             <PropertyRef Name="id" />
@@ -823,9 +857,22 @@
           <Property Name="login" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="userinfo_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AuthDouble" Relationship="Self.FK_AuthDouble_Users" FromRole="Users" ToRole="AuthDouble" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Users" FromRole="Users" ToRole="Order" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_Users_UserInfo" FromRole="Users" ToRole="UserInfo" />
         </EntityType>
+        <Association Name="FK_AuthDouble_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AuthDouble" Type="Self.AuthDouble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AuthDouble">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cars_CarBody">
           <End Role="CarBody" Type="Self.CarBody" Multiplicity="1" />
           <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
@@ -1067,6 +1114,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HimBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuthDouble" EntityType="Self.AuthDouble" />
           <EntitySet Name="CarBody" EntityType="Self.CarBody" />
           <EntitySet Name="CarBrand" EntityType="Self.CarBrand" />
           <EntitySet Name="Cars" EntityType="Self.Cars" />
@@ -1089,6 +1137,10 @@
           <EntitySet Name="Unit" EntityType="Self.Unit" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_AuthDouble_Users" Association="Self.FK_AuthDouble_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AuthDouble" EntitySet="AuthDouble" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cars_CarBody" Association="Self.FK_Cars_CarBody">
             <End Role="CarBody" EntitySet="CarBody" />
             <End Role="Cars" EntitySet="Cars" />
@@ -1220,6 +1272,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище HimBDModelContainer" CdmEntityContainer="HimBDEntities">
+          <EntitySetMapping Name="AuthDouble">
+            <EntityTypeMapping TypeName="HimBDModel.AuthDouble">
+              <MappingFragment StoreEntitySet="AuthDouble">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="s_code" ColumnName="s_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CarBody">
             <EntityTypeMapping TypeName="HimBDModel.CarBody">
               <MappingFragment StoreEntitySet="CarBody">

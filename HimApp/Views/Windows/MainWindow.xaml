@@ -44,34 +44,34 @@
                     <DockPanel Margin="0 20" LastChildFill="True">
                         
                         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                            <Button Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtnOnly}"  x:Name="ThemeSwitch" Click="ThemeSwitch_Click">
+                            <Button Style="{DynamicResource MenuBtnOnly}"  x:Name="ThemeSwitch" Click="ThemeSwitch_Click">
                                 <Icon:PackIconMaterial Kind="Lightbulb" x:Name="ThemeSwitchIcon" Style="{DynamicResource menuBtnIcon}"/>
                             </Button>                            
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoSettingPage" Click="GoSettingPage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="GoSettingPage" Click="GoSettingPage_Click">
                                 <Icon:PackIconMaterial Kind="Cog" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <Button Tag="{DynamicResource Basic}" Style="{DynamicResource MenuBtnOnly}" Click="LogOut_Click">
+                            <Button Style="{DynamicResource MenuBtnOnly}" Click="LogOut_Click">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{DynamicResource menuBtnIcon}"/>
                             </Button>
                         </StackPanel>
 
                         <StackPanel VerticalAlignment="Center">
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="HomePageBtn" Click="HomePage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="HomePageBtn" Click="HomePage_Click">
                                 <Icon:PackIconMaterial Kind="HomeVariant" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="OrdersPageBtn" Click="OrdersPage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="OrdersPageBtn" Click="OrdersPage_Click">
                                 <Icon:PackIconMaterial Kind="ViewList" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ProductPageBtn" Click="ProductPage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ProductPageBtn" Click="ProductPage_Click">
                                 <Icon:PackIconMaterial Kind="Store" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="EmployessPageBtn" Click="EmployeesPage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="EmployessPageBtn" Click="EmployeesPage_Click">
                                 <Icon:PackIconMaterial Kind="AccountMultiple" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ServicePageBtn" Click="ServicePage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ServicePageBtn" Click="ServicePage_Click">
                                 <Icon:PackIconMaterial Kind="Bookmark" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton Tag="{DynamicResource Basic}" GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="AdminPageBtn" Click="AdminPage_Click">
+                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="AdminPageBtn" Click="AdminPage_Click">
                                 <Icon:PackIconMaterial Kind="ShieldKey" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
                         </StackPanel>

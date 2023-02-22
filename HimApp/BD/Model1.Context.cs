@@ -27,6 +27,7 @@ namespace HimApp.BD
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AuthDouble> AuthDouble { get; set; }
         public virtual DbSet<CarBody> CarBody { get; set; }
         public virtual DbSet<CarBrand> CarBrand { get; set; }
         public virtual DbSet<Cars> Cars { get; set; }

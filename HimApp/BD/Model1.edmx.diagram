@@ -4,7 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bec93575f48142a0bd9701b039db9c28" Name="Diagram1">
+      <Diagram DiagramId="268ee9bffa1e4d2ab2bdc97ae775e47b" Name="Diagram1">
+        <EntityTypeShape EntityType="HimBDModel.AuthDouble" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.CarBody" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.CarBrand" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.Cars" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
@@ -26,7 +27,8 @@
         <EntityTypeShape EntityType="HimBDModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.Unit" Width="1.5" PointX="3.75" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.UserInfo" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HimBDModel.Users" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Users" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <AssociationConnector Association="HimBDModel.FK_AuthDouble_Users" ManuallyRouted="false" />
         <AssociationConnector Association="HimBDModel.FK_Cars_CarBody" ManuallyRouted="false" />
         <AssociationConnector Association="HimBDModel.FK_Cars_CarBrand" ManuallyRouted="false" />
         <AssociationConnector Association="HimBDModel.FK_ClientCar_Cars" ManuallyRouted="false" />

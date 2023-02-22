@@ -17,6 +17,7 @@ namespace HimApp.BD
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
+            this.AuthDouble = new HashSet<AuthDouble>();
             this.Order = new HashSet<Order>();
         }
     
@@ -25,6 +26,8 @@ namespace HimApp.BD
         public string password { get; set; }
         public int userinfo_id { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AuthDouble> AuthDouble { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
         public virtual UserInfo UserInfo { get; set; }
