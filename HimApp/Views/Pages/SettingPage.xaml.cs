@@ -1,4 +1,5 @@
-﻿using HimApp.Controllers;
+﻿using HimApp.BD;
+using HimApp.Controllers;
 using HimApp.Views.Windows;
 using MahApps.Metro.IconPacks;
 using System;
@@ -30,9 +31,26 @@ namespace HimApp.Views.Pages
     {
         public SettingPage()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            WConnect.SettingPageMethod = this;
             RdStartPage();
+            initDouble();
         }
+
+        public void initDouble()
+        {
+            if (HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == UserObj.UserAcc.id).FirstOrDefault() != null)
+            {
+                SetCode.Visibility = Visibility.Collapsed;
+                DelCode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SetCode.Visibility = Visibility.Visible;
+                DelCode.Visibility = Visibility.Collapsed;
+            }
+        }
+
         public void RdStartPage()
         {
             RestColor();
@@ -174,19 +192,39 @@ namespace HimApp.Views.Pages
                 HttpClient hc = new HttpClient();
                 HttpResponseMessage hpm = await hc
                     .GetAsync($"https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo={UserObj.UserAcc.login}&SecretCode={code}");
-
                 if (hpm.IsSuccessStatusCode)
                 {
                     MatchCollection ImgPath = new Regex(@"src='.*?'").Matches(await hpm.Content.ReadAsStringAsync());
                     string ShortVal = ImgPath[0].Value.Remove(0, 5);
                     ShortVal = ShortVal.Remove(ShortVal.Length - 1, 1);
-                    new DoubleAuth(ShortVal, code).Show();
+                    if (new DoubleAuth(false, ShortVal, code).ShowDialog() == true)
+                        initDouble();
                 }
             }
             catch (HttpRequestException)
             {
                 return;
             }
+        }
+
+        private void DelCode_Click(object sender, RoutedEventArgs e)
+        {
+            AuthDouble DAuth = HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == UserObj.UserAcc.id).FirstOrDefault();
+            if (DAuth == null)
+                MessageBox.Show("Отключено");
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите отключить двухфакторную аутентификацию?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (new DoubleAuth(true).ShowDialog() == true)
+                    {
+                        HimBDEntities.GetContext().AuthDouble.Remove(DAuth);
+                    }
+                }
+            }
+            HimBDEntities.GetContext().SaveChanges();
+            initDouble();
         }
     }
 }

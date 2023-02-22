@@ -16,7 +16,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <DockPanel x:Name="ToolBar" MouseDown="ToolBar_MouseDown" Background="Transparent" Grid.Row="0" Height="35">
-                <TextBlock Margin="10 0" Text="Аутентификация" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{DynamicResource ResMinBtn}" Click="CollapseWin_Click">
                         <Icon:PackIconMaterial Kind="Minus"/>
@@ -26,8 +25,19 @@
                     </Button>
                 </StackPanel>
             </DockPanel>
+
+            <StackPanel Grid.Row="1" Width="310" x:Name="CheckCodeQwest" Visibility="Collapsed">
+                <TextBlock Text="1. Введите код из приложения 'Google Authenticator' в поле" TextWrapping="Wrap" Margin="0 10 0 10"/>
+                <StackPanel Height="30" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Код: "/>
+                    <TextBox x:Name="CheckCode" KeyDown="CheckCode_KeyDown" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0" Style="{DynamicResource AuthBox}"/>
+                    <Button Click="SendCheckCode_Click">
+                        <TextBlock Foreground="{DynamicResource TextBtn}" Text="Проверить"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
             
-            <StackPanel Grid.Row="1" Width="310">
+            <StackPanel Grid.Row="1" Width="310" x:Name="SetCodeQwest" Visibility="Collapsed">
                 <TextBlock Text="1. Скачайте приложение 'Google Authenticator'" TextWrapping="Wrap" Margin="0 10 0 5"/>
                 <TextBlock Text="2. Откройте камеру или отсканируйте в приложении QR код" TextWrapping="Wrap" Margin="0 0 0 5"/>
                 <TextBlock Text="3. Введите код из приложения в поле" TextWrapping="Wrap" Margin="0 0 0 10"/>
@@ -36,7 +46,7 @@
                 </Border>
                 <StackPanel Margin="0 21 0 0" Height="30" Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="Код: "/>
-                    <TextBox x:Name="code" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0" Style="{DynamicResource AuthBox}"/>
+                    <TextBox x:Name="code" KeyDown="code_KeyDown" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0" Style="{DynamicResource AuthBox}"/>
                     <Button Click="SendCode_Click">
                         <TextBlock Foreground="{DynamicResource TextBtn}" Text="Установить"/>
                     </Button>

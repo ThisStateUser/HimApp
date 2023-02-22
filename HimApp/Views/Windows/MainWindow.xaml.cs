@@ -29,6 +29,7 @@ namespace HimApp.Views.Windows
         public MainWindow()
         {
             InitializeComponent();
+            WConnect.MainWindowMethod = this;
             UpdIconTheme();
             UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
             RdStartPage();

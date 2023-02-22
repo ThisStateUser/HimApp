@@ -90,8 +90,11 @@
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Двухфакторная аутентификация (admin)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1" Grid.Row="0" Click="AuthCodeSet_Click">
+                    <TextBlock Text="Двухфакторная аутентификация" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Grid.Row="0" x:Name="DelCode" Click="DelCode_Click" Background="{DynamicResource redcolor}">
+                        <TextBlock Text="Удалить" Foreground="{DynamicResource TextBtn}"/>
+                    </Button>
+                    <Button Grid.Column="1" x:Name="SetCode" Grid.Row="0" Click="AuthCodeSet_Click">
                         <TextBlock Text="Установить" Foreground="{DynamicResource TextBtn}"/>
                     </Button>
                 </Grid>

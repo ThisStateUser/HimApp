@@ -30,6 +30,7 @@ namespace HimApp.Views.Windows
         public AuthWindow()
         {
             InitializeComponent();
+            WConnect.AuthWindowMethod = this;
             UIObj.SwitchThemeCheck();
             UIObj.SwitchColor();
             Task check = new Task(CheckApp);
@@ -43,20 +44,40 @@ namespace HimApp.Views.Windows
                 LoaderShow("Вход в аккаунт");
                 Users user = HimBDEntities.GetContext().Users.Where
                                 (x => x.login == Properties.Settings.Default.Login.Trim()).FirstOrDefault();
-                if (user != null)
+
+                void auth()
                 {
                     UserObj.UserAcc = user;
                     new MainWindow().Show();
                     this.Close();
-                    return true;
+                }
+
+                if (user != null)
+                {
+                    if (user.UserInfo.role_id != 1)
+                    {
+                        auth();
+                        return true;
+                    }
+                    if (HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == user.id).FirstOrDefault() == null)
+                    {
+                        auth();
+                        return true;
+                    }
+                    if (new DoubleAuth(true).ShowDialog() == true)
+                    {
+                        auth();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     Loading(false);
-                    Dispatcher.Invoke(() =>
-                    {
-                        ErrorShow("Ошибка входа");
-                    });
+                    Dispatcher.Invoke(() => { ErrorShow("Ошибка входа"); });
                     return false;
                 }
             }
@@ -107,7 +128,7 @@ namespace HimApp.Views.Windows
             }
             catch (EntityException)
             {
-                
+
                 Dispatcher.Invoke(() =>
                 {
                     ErrorShow("Соединение отсутствует");
@@ -167,6 +188,18 @@ namespace HimApp.Views.Windows
             if (!UserAuth())
                 return;
             LoaderShow("Вход в аккаунт");
+            Users user = FindUser();
+            if (user.UserInfo.role_id == 1
+                && HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == user.id).FirstOrDefault() != null)
+            {
+                if (new DoubleAuth(true, login:login.Text).ShowDialog() == true)
+                {
+                    UserObj.UserAcc = FindUser();
+                    new MainWindow().Show();
+                    this.Close();
+                }
+                return;
+            } 
             UserObj.UserAcc = FindUser();
             new MainWindow().Show();
             this.Close();
@@ -236,7 +269,7 @@ namespace HimApp.Views.Windows
         {
             ReturnLoader();
             Loading(false);
-            Dispatcher.Invoke(() => 
+            Dispatcher.Invoke(() =>
             {
                 Loader.Visibility = Visibility.Collapsed;
                 Error.Visibility = Visibility.Visible;
