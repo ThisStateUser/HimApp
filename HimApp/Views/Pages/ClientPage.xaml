@@ -43,7 +43,7 @@
         </StackPanel>
 
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
-            <DataGrid x:Name="dg" d:ItemsSource="{d:SampleData ItemCount=23}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+            <DataGrid x:Name="dg" d:ItemsSource="{d:SampleData ItemCount=3}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.Header>
@@ -103,13 +103,13 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     
-                    <DataGridTemplateColumn Width="6*">
+                    <DataGridTemplateColumn Width="5*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="Прочее"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button HorizontalAlignment="Right" Margin="0 5">
+                                <Button HorizontalAlignment="Left" Margin="0 5">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Детали заказа" Foreground="{DynamicResource TextBtn}"/>
                                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>

@@ -60,14 +60,14 @@ namespace HimApp.Views.Windows
                         return true;
                     }
                     if (HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == user.id).FirstOrDefault() == null)
-                    {
-                        auth();
+                    { 
+                        auth(); 
                         return true;
                     }
                     if (new DoubleAuth(true).ShowDialog() == true)
-                    {
-                        auth();
-                        return true;
+                    { 
+                        auth(); 
+                        return true; 
                     }
                     else
                     {
@@ -128,7 +128,6 @@ namespace HimApp.Views.Windows
             }
             catch (EntityException)
             {
-
                 Dispatcher.Invoke(() =>
                 {
                     ErrorShow("Соединение отсутствует");
@@ -170,15 +169,12 @@ namespace HimApp.Views.Windows
                     icon.Kind = PackIconMaterialKind.EyeOff;
                     TbOrPb_pass = true;
                     break;
-
                 case true:
                     pass.Password = text.Text;
                     text.Visibility = Visibility.Collapsed;
                     pass.Visibility = Visibility.Visible;
                     icon.Kind = PackIconMaterialKind.Eye;
                     TbOrPb_pass = false;
-                    break;
-                default:
                     break;
             }
         }
@@ -194,13 +190,13 @@ namespace HimApp.Views.Windows
             {
                 if (new DoubleAuth(true, login:login.Text).ShowDialog() == true)
                 {
-                    UserObj.UserAcc = FindUser();
+                    UserObj.UserAcc = user;
                     new MainWindow().Show();
                     this.Close();
                 }
-                return;
+                ReturnForm();
             } 
-            UserObj.UserAcc = FindUser();
+            UserObj.UserAcc = user;
             new MainWindow().Show();
             this.Close();
         }
@@ -209,17 +205,10 @@ namespace HimApp.Views.Windows
         {
             if (e.Key == Key.Enter)
             {
-                switch (TbOrPb_pass)
-                {
-                    case true:
-                        password_visible.Focus();
-                        break;
-                    case false:
-                        password.Focus();
-                        break;
-                    default:
-                        break;
-                }
+                if(TbOrPb_pass)
+                    password_visible.Focus();
+                else
+                    password.Focus();
             }
         }
 
@@ -251,7 +240,7 @@ namespace HimApp.Views.Windows
 
             if (user == null)
             {
-                MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Stop);
+                MainVoid.ErrorMessage("Неверный логин или пароль");
                 return false;
             }
 

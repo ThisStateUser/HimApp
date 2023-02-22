@@ -371,6 +371,7 @@
     <Compile Include="BD\Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\MainVoid.cs" />
     <Compile Include="Controllers\UIObj.cs" />
     <Compile Include="Controllers\UserObj.cs" />
     <Compile Include="Controllers\WConnect.cs" />

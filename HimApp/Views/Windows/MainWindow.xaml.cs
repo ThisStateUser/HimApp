@@ -33,7 +33,6 @@ namespace HimApp.Views.Windows
             UpdIconTheme();
             UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
             RdStartPage();
-
         }
 
         private void RdStartPage()
@@ -106,7 +105,6 @@ namespace HimApp.Views.Windows
         }
 
 
-
         private void ThemeSwitch_Click(object sender, RoutedEventArgs e)
         {
             UIObj.SwitchThemeVoid();
@@ -151,12 +149,10 @@ namespace HimApp.Views.Windows
         {
             FrameM.Navigate(new HomePage());
         }
-
         private void OrdersPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new OrdersPage());
         }
-
         private void ProductPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new ProductPage());
@@ -165,17 +161,14 @@ namespace HimApp.Views.Windows
         {
             FrameM.Navigate(new EmployeesPage());
         }
-
         private void ServicePage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new ServicePage());
         }
-
         private void AdminPage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new AdminPage());
         }
-
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Login = "";

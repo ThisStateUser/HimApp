@@ -41,13 +41,13 @@ namespace HimApp.Views.Pages
         {
             if (HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == UserObj.UserAcc.id).FirstOrDefault() != null)
             {
-                SetCode.Visibility = Visibility.Collapsed;
-                DelCode.Visibility = Visibility.Visible;
+                SetFactorCode.Visibility = Visibility.Collapsed;
+                DelFactorCode.Visibility = Visibility.Visible;
             }
             else
             {
-                SetCode.Visibility = Visibility.Visible;
-                DelCode.Visibility = Visibility.Collapsed;
+                SetFactorCode.Visibility = Visibility.Visible;
+                DelFactorCode.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -161,36 +161,13 @@ namespace HimApp.Views.Pages
             UIObj.StartUp("AdminPage");
             RdStartPage();
         }
-        private string news_code()
+
+        private async void SetFactorCode_Click(object sender, RoutedEventArgs e)
         {
-            Random random = new Random();
-            char[] tokenMas = new char[]
-            {
-                'A','b','c','D','e','F',
-                'f','J','j','w','W','g',
-                '0','1','2','C','V','G',
-                '9','5','3','7','N','q',
-                'Q','L','s','S','Z','z',
-                'o','O','a','P','p','n'
-            };
-
-            string s_code = "";
-
-            for (int i = 0; i <= 32; i++)
-            {
-                int ti = random.Next(0, tokenMas.Length - 1);
-                s_code += tokenMas[ti];
-            }
-            return s_code;
-        }
-
-        private async void AuthCodeSet_Click(object sender, RoutedEventArgs e)
-        {
-            string code = news_code();
+            string code = MainVoid.GenCode();
             try
             {
-                HttpClient hc = new HttpClient();
-                HttpResponseMessage hpm = await hc
+                HttpResponseMessage hpm = await new HttpClient()
                     .GetAsync($"https://www.authenticatorApi.com/pair.aspx?AppName=HimApp&AppInfo={UserObj.UserAcc.login}&SecretCode={code}");
                 if (hpm.IsSuccessStatusCode)
                 {
@@ -201,13 +178,14 @@ namespace HimApp.Views.Pages
                         initDouble();
                 }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
+                MainVoid.FatalErrorMessage(ex.ToString());
                 return;
             }
         }
 
-        private void DelCode_Click(object sender, RoutedEventArgs e)
+        private void DelFactorCode_Click(object sender, RoutedEventArgs e)
         {
             AuthDouble DAuth = HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == UserObj.UserAcc.id).FirstOrDefault();
             if (DAuth == null)

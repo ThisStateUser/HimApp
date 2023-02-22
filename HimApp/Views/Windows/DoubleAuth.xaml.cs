@@ -45,20 +45,20 @@ namespace HimApp.Views.Windows
             {
                 SetCodeQwest.Visibility = Visibility.Visible;
                 this.Height = 550;
-                ShowQR(PathImg);
+                GetQR(PathImg);
                 _s_code = s_code;
                 code.Focus();
             }
         }
 
-        private void ShowQR(string PathImg)
+        private void GetQR(string PathImg)
         {
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.UriSource = new Uri(PathImg);
-            bitmapImage.EndInit();
-            imgAuth.Source = bitmapImage;
+            BitmapImage GetQRImg = new BitmapImage();
+            GetQRImg.BeginInit();
+            GetQRImg.CacheOption = BitmapCacheOption.OnLoad;
+            GetQRImg.UriSource = new Uri(PathImg);
+            GetQRImg.EndInit();
+            imgAuth.Source = GetQRImg;
         }
 
         private void CloseWin_Click(object sender, RoutedEventArgs e)
@@ -84,25 +84,25 @@ namespace HimApp.Views.Windows
             try
             {
                 WebClient client = new WebClient();
-                string responce = client.DownloadString($"https://www.authenticatorApi.com/Validate.aspx?Pin={code.Text.Trim()}&SecretCode={_s_code}");
-                if (responce == "True")
+                string response = client.DownloadString($"https://www.authenticatorApi.com/Validate.aspx?Pin={code.Text.Trim()}&SecretCode={_s_code}");
+                if (response == "True")
                 {
                     if (DAuth == null)
                         HimBDEntities.GetContext().AuthDouble.Add(new AuthDouble { s_code = _s_code, user_id = UserObj.UserAcc.id });
                     else
                         DAuth.s_code = _s_code;
                     HimBDEntities.GetContext().SaveChanges();
-                    MessageBox.Show("Двухфакторная аутентификация установлена", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainVoid.InformationMessage("Двухфакторная аутентификация установлена");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else if (responce == "False")
-                    MessageBox.Show("Неверный код", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                else if (response == "False")
+                    MainVoid.ErrorMessage("Неверный код");
                 else return;
             }
             catch (Exception)
             {
-                MessageBox.Show("Нет интернет соединения");
+                MainVoid.ErrorMessage("Нет интернет соединения");
                 return;
             }
         }
@@ -119,22 +119,22 @@ namespace HimApp.Views.Windows
             try
             {
                 WebClient client = new WebClient();
-                string responce = client.DownloadString($"https://www.authenticatorApi.com/Validate.aspx?Pin={CheckCode.Text.Trim()}&SecretCode={DAuth.s_code}");
-                if (responce == "True")
+                string response = client.DownloadString($"https://www.authenticatorApi.com/Validate.aspx?Pin={CheckCode.Text.Trim()}&SecretCode={DAuth.s_code}");
+                if (response == "True")
                 {
                     if (DAuth == null)
                         return;
-                    MessageBox.Show("Проверка пройдена", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainVoid.InformationMessage("Проверка пройдена");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else if (responce == "False")
-                    MessageBox.Show("Неверный код", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                else if (response == "False")
+                    MainVoid.ErrorMessage("Неверный код");
                 else return;
             }
             catch (Exception)
             {
-                MessageBox.Show("Нет интернет соединения");
+                MainVoid.ErrorMessage("Нет интернет соединения");
                 return;
             }
         }
