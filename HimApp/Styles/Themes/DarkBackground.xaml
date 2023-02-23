@@ -39,7 +39,6 @@
         <Setter Property="MinWidth" Value="10"/>
     </Style>
 
-
     <Style TargetType="Border" x:Key="ShadowPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
     </Style>

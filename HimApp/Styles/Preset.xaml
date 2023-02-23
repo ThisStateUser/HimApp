@@ -233,7 +233,7 @@
                                   Color="{DynamicResource BasicColor}"
                                   Opacity="10"
                                   ShadowDepth="0"
-                                  RenderingBias="Performance"/>
+                                  RenderingBias="Quality"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -325,7 +325,7 @@
                                                       Color="{DynamicResource BasicColor}"
                                                       Opacity="10"
                                                       ShadowDepth="0"
-                                                      RenderingBias="Performance"/>
+                                                      RenderingBias="Quality"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -337,7 +337,7 @@
                                                       Color="#263238"
                                                       Opacity="0.3"
                                                       ShadowDepth="1"
-                                                      RenderingBias="Performance"/>
+                                                      RenderingBias="Quality"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
