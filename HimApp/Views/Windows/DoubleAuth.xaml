@@ -37,7 +37,7 @@
                 </StackPanel>
             </StackPanel>
             
-            <StackPanel Grid.Row="1" Width="310" x:Name="SetCodeQwest" Visibility="Collapsed">
+            <StackPanel Grid.Row="1" Width="310" x:Name="SetCodeQwest" Visibility="Visible">
                 <TextBlock Text="1. Скачайте приложение 'Google Authenticator'" TextWrapping="Wrap" Margin="0 10 0 5"/>
                 <TextBlock Text="2. Откройте камеру или отсканируйте в приложении QR код" TextWrapping="Wrap" Margin="0 0 0 5"/>
                 <TextBlock Text="3. Введите код из приложения в поле" TextWrapping="Wrap" Margin="0 0 0 10"/>
@@ -46,7 +46,7 @@
                 </Border>
                 <StackPanel Margin="0 21 0 0" Height="30" Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="Код: "/>
-                    <TextBox x:Name="code" KeyDown="code_KeyDown" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0" Style="{DynamicResource AuthBox}"/>
+                    <TextBox x:Name="code" KeyDown="code_KeyDown" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0"/>
                     <Button Click="SendCode_Click">
                         <TextBlock Foreground="{DynamicResource TextBtn}" Text="Установить"/>
                     </Button>
