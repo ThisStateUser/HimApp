@@ -195,10 +195,11 @@ namespace HimApp.Views.Windows
                     this.Close();
                 }
                 ReturnForm();
-            } 
+            }
             UserObj.UserAcc = user;
             new MainWindow().Show();
             this.Close();
+            
         }
 
         private void login_KeyDown(object sender, KeyEventArgs e)
