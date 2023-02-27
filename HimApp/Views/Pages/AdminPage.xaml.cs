@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HimApp.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace HimApp.Views.Pages
         public AdminPage()
         {
             InitializeComponent();
+            WConnect.MainWindowMethod.PageTitle.Text = "Админ панель";
         }
     }
 }

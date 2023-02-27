@@ -30,7 +30,7 @@
                 <TextBlock Text="1. Введите код из приложения 'Google Authenticator' в поле" TextWrapping="Wrap" Margin="0 10 0 10"/>
                 <StackPanel Height="30" Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="Код: "/>
-                    <TextBox x:Name="CheckCode" KeyDown="CheckCode_KeyDown" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0" Style="{DynamicResource AuthBox}"/>
+                    <TextBox x:Name="CheckCode" KeyDown="CheckCode_KeyDown" VerticalAlignment="Center" MaxLength="6" Width="160" Margin="0 0 13 0"/>
                     <Button Click="SendCheckCode_Click">
                         <TextBlock Foreground="{DynamicResource TextBtn}" Text="Проверить"/>
                     </Button>

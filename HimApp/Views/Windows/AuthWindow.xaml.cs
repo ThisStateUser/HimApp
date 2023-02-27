@@ -195,6 +195,7 @@ namespace HimApp.Views.Windows
                     this.Close();
                 }
                 ReturnForm();
+                return;
             }
             UserObj.UserAcc = user;
             new MainWindow().Show();

@@ -33,6 +33,7 @@ namespace HimApp.Views.Pages
         {
             InitializeComponent();
             WConnect.SettingPageMethod = this;
+            WConnect.MainWindowMethod.PageTitle.Text = "Настройки";
             RdStartPage();
             initDouble();
         }
@@ -195,14 +196,14 @@ namespace HimApp.Views.Pages
                 MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите отключить двухфакторную аутентификацию?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    if (new DoubleAuth(true).ShowDialog() == true)
+                    if (new DoubleAuth(true, login:UserObj.UserAcc.login).ShowDialog() == true)
                     {
                         HimBDEntities.GetContext().AuthDouble.Remove(DAuth);
+                        HimBDEntities.GetContext().SaveChanges();
+                        initDouble();
                     }
                 }
             }
-            HimBDEntities.GetContext().SaveChanges();
-            initDouble();
         }
     }
 }

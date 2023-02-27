@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HimApp.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace HimApp.Views.Pages
         public HomePage()
         {
             InitializeComponent();
+            WConnect.MainWindowMethod.PageTitle.Text = "Главная";
         }
 
         private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

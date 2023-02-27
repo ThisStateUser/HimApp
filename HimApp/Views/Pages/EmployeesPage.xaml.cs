@@ -1,4 +1,5 @@
 ﻿using HimApp.BD;
+using HimApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace HimApp.Views.Pages
         public EmployeesPage()
         {
             InitializeComponent();
+            WConnect.MainWindowMethod.PageTitle.Text = "Сотрудники";
             EmployUser.ItemsSource = HimBDEntities.GetContext().Users.Where(x => x.UserInfo.role_id == 2).ToList();
         }
     }
