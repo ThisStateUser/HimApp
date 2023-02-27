@@ -220,7 +220,7 @@
     <Style x:Key="settingCB" TargetType="{x:Type ComboBox}">
         <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Height" Value="30" />
-        <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource Mode=Self}}"/>
+        <Setter Property="MinWidth" Value="130"/>
         <Setter Property="Foreground" Value="{StaticResource darkcolor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource Basic}"/>
         <Setter Property="BorderThickness" Value="1"/>

@@ -9,40 +9,66 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="AddOrder">
     <Grid>
-        <Border Style="{DynamicResource BorderPanel}" Width="400" Height="500">
-            <StackPanel>
-                <TextBlock Text="Ответственный за заказ"/>
-                <ComboBox Style="{DynamicResource settingCB}" x:Name="executor"/>
-                <TextBlock Text="Автомобиль"/>
-                <ComboBox Style="{DynamicResource settingCB}" x:Name="car"/>
-                <TextBlock Text="номер автомобиля"/>
-                <TextBox x:Name="car_num"/>
-                <TextBlock Text="Состояние автомобиля"/>
-                <ComboBox Style="{DynamicResource settingCB}" x:Name="condition"/>
-                <TextBlock Text="Состав заказа"/>
-                <WrapPanel>
-                    <Button>
-                        <Icon:PackIconMaterial Kind="Plus"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.RowSpan="2" Grid.Column="0" Style="{DynamicResource BorderPanel}" Width="400" Height="560">
+            <ScrollViewer>
+                <StackPanel Width="350" HorizontalAlignment="Left">
+                    <TextBlock Text="Ответственный за заказ"/>
+                    <ComboBox Style="{DynamicResource settingCB}" x:Name="executor"/>
+                    <TextBlock Text="Автомобиль"/>
+                    <ComboBox Style="{DynamicResource settingCB}" x:Name="car"/>
+                    <TextBlock Text="Номер автомобиля"/>
+                    <TextBox x:Name="car_num"/>
+                    <TextBlock Text="Состояние автомобиля"/>
+                    <ComboBox Style="{DynamicResource settingCB}" x:Name="condition"/>
+                    <TextBlock Text="Состав заказа"/>
+                    <WrapPanel>
+                        <Button>
+                            <Icon:PackIconMaterial Kind="Plus"/>
+                        </Button>
+                    </WrapPanel>
+                    <TextBlock Text="Заметка к заказу"/>
+                    <RichTextBox x:Name="comments"/>
+                    <TextBlock Text="Стоимость работ"/>
+                    <TextBox x:Name="cost"/>
+                    <TextBlock Text="Предоплата (при наличии)"/>
+                    <TextBox x:Name="prepay"/>
+                    <TextBlock Text="Дата записи"/>
+                    <DatePicker x:Name="arrival"/>
+                    <TextBlock Text="Дата выдачи"/>
+                    <DatePicker x:Name="departure"/>
+                    <Button Margin="0 10 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
+                        </StackPanel>
                     </Button>
-                </WrapPanel>
-                <TextBlock Text="Заметка к заказу"/>
-                <RichTextBox x:Name="comments"/>
-                <TextBlock Text="Стоимость работ"/>
-                <TextBox x:Name="cost"/>
-                <TextBlock Text="Предоплата (при наличии)"/>
-                <TextBox x:Name="prepay"/>
-                <TextBlock Text="Дата записи"/>
-                <DatePicker x:Name="arrival"/>
-                <TextBlock Text="Дата выдачи"/>
-                <DatePicker x:Name="departure"/>
-                
-                <Button Margin="0 10 0 0">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
-                    </StackPanel>
-                </Button>
-
-            </StackPanel>    
+                </StackPanel>
+            </ScrollViewer>
         </Border>
+        
+        <Border Grid.Column="1" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
+            <StackPanel>
+                <TextBlock Text="Добавление автомобиля" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
+                <TextBlock Text="Марка"/>
+                <ComboBox x:Name="car_brand" Style="{DynamicResource settingCB}" Margin="0 5 0 10">
+                </ComboBox>
+                <TextBlock Text="Модель"/>
+                <TextBox x:Name="car_model" Margin="0 5 0 10"/>
+                <TextBlock Text="Категория автомобиля"/>
+                <ComboBox Style="{DynamicResource settingCB}" x:Name="body_name" Margin="0 5 0 10"/>
+                <Button HorizontalAlignment="Right">
+                    <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
+                </Button>
+            </StackPanel>
+        </Border>
+        
     </Grid>
 </Page>

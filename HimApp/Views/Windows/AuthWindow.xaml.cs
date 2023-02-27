@@ -71,6 +71,9 @@ namespace HimApp.Views.Windows
                     }
                     else
                     {
+                        Properties.Settings.Default.IsRemember = false;
+                        Properties.Settings.Default.Login = "";
+                        Properties.Settings.Default.Save();
                         return false;
                     }
                 }
