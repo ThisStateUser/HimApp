@@ -125,7 +125,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="templateRoot" CornerRadius="10" 
+                    <Border x:Name="templateRoot" CornerRadius="5" 
                             Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                         <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" 
@@ -138,7 +138,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="CornerRadius" TargetName="templateRoot" Value="10 10 0 0"/>
+                            <Setter Property="CornerRadius" TargetName="templateRoot" Value="5 5 0 0"/>
                             <Setter Property="Data" TargetName="arrow" Value="F1 M1.454 4.822a.9.9 0 01-1.108-1.418l4.096-3.203a.9.9 0 011.109 0l4.1 3.203a.9.9 0 11-1.108 1.418l-3.546-2.77-3.543 2.77Z"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -210,8 +210,8 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource Mode=Self}}"/>
         <Setter Property="Foreground" Value="{StaticResource darkcolor}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource whitecolor}"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Basic}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
