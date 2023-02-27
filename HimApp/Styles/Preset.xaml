@@ -9,6 +9,18 @@
         <Setter Property="FontFamily" Value="Trebuchet MS"/>
     </Style>
 
+    <Style TargetType="Border" x:Key="BorderPanel">
+        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="MinHeight" Value="10"/>
+        <Setter Property="MinWidth" Value="10"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="ShadowPanel">
+        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
+    </Style>
+
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Foreground" Value="{DynamicResource Text}"/>
