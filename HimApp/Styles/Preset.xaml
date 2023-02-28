@@ -695,4 +695,82 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <Style x:Key="Calendar" TargetType="{x:Type Calendar}">
+        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
+                    <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0.16"/>
+                    <GradientStop Color="{DynamicResource Panel2Color}" Offset="0.16"/>
+                    <GradientStop Color="{DynamicResource Panel2Color}" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Calendar}">
+                    <StackPanel x:Name="PART_Root" HorizontalAlignment="Center">
+                        <CalendarItem x:Name="PART_CalendarItem" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Style="{TemplateBinding CalendarItemStyle}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}">
+        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+        <Setter Property="IsTodayHighlighted" Value="True"/>
+        <Setter Property="SelectedDateFormat" Value="Short"/>
+        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Basic}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DatePicker}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.Resources>
+                                <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <Grid Background="Transparent" FlowDirection="LeftToRight" HorizontalAlignment="Center" Height="26" Margin="0" VerticalAlignment="Center" Width="50">
+                                            <Border x:Name="Highlight" BorderBrush="{DynamicResource Panel1}" BorderThickness="1" CornerRadius="5" Margin="-1" Opacity="0"/>
+                                            <Border x:Name="BackgroundGradient" BorderBrush="#BF000000" BorderThickness="0" CornerRadius="5" Opacity="1" Background="{DynamicResource Panel2}"/>
+                                            <Path Width="20" Height="20" Data="M6.25 1a.75.75 0 0 1 .75.75v.2567C7.393 2 7.83 2 8.3174 2h3.3652c.4873 0 .9244 0 1.3174.0067V1.75a.75.75 0 0 1 1.5 0v.3557c.4282.0646.8156.1721 1.1795.3575a4.2506 4.2506 0 0 1 1.8573 1.8573c.2536.4977.3616 1.0396.413 1.6696C18 6.6044 18 7.365 18 8.3174v3.3652c0 .9525 0 1.713-.0502 2.3273-.0514.63-.1594 1.1719-.413 1.6696a4.2512 4.2512 0 0 1-1.8573 1.8573c-.4977.2536-1.0396.3615-1.6696.413C13.3956 18 12.6351 18 11.6826 18H8.3174c-.9525 0-1.713 0-2.3273-.0502-.63-.0515-1.1719-.1594-1.6696-.413a4.2506 4.2506 0 0 1-1.8573-1.8573c-.2536-.4977-.3616-1.0396-.413-1.6696C2 13.3956 2 12.6351 2 11.6826V8.3174c0-.9525 0-1.713.0502-2.3273.0514-.63.1594-1.1719.413-1.6696a4.25 4.25 0 0 1 1.8573-1.8573c.3639-.1854.7513-.293 1.1795-.3575V1.75A.75.75 0 0 1 6.25 1ZM5.5 3.6296c-.203.044-.3614.1003-.4985.1701a2.75 2.75 0 0 0-1.2018 1.2018c-.1279.251-.2106.5735-.2545 1.1108-.0208.2545-.032.5424-.038.8777h12.9857c-.0061-.3353-.0173-.6232-.0381-.8777-.0439-.5373-.1266-.8598-.2545-1.1108a2.7505 2.7505 0 0 0-1.2018-1.2018c-.1371-.0698-.2955-.1262-.4985-.1701V3.75a.75.75 0 0 1-1.5 0v-.243c-.3817-.0068-.8248-.007-1.35-.007h-3.3c-.5252 0-.9683.0002-1.35.007v.243a.75.75 0 0 1-1.5 0v-.1204Zm11 4.8604h-13v3.16c0 .9925.0006 1.6917.0452 2.2377.0439.5373.1266.8598.2545 1.1108a2.7505 2.7505 0 0 0 1.2018 1.2018c.251.1279.5735.2106 1.1108.2545.546.0446 1.2452.0452 2.2377.0452h3.3c.9925 0 1.6917-.0006 2.2377-.0452.5373-.0439.8598-.1266 1.1108-.2545a2.751 2.751 0 0 0 1.2018-1.2018c.1279-.251.2106-.5735.2545-1.1108.0446-.546.0452-1.2452.0452-2.2377V8.49Z M15 13.5c0 .8284-.6716 1.5-1.5 1.5s-1.5-.6716-1.5-1.5.6716-1.5 1.5-1.5 1.5.6716 1.5 1.5Z" Fill="{DynamicResource Text}" HorizontalAlignment="Center" Margin="4,3,4,3" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PART_Button" Grid.Column="1" Foreground="{TemplateBinding Foreground}" Focusable="False" HorizontalAlignment="Left" Margin="3,0,3,0" Grid.Row="0" Template="{StaticResource DropDownButtonTemplate}" VerticalAlignment="Top" Width="20"/>
+                            <DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0" Focusable="{TemplateBinding Focusable}" 
+                                               HorizontalContentAlignment="Stretch" Grid.Row="0" VerticalContentAlignment="Stretch" Background="Transparent"
+                                               VerticalAlignment="Center" Padding="3"/>
+                            <Grid x:Name="PART_DisabledVisual" Grid.ColumnSpan="2" Grid.Column="0" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Grid.Column="0" Fill="#A5FFFFFF" RadiusY="1" Grid.Row="0" RadiusX="1"/>
+                                <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0" RadiusY="1" Grid.Row="0" RadiusX="1" Width="19"/>
+                                <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                            <Setter Property="Foreground" TargetName="PART_TextBox" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
