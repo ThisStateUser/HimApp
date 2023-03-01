@@ -21,39 +21,6 @@
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
     </Style>
 
-    <Style x:Key="DatePickerShow" TargetType="{x:Type Calendar}">
-        <Setter Property="Foreground" Value="{DynamicResource Text}"/>
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
-                    <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0.16"/>
-                    <GradientStop Color="{DynamicResource Panel2Color}" Offset="0.16"/>
-                    <GradientStop Color="{DynamicResource Panel2Color}" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFA3AEB9" Offset="0"/>
-                    <GradientStop Color="#FF8399A9" Offset="0.375"/>
-                    <GradientStop Color="#FF718597" Offset="0.375"/>
-                    <GradientStop Color="#FF617584" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Calendar}">
-                    <StackPanel x:Name="PART_Root" HorizontalAlignment="Center">
-                        <CalendarItem x:Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Style="{TemplateBinding CalendarItemStyle}"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Foreground" Value="{DynamicResource Text}"/>
@@ -85,7 +52,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="ScrollViewerShow" TargetType="{x:Type ScrollViewer}">
         <Setter Property="Template">
             <Setter.Value>
@@ -209,17 +176,17 @@
                         Background="{TemplateBinding Background}"
                         BorderThickness="0">
                     <ScrollViewer x:Name="DropDownScrollViewer">
-                            <StackPanel RenderOptions.ClearTypeHint="Enabled">
-                                <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
-                                    <Rectangle x:Name="opaqueRect" 
+                        <StackPanel RenderOptions.ClearTypeHint="Enabled">
+                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                <Rectangle x:Name="opaqueRect" 
                                                Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
                                                Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
-                                </Canvas>
-                                <ItemsPresenter x:Name="ItemsPresenter"
+                            </Canvas>
+                            <ItemsPresenter x:Name="ItemsPresenter"
                                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </StackPanel>
-                        </ScrollViewer>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Border>
             </Popup>
 
@@ -376,7 +343,7 @@
         <Setter Property="Padding" Value="5" />
         <Setter Property="FontFamily" Value="Trebuchet MS"/>
         <Setter Property="Margin" Value="0 0 0 20" />
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type PasswordBox}">
@@ -728,7 +695,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="Calendar" TargetType="{x:Type Calendar}">
         <Setter Property="Foreground" Value="{DynamicResource Text}"/>
         <Setter Property="Background">
