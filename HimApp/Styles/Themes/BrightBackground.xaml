@@ -20,11 +20,7 @@
     <Color x:Key="SysPressedColor">#868687</Color>
     <Color x:Key="SysDisabledColor">#CACBCC</Color>
 
-    
-    <SolidColorBrush x:Key="Shadow" Color="#e1e4e9"/>
-    <Color x:Key="ShadowColor">#e1e4e9</Color>
-    
-    
+
     <SolidColorBrush x:Key="Text" Color="#2a2d48"/>
     <SolidColorBrush x:Key="SysText" Color="#cfd6dc"/>
     

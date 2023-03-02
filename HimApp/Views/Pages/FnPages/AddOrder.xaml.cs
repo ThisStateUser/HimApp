@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HimApp.BD;
+using HimApp.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,13 @@ namespace HimApp.Views.Pages.FnPages
         public AddOrder()
         {
             InitializeComponent();
+            WConnect.MainWindowMethod.PageTitle.Text = "Новый заказ";
+            PreLoad();
+        }
+
+        private void PreLoad()
+        {
+            executor.ItemsSource = HimBDEntities.GetContext().Users.Where(x => x.UserInfo.role_id == 2).ToList();
         }
     }
 }

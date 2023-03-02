@@ -21,10 +21,6 @@
     <Color x:Key="SysDisabledColor">#232E33</Color>
 
 
-    <SolidColorBrush x:Key="Shadow" Color="#686868"/>
-    <Color x:Key="ShadowColor">#686868</Color>
-
-
     <SolidColorBrush x:Key="Text" Color="#fbfcfd"/>
     <SolidColorBrush x:Key="SysText" Color="#5f7a8e"/>
     

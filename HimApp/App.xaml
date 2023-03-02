@@ -12,6 +12,8 @@
                 
                 <ResourceDictionary Source="./Styles/Elements/ScrollBar.xaml"/>
                 <ResourceDictionary Source="./Styles/Elements/DatePicker.xaml"/>
+                <ResourceDictionary Source="./Styles/Elements/RichPassTextBox.xaml"/>
+                <ResourceDictionary Source="./Styles/Elements/DataGrid.xaml"/>
                 
                 <ResourceDictionary Source="./Styles/Preset.xaml"/>
                 <ResourceDictionary Source="./Styles/Elements/SystemStyle.xaml"/>
