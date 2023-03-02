@@ -42,9 +42,9 @@
                     <TextBlock Text="Предоплата (при наличии)"/>
                     <TextBox x:Name="prepay"/>
                     <TextBlock Text="Дата записи"/>
-                    <DatePicker CalendarStyle="{DynamicResource Calendar}" Style="{DynamicResource DatePickerStyle}" IsDropDownOpen="False" SelectedDate="10.10.2030" x:Name="arrival"/>
+                    <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="arrival"/>
                     <TextBlock Text="Дата выдачи"/>
-                    <DatePicker x:Name="departure" Margin="-1,0,1,0"/>
+                    <DatePicker CalendarStyle="{DynamicResource Calendars}" SelectedDate="10 10" x:Name="departure"/>
                     <Button Margin="0 10 0 0">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
