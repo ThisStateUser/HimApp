@@ -23,7 +23,7 @@
                 <StackPanel Width="350" HorizontalAlignment="Left">
                     <TextBlock Text="Заказ" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
                     <TextBlock Text="Ответственный за заказ"/>
-                    <ComboBox Style="{DynamicResource settingCB}" x:Name="executor">
+                    <ComboBox x:Name="executor">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -67,7 +67,7 @@
                 <TextBlock Text="Номер автомобиля"/>
                 <TextBox x:Name="car_num"/>
                 <TextBlock Text="Состояние автомобиля"/>
-                <ComboBox Style="{DynamicResource settingCB}" x:Name="condition"/>
+                <ComboBox x:Name="condition"/>
                 <Button HorizontalAlignment="Right">
                     <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
                 </Button>
@@ -78,12 +78,12 @@
             <StackPanel>
                 <TextBlock Text="Добавление автомобиля" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
                 <TextBlock Text="Марка"/>
-                <ComboBox x:Name="car_brand" Style="{DynamicResource settingCB}" Margin="0 5 0 10">
+                <ComboBox x:Name="car_brand" Margin="0 5 0 10">
                 </ComboBox>
                 <TextBlock Text="Модель"/>
                 <TextBox x:Name="car_model" Margin="0 5 0 10"/>
                 <TextBlock Text="Категория автомобиля"/>
-                <ComboBox Style="{DynamicResource settingCB}" x:Name="body_name" Margin="0 5 0 10"/>
+                <ComboBox x:Name="body_name" Margin="0 5 0 10"/>
                 <Button HorizontalAlignment="Right">
                     <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
                 </Button>
