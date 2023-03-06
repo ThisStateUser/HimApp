@@ -28,7 +28,8 @@
     <Style TargetType="Border" x:Key="ShadowPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
     </Style>
-
+    
+   
     <Style x:Key="Search" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Foreground" Value="{DynamicResource Text}"/>
@@ -48,7 +49,7 @@
                             <Icon:PackIconMaterialDesign x:Name="SearchIcon" Opacity="0.7" DockPanel.Dock="Right" Kind="Search" Width="18" Height="18" Margin="10 0 0 0" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                             <Grid>
                                 <TextBlock Visibility="Collapsed" Opacity="0.7" x:Name="placeholder" Text="Поиск..." HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <ScrollViewer x:Name="PART_ContentHost" Margin="-2 0 0 0" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                             </Grid>
                         </DockPanel>
                     </Border>
@@ -63,6 +64,9 @@
                         </Trigger>
                         <Trigger Property="Text" Value="">
                             <Setter Property="Visibility" TargetName="placeholder" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" TargetName="SearchIcon" Value="1"/>
@@ -143,9 +147,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
-
 
     <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button" x:Key="DeleteBtn">
         <Setter Property="Background" Value="#FF3F34"/>
@@ -304,6 +305,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
 
 </ResourceDictionary>

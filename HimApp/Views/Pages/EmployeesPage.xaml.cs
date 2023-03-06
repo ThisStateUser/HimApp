@@ -28,5 +28,10 @@ namespace HimApp.Views.Pages
             WConnect.MainWindowMethod.PageTitle.Text = "Сотрудники";
             EmployUser.ItemsSource = HimBDEntities.GetContext().Users.Where(x => x.UserInfo.role_id == 2).ToList();
         }
+
+        private void MoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+            WConnect.MainWindowMethod.FrameM.Navigate(new ClientPage());
+        }
     }
 }

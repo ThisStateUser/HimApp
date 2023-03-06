@@ -54,7 +54,7 @@
         </Button>
 
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
-            <DataGrid x:Name="EmployUser" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+            <DataGrid d:ItemsSource="{d:SampleData ItemCount=2}" x:Name="EmployUser" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.Header>
@@ -114,7 +114,7 @@
                     <DataGridTemplateColumn Width="5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button HorizontalAlignment="Right" Margin="0 5">
+                                <Button HorizontalAlignment="Right" Margin="0 5" Click="MoreInfo_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Подробнее" Foreground="{DynamicResource TextBtn}"/>
                                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>

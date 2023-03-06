@@ -31,8 +31,8 @@ namespace HimApp.Views.Pages.FnPages
 
         private void PreLoad()
         {
-            executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
-            condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
+            //executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
+            //condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
         }
     }
 }
