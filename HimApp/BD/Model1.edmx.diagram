@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="268ee9bffa1e4d2ab2bdc97ae775e47b" Name="Diagram1">
+      <Diagram DiagramId="268ee9bffa1e4d2ab2bdc97ae775e47b" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="HimBDModel.AuthDouble" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.CarBody" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.CarBrand" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />

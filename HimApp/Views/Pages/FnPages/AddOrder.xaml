@@ -18,28 +18,16 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
-        <Border Grid.RowSpan="2" Grid.Column="0" Style="{DynamicResource BorderPanel}" Width="400" Height="560">
+        <Border Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource BorderPanel}" Width="400" Height="560">
             <ScrollViewer>
                 <StackPanel Width="350" HorizontalAlignment="Left">
                     <TextBlock Text="Заказ" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
                     <TextBlock Text="Ответственный за заказ"/>
-                    <ComboBox x:Name="executor">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding UserInfo.first_name}" Foreground="{DynamicResource Text}" Margin="0 0 5 0"/>
-                                    <TextBlock Text="{Binding UserInfo.last_name}" Foreground="{DynamicResource Text}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    
+                    <Border CornerRadius="5" Height="30" Padding="5" Margin="0 5 0 10" Background="{DynamicResource Panel2}">
+                        <TextBlock VerticalAlignment="Center"/>
+                    </Border>
+
                     <TextBlock Text="Состав заказа"/>
-                    <WrapPanel>
-                        <Button>
-                            <Icon:PackIconMaterial Kind="Plus"/>
-                        </Button>
-                    </WrapPanel>
                     <TextBlock Text="Заметка к заказу"/>
                     <RichTextBox x:Name="comments"/>
                     <TextBlock Text="Стоимость работ"/>
@@ -59,22 +47,28 @@
             </ScrollViewer>
         </Border>
 
-        <Border Grid.Column="1" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
+        <Border Grid.Column="0" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
             <StackPanel>
                 <TextBlock Text="Автомобиль" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
                 <TextBlock Text="Автомобиль"/>
-                <ComboBox IsEditable="True" x:Name="car"/>
+                <ComboBox x:Name="car"/>
                 <TextBlock Text="Номер автомобиля"/>
                 <TextBox x:Name="car_num"/>
                 <TextBlock Text="Состояние автомобиля"/>
-                <ComboBox x:Name="condition"/>
+                <ComboBox x:Name="condition">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="{DynamicResource Text}" Text="{Binding condition_rate}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Button HorizontalAlignment="Right">
                     <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
                 </Button>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="1" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
+        <Border Grid.Column="0" Grid.Row="1" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
             <StackPanel>
                 <TextBlock Text="Добавление автомобиля" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
                 <TextBlock Text="Марка"/>
