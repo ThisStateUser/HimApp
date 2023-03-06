@@ -67,7 +67,7 @@
     </Style>
 
     <Style x:Key="ToggleSettings" TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Panel1}"/>
+        <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Foreground" Value="{DynamicResource Text}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -85,13 +85,6 @@
                             Padding="3"
                             MinWidth="70"
                             Height="30">
-                        <Border.Effect>
-                            <DropShadowEffect x:Name="Shadow" BlurRadius="3"
-                                  Color="{DynamicResource ShadowColor}"
-                                  Opacity="1"
-                                  ShadowDepth="2"
-                                  RenderingBias="Performance"/>
-                        </Border.Effect>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>

@@ -9,30 +9,82 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="AddOrder">
     <Grid>
-        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="800" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="152,0,0,0">
+        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="900" Height="550" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Border CornerRadius="10 0 0 10" Padding="5" Background="{DynamicResource Panel2}" Grid.Column="0">
+                <Border CornerRadius="10 0 0 10" Padding="20 5" Background="{DynamicResource Panel2}" Grid.Column="0">
                     <StackPanel>
-                        <TextBlock Text="Заказ" Style="{DynamicResource TitleText}"/>
-                        
-                    </StackPanel>
-                </Border>
-                <StackPanel VerticalAlignment="Center" Grid.Column="1">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Ответственный за заказ"/>
-                        <Border CornerRadius="5" Height="30" Padding="5" Margin="0 5 0 10" Background="{DynamicResource Panel2}">
-                            <TextBlock VerticalAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" Text="Заказ" Style="{DynamicResource TitleText}"/>
+                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="Иванов Дмитрий"/>
+                        </Border>
+                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="Иванов Дмитрий"/>
+                        </Border>
+                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="Иванов Дмитрий"/>
+                        </Border>
+                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="Иванов Дмитрий"/>
                         </Border>
                     </StackPanel>
+                </Border>
+                <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                <StackPanel VerticalAlignment="Center" Grid.Column="1">
+                    <StackPanel Margin="20">
+                        <ScrollViewer x:Name="OrderSetPageOne" MaxHeight="400" Padding="0 0 10 0">
+                            <StackPanel>
+                                <TextBlock Text="Состав заказа"/>
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left">
+                                    <TextBlock Text="Выбрать" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
+                                <TextBlock Text="Заметка к заказу"/>
+                                <RichTextBox x:Name="comments" MinHeight="130" Margin="0 5"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel x:Name="OrderSetPageTwo" Visibility="Collapsed">
+                            <TextBlock Text="Ответственный за заказ"/>
+                            <ComboBox x:Name="executor" Margin="0 5 0 10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{DynamicResource Text}" Text="{Binding UserInfo.first_name}"/>
+                                            <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding UserInfo.last_name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBlock Text="Стоимость работ"/>
+                            <TextBox x:Name="cost" Margin="0 5 0 10"/>
+                            <TextBlock Text="Предоплата (при наличии)"/>
+                            <TextBox x:Name="prepay" Margin="0 5 0 10"/>
+                            <TextBlock Text="Дата записи"/>
+                            <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="arrival" Margin="0 5 0 10"/>
+                            <TextBlock Text="Дата выдачи"/>
+                            <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="departure" Margin="0 5 0 10"/>
+                        </StackPanel>
+                        <StackPanel x:Name="OrderSetPageThree" Visibility="Collapsed">
+                            <TextBlock Text="Ответственный за заказ"/>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
-                <Button Margin="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button Margin="5" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <StackPanel>
-                        <Icon:PackIconMaterial Kind="ArrowRight" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
-                        <TextBlock Text="Далее" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" FontSize="10"/>
+                        <Icon:PackIconMaterial Kind="ArrowLeft" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
+                        <TextBlock Text="Назад" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="5" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
+                    <StackPanel>
+                        <Icon:PackIconMaterial Kind="ArrowRight" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
+                        <TextBlock Text="Далее" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" FontSize="10"/>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -48,6 +100,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
+    
+    <TextBlock Text="Заметка к заказу"/>
+                            <RichTextBox x:Name="comments" Margin="0 5 0 10"/>
+    
         <Border Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource BorderPanel}" Width="400" Height="560">
             <ScrollViewer>
                 <StackPanel Width="350" HorizontalAlignment="Left">

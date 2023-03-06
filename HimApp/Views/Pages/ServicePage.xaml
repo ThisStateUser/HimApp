@@ -10,6 +10,10 @@
       Title="ServicePage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="137*"/>
+        </Grid.ColumnDefinitions>
+
     </Grid>
 </Page>

@@ -46,7 +46,7 @@
                 <StackPanel DockPanel.Dock="Top" Margin="0 0 0 20" Orientation="Horizontal">
                     <TextBox MinWidth="300" Style="{DynamicResource Search}"/>
                 </StackPanel>
-                <DataGrid DockPanel.Dock="Top" x:Name="dg" d:ItemsSource="{d:SampleData ItemCount=3}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                <DataGrid DockPanel.Dock="Top" x:Name="dg" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="2*">
                             <DataGridTemplateColumn.Header>
