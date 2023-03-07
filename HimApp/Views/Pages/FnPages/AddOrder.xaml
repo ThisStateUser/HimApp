@@ -9,9 +9,10 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="AddOrder">
     <Grid>
-        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="900" Height="550" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="1000" Height="550" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
@@ -22,25 +23,45 @@
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
                             <TextBlock Text="Иванов Дмитрий"/>
                         </Border>
-                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <TextBlock Text="Автомобиль" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="Иванов Дмитрий"/>
+                            <TextBlock Text="Lamborgini Aventodor"/>
                         </Border>
-                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <TextBlock Text="Состояние автомобиля" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="Иванов Дмитрий"/>
+                            <TextBlock Text="Хорошее"/>
                         </Border>
-                        <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
+                        <TextBlock Text="Цена работ" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="Иванов Дмитрий"/>
+                            <TextBlock Text="10000"/>
+                        </Border>
+                        <TextBlock Text="Предоплата" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="0"/>
+                        </Border>
+                        <TextBlock Text="Дата приема" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="19.09.2023"/>
+                        </Border>
+                        <TextBlock Text="Дата выдачи" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <TextBlock Text="10.10.2023"/>
                         </Border>
                     </StackPanel>
                 </Border>
-                <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0"/>
                 <StackPanel VerticalAlignment="Center" Grid.Column="1">
                     <StackPanel Margin="20">
-                        <ScrollViewer x:Name="OrderSetPageOne" MaxHeight="400" Padding="0 0 10 0">
+                        <ScrollViewer x:Name="OrderSetPageOne" Visibility="Visible" MaxHeight="400" Padding="0 0 10 0">
                             <StackPanel>
+                                <TextBlock Text="Клиент"/>
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left">
+                                    <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
+                                <TextBlock Text="Автомобиль"/>
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left">
+                                    <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
                                 <TextBlock Text="Состав заказа"/>
                                 <Button Margin="0 5 0 10" HorizontalAlignment="Left">
                                     <TextBlock Text="Выбрать" Foreground="{DynamicResource TextBtn}"/>
@@ -50,8 +71,7 @@
                             </StackPanel>
                         </ScrollViewer>
                         <StackPanel x:Name="OrderSetPageTwo" Visibility="Collapsed">
-                            <TextBlock Text="Ответственный за заказ"/>
-                            <ComboBox x:Name="executor" Margin="0 5 0 10">
+                            <ComboBox Tag="Ответственный за заказ" x:Name="executor" Margin="0 5 0 10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -61,32 +81,136 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBlock Text="Стоимость работ"/>
-                            <TextBox x:Name="cost" Margin="0 5 0 10"/>
-                            <TextBlock Text="Предоплата (при наличии)"/>
-                            <TextBox x:Name="prepay" Margin="0 5 0 10"/>
-                            <TextBlock Text="Дата записи"/>
-                            <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="arrival" Margin="0 5 0 10"/>
-                            <TextBlock Text="Дата выдачи"/>
-                            <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="departure" Margin="0 5 0 10"/>
+
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Стоимость работ" x:Name="cost" Margin="0 5 0 10"/>
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Предоплата (при наличии)" x:Name="prepay" Margin="0 5 0 10"/>
+                            <DatePicker Tag="Дата записи" CalendarStyle="{DynamicResource Calendars}" x:Name="arrival" Margin="0 5 0 10"/>
+                            <DatePicker Tag="Дата выдачи" CalendarStyle="{DynamicResource Calendars}" x:Name="departure" Margin="0 5 0 10"/>
                         </StackPanel>
                         <StackPanel x:Name="OrderSetPageThree" Visibility="Collapsed">
                             <TextBlock Text="Ответственный за заказ"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <Button Margin="5" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Button Margin="20 5" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <StackPanel>
                         <Icon:PackIconMaterial Kind="ArrowLeft" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
-                        <TextBlock Text="Назад" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" FontSize="10"/>
+                        <TextBlock Text="Назад" Style="{DynamicResource SmallText}" Foreground="{DynamicResource Text}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Margin="5" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
+                <Button Margin="20 5" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
                     <StackPanel>
                         <Icon:PackIconMaterial Kind="ArrowRight" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
-                        <TextBlock Text="Далее" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" FontSize="10"/>
+                        <TextBlock Text="Далее" Style="{DynamicResource SmallText}" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
+
+                <TextBlock Margin="5" Text="Задача" x:Name="TitleOther" HorizontalAlignment="Center" Grid.Column="2" Style="{DynamicResource TitleText}"/>
+                <StackPanel Margin="20 5" VerticalAlignment="Center" Grid.Column="2">
+                    <StackPanel Visibility="Collapsed">
+                        <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Марка" x:Name="brand_car" Margin="0 5 0 10"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Модель" x:Name="model_car" Margin="0 5 0 10"/>
+                        <ComboBox Tag="Категория автомобиля" x:Name="category_car" Margin="0 5 0 10">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding body_name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Номер автомобиля" x:Name="num_car" Margin="0 5 0 5"/>
+                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddCar" Click="PageNext_Click">
+                            <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
+                        </Button>
+                        <TextBlock Text="Найти" Margin="0 10 0 0" HorizontalAlignment="Center"/>
+                        <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
+                        <ScrollViewer Padding="0 0 10 0" MaxHeight="156">
+                            <DataGrid IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="1*">
+                                        <DataGridTemplateColumn.Header>
+                                            <TextBlock Text="№"/>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="3*">
+                                        <DataGridTemplateColumn.Header>
+                                            <TextBlock Text="Авто"/>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Cars.car_brand}"/>
+                                                    <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding Cars.car_model}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="27">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button>
+                                                    <Icon:PackIconMaterial Kind="Check"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </StackPanel>
+                    <StackPanel Visibility="Collapsed">
+                        <TextBlock Text="Новый клиент" Margin="0 5 0 10" HorizontalAlignment="Center"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Имя" x:Name="first_name_client" Margin="0 5 0 10"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Фамилия" x:Name="last_name_client" Margin="0 5 0 10"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Номер телефона*" x:Name="phone_client" Margin="0 5 0 5"/>
+                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddClient" Click="PageNext_Click">
+                            <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
+                        </Button>
+                        <TextBlock Text="Найти" Margin="0 10 0 0" HorizontalAlignment="Center"/>
+                        <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
+                        <ScrollViewer Padding="0 0 10 0" MaxHeight="156">
+                            <DataGrid IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="1*">
+                                        <DataGridTemplateColumn.Header>
+                                            <TextBlock Text="№"/>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="3*">
+                                        <DataGridTemplateColumn.Header>
+                                            <TextBlock Text="Телефон"/>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding phone}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="27">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button>
+                                                    <Icon:PackIconMaterial Kind="Check"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Margin="5" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="Обязательные поля помечены *" Style="{DynamicResource SmallText}"/>
             </Grid>
         </Border>
     </Grid>

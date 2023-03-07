@@ -34,6 +34,7 @@ namespace HimApp.Views.Pages.FnPages
         {
             ShowPage();
             executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
+            category_car.ItemsSource = HimBDEntities.GetContext().CarBody.ToList();
             //condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
         }
 

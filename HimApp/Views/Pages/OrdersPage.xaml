@@ -35,7 +35,7 @@
         </StackPanel>
 
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
-            <DataGrid x:Name="dg" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" RowStyle="{DynamicResource DataGridRowShow}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+            <DataGrid x:Name="dg" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.Header>

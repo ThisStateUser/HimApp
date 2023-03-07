@@ -252,6 +252,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
+                            <TextBlock Visibility="Collapsed" Margin="5 0 0 0" Opacity="0.7" x:Name="placeholder" Text="{TemplateBinding Tag}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             <Button x:Name="PART_Button" Grid.Column="1" 
                                     Foreground="{TemplateBinding Foreground}" 
                                     Focusable="False" HorizontalAlignment="Left" 
@@ -278,6 +279,12 @@
                         <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
                             <Setter Property="Foreground" TargetName="PART_TextBox" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </DataTrigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Text" SourceName="PART_TextBox" Value="">
+                            <Setter Property="Visibility" TargetName="placeholder" Value="Visible"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -48,7 +48,8 @@
                         CornerRadius="0 0 5 5" 
                         Padding="0 0 0 5" x:Name="dropDownBorder"
                         Background="{TemplateBinding Background}"
-                        BorderThickness="0">
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource Basic}">
                     <ScrollViewer x:Name="DropDownScrollViewer">
                         <StackPanel RenderOptions.ClearTypeHint="Enabled">
                             <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
@@ -77,6 +78,7 @@
                               IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <TextBlock Visibility="Collapsed" Opacity="0.7" Margin="5 0 0 0" x:Name="placeholder" Text="{TemplateBinding Tag}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasItems" Value="false">
@@ -92,6 +94,15 @@
             <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
                 <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
                 <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="true">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="Content" SourceName="contentPresenter" Value="">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Visible"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -150,11 +161,11 @@
             <Border x:Name="border" Background="Transparent" Margin="0 -1 5 0" VerticalAlignment="Center">
                 <TextBox x:Name="PART_EditableTextBox" 
                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                         Text="dfdsfs"
                          IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" 
                          Margin="{TemplateBinding Padding}"
                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </Border>
+            <TextBlock Visibility="Collapsed" Opacity="0.7" Margin="5 0 0 0" x:Name="placeholder" Text="{TemplateBinding Tag}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="false">
@@ -165,6 +176,18 @@
             </Trigger>
             <Trigger Property="HasItems" Value="false">
                 <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
+            </Trigger>            
+            <Trigger Property="IsKeyboardFocused" Value="true">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="true">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="Text" SourceName="PART_EditableTextBox" Value="">
+                <Setter Property="Visibility" TargetName="placeholder" Value="Visible"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
