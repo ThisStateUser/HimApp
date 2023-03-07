@@ -28,8 +28,7 @@
     <Style TargetType="Border" x:Key="ShadowPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
     </Style>
-    
-   
+
     <Style x:Key="Search" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource Panel2}"/>
         <Setter Property="Foreground" Value="{DynamicResource Text}"/>
