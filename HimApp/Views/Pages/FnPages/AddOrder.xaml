@@ -9,7 +9,7 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="AddOrder">
     <Grid>
-        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="1000" Height="550" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="1080" Height="650" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -52,14 +52,14 @@
                 <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0"/>
                 <StackPanel VerticalAlignment="Center" Grid.Column="1">
                     <StackPanel Margin="20">
-                        <ScrollViewer x:Name="OrderSetPageOne" Visibility="Visible" MaxHeight="400" Padding="0 0 10 0">
+                        <ScrollViewer x:Name="OrderSetPageOne" Visibility="Visible" MaxHeight="500" Padding="0 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Клиент"/>
-                                <Button Margin="0 5 0 10" HorizontalAlignment="Left">
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="addClientForm" Click="addClientForm_Click">
                                     <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Автомобиль"/>
-                                <Button Margin="0 5 0 10" HorizontalAlignment="Left">
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="addAutoForm" Click="addAutoForm_Click">
                                     <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Состав заказа"/>
@@ -92,39 +92,57 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <Button Margin="20 5" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Button Margin="20 10" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <StackPanel>
                         <Icon:PackIconMaterial Kind="ArrowLeft" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
                         <TextBlock Text="Назад" Style="{DynamicResource SmallText}" Foreground="{DynamicResource Text}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Margin="20 5" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
+                <Button Margin="20 10" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
                     <StackPanel>
                         <Icon:PackIconMaterial Kind="ArrowRight" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
                         <TextBlock Text="Далее" Style="{DynamicResource SmallText}" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <TextBlock Margin="5" Text="Задача" x:Name="TitleOther" HorizontalAlignment="Center" Grid.Column="2" Style="{DynamicResource TitleText}"/>
+                <TextBlock Margin="5" Text="Доп. задача" x:Name="TitleOther" HorizontalAlignment="Center" Grid.Column="2" Style="{DynamicResource TitleText}"/>
                 <StackPanel Margin="20 5" VerticalAlignment="Center" Grid.Column="2">
-                    <StackPanel Visibility="Collapsed">
+                    <StackPanel x:Name="DopPageOther">
+                        <TextBlock Text="Клиент" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
+                            <TextBlock x:Name="info_Client" Text="Пусто"/>
+                        </Border>
+                        <TextBlock Text="Номер клиента" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
+                            <TextBlock x:Name="info_ClientNumber" Text=""/>
+                        </Border>
+                        <TextBlock Text="Автомобиль" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
+                            <TextBlock x:Name="info_ClientCar" Text=""/>
+                        </Border>
+                        <TextBlock Text="Номер автомобиля" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
+                            <TextBlock x:Name="info_ClientCarNumber" Text=""/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Visibility="Visible" x:Name="AutoPageOther">
                         <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
-                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Марка" x:Name="brand_car" Margin="0 5 0 10"/>
-                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Модель" x:Name="model_car" Margin="0 5 0 10"/>
-                        <ComboBox Tag="Категория автомобиля" x:Name="category_car" Margin="0 5 0 10">
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Марка*" x:Name="brand_car" Margin="0 5 0 10"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Модель*" x:Name="model_car" Margin="0 5 0 10"/>
+                        <ComboBox Tag="Категория автомобиля*" x:Name="category_car" Margin="0 5 0 10">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding body_name}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Номер автомобиля" x:Name="num_car" Margin="0 5 0 5"/>
-                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddCar" Click="PageNext_Click">
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Номер автомобиля*" x:Name="num_car" Margin="0 5 0 5"/>
+                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddCar" Click="AddCar_Click">
                             <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
                         </Button>
                         <TextBlock Text="Найти" Margin="0 10 0 0" HorizontalAlignment="Center"/>
                         <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
-                        <ScrollViewer Padding="0 0 10 0" MaxHeight="156">
+                        <ScrollViewer Padding="0 0 10 0" MaxHeight="200">
                             <DataGrid IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Width="1*">
@@ -163,18 +181,18 @@
                             </DataGrid>
                         </ScrollViewer>
                     </StackPanel>
-                    <StackPanel Visibility="Collapsed">
+                    <StackPanel Visibility="Collapsed" x:Name="ClientPageOther">
                         <TextBlock Text="Новый клиент" Margin="0 5 0 10" HorizontalAlignment="Center"/>
                         <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Имя" x:Name="first_name_client" Margin="0 5 0 10"/>
                         <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Фамилия" x:Name="last_name_client" Margin="0 5 0 10"/>
-                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Номер телефона*" x:Name="phone_client" Margin="0 5 0 5"/>
-                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddClient" Click="PageNext_Click">
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="phone_client_PreviewTextInput" Tag="Номер телефона*" x:Name="phone_client" Margin="0 5 0 5"/>
+                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddClient" Click="AddClient_Click">
                             <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
                         </Button>
                         <TextBlock Text="Найти" Margin="0 10 0 0" HorizontalAlignment="Center"/>
                         <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
-                        <ScrollViewer Padding="0 0 10 0" MaxHeight="156">
-                            <DataGrid IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                        <ScrollViewer Padding="0 0 10 0" MaxHeight="250">
+                            <DataGrid IsReadOnly="True" x:Name="ClientList" Style="{DynamicResource DataGridShow}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Width="1*">
                                         <DataGridTemplateColumn.Header>
@@ -199,7 +217,7 @@
                                     <DataGridTemplateColumn Width="27">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button>
+                                                <Button Tag="{Binding id}" Click="SelectClient_Click">
                                                     <Icon:PackIconMaterial Kind="Check"/>
                                                 </Button>
                                             </DataTemplate>
@@ -210,7 +228,7 @@
                         </ScrollViewer>
                     </StackPanel>
                 </StackPanel>
-                <TextBlock Margin="5" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="Обязательные поля помечены *" Style="{DynamicResource SmallText}"/>
+                <TextBlock Margin="10" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="Обязательные поля помечены *" Style="{DynamicResource SmallText}"/>
             </Grid>
         </Border>
     </Grid>
