@@ -63,7 +63,7 @@
                                     <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Состав заказа"/>
-                                <Button Margin="0 5 0 10" HorizontalAlignment="Left">
+                                <Button Margin="0 5 0 10" Click="Button_Click" HorizontalAlignment="Left">
                                     <TextBlock Text="Выбрать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Заметка к заказу"/>
@@ -110,7 +110,7 @@
                     <StackPanel x:Name="DopPageOther">
                         <TextBlock Text="Клиент" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
-                            <TextBlock x:Name="info_Client" Text="Пусто"/>
+                            <TextBlock x:Name="info_Client"/>
                         </Border>
                         <TextBlock Text="Номер клиента" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
@@ -125,25 +125,36 @@
                             <TextBlock x:Name="info_ClientCarNumber" Text=""/>
                         </Border>
                     </StackPanel>
-                    <StackPanel Visibility="Visible" x:Name="AutoPageOther">
-                        <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
-                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Марка*" x:Name="brand_car" Margin="0 5 0 10"/>
-                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Модель*" x:Name="model_car" Margin="0 5 0 10"/>
-                        <ComboBox Tag="Категория автомобиля*" x:Name="category_car" Margin="0 5 0 10">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding body_name}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                    <StackPanel Visibility="Collapsed" x:Name="AutoPageOther">
+                            <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
+                        <StackPanel Visibility="Visible" x:Name="MainAddCar">
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Марка*" x:Name="brand_car" Margin="0 5 0 10"/>
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Модель*" x:Name="model_car" Margin="0 5 0 10"/>
+                            <ComboBox Tag="Категория автомобиля*" x:Name="category_car" Margin="0 5 0 10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding body_name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
                         <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Номер автомобиля*" x:Name="num_car" Margin="0 5 0 5"/>
                         <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddCar" Click="AddCar_Click">
                             <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
                         </Button>
-                        <TextBlock Text="Найти" Margin="0 10 0 0" HorizontalAlignment="Center"/>
+                        <Button  VerticalAlignment="Bottom" Margin="0 5 0 10" Name="AddNumCar" Visibility="Collapsed" Click="AddNumCar_Click">
+                            <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
+                        </Button>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                            <TextBlock Text="Найти автомобиль" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal" Margin="43 0 0 0">
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="firstloadcheck" Checked="carout_Checked" Content="Все"/>
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" Checked="carout_Checked_1" Margin="5 0 0 0" Content="Клиент"/>
+                            </StackPanel>
+                        </StackPanel>
                         <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
                         <ScrollViewer Padding="0 0 10 0" MaxHeight="200">
-                            <DataGrid IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                            <DataGrid IsReadOnly="True" x:Name="DG_client_car" Style="{DynamicResource DataGridShow}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Width="1*">
                                         <DataGridTemplateColumn.Header>
@@ -162,8 +173,8 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Cars.car_brand}"/>
-                                                    <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding Cars.car_model}"/>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding car_brand}"/>
+                                                    <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding car_model}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -171,7 +182,7 @@
                                     <DataGridTemplateColumn Width="27">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button>
+                                                <Button Tag="{Binding id}" Click="SelectCarClient_Click">
                                                     <Icon:PackIconMaterial Kind="Check"/>
                                                 </Button>
                                             </DataTemplate>

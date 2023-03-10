@@ -303,9 +303,6 @@
     <Compile Include="BD\CarBody.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BD\CarBrand.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="BD\Cars.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

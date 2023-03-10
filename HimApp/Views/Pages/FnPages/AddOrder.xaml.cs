@@ -3,6 +3,7 @@ using HimApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.WebRequestMethods;
 
 namespace HimApp.Views.Pages.FnPages
 {
@@ -26,6 +28,8 @@ namespace HimApp.Views.Pages.FnPages
     {
         //client
         public static Client client;
+        public static Cars car;
+        public static ClientCar client_car;
     }
 
     public partial class AddOrder : Page
@@ -44,8 +48,25 @@ namespace HimApp.Views.Pages.FnPages
             executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
             category_car.ItemsSource = HimBDEntities.GetContext().CarBody.ToList();
             ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
+            additionalVis(true);
             //condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
         }
+
+        private void additionalVis(bool shide)
+        {
+            if (shide)
+            {
+                MainAddCar.Visibility = Visibility.Visible;
+                AddCar.Visibility = Visibility.Visible;
+                AddNumCar.Visibility = Visibility.Collapsed;
+            } else
+            {
+                MainAddCar.Visibility = Visibility.Collapsed;
+                AddCar.Visibility = Visibility.Collapsed;
+                AddNumCar.Visibility = Visibility.Visible;
+            }
+        }
+
 
         private void PageBack_Click(object sender, RoutedEventArgs e)
         {
@@ -92,7 +113,14 @@ namespace HimApp.Views.Pages.FnPages
 
         private void addAutoForm_Click(object sender, RoutedEventArgs e)
         {
+            if(OrderComplit.client == null)
+            {
+                MainVoid.ErrorMessage("Выберите клиента.");
+                return;
+            }
+            additionalVis(true);
             HideOtherPage();
+            firstloadcheck.IsChecked = true;
             TitleOther.Text = "Выбор автомобиля";
             AutoPageOther.Visibility = Visibility.Visible;
         }
@@ -150,36 +178,124 @@ namespace HimApp.Views.Pages.FnPages
             OrderComplit.client = HimBDEntities.GetContext().Client.Where(x => x.id == ltp).FirstOrDefault();
             info_Client.Text = OrderComplit.client.first_name + " " + OrderComplit.client.last_name;
             info_ClientNumber.Text = OrderComplit.client.phone;
+            HideOtherPage();
+            OrderComplit.car = null;
+            OrderComplit.client_car = null;
+            info_ClientCar.Text = "";
+            info_ClientCarNumber.Text = "";
+            DopPageOther.Visibility = Visibility.Visible;
+        }
+        private void SelectCarClient_Click(object sender, RoutedEventArgs e)
+        {
+            Button thisbt = (Button)sender;
+            int ltp = Convert.ToInt32(thisbt.Tag.ToString());
+            OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x => x.id == ltp).FirstOrDefault();
+            if (OrderComplit.client.ClientCar.Where(x => x.car_id == ltp).FirstOrDefault() == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Добавить новый автомобиль клиенту?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                    additionalVis(false);
+                else
+                    return;
+                return;
+            }
+            OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_id == ltp && x.client_id == OrderComplit.client.id).FirstOrDefault();
+            info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
+            info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
+            HideOtherPage();
+            DopPageOther.Visibility = Visibility.Visible;
+        }
+        private void AddNumCar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (num_car.Text.Length <= 2)
+                {
+                    MainVoid.ErrorMessage("Заполните номер автомобиля");
+                    return;
+                }
+                HimBDEntities.GetContext().ClientCar.Add(new ClientCar()
+                {
+                    client_id = OrderComplit.client.id,
+                    car_id = OrderComplit.car.id,
+                    car_number = num_car.Text.Trim().ToUpper(),
+                });
+                HimBDEntities.GetContext().SaveChanges();
+                OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_id == OrderComplit.car.id && x.client_id == OrderComplit.client.id).FirstOrDefault();
+                MainVoid.InformationMessage($"Автомобиль {OrderComplit.car.car_brand} {OrderComplit.car.car_model} добавлен клиенту {OrderComplit.client.first_name} {OrderComplit.client.last_name}.");
+                info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
+                info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
+                HideOtherPage();
+                DopPageOther.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.ToString());
+            }
         }
 
         private void AddCar_Click(object sender, RoutedEventArgs e)
         {
-            //if (phone_client.Text.Length < 11)
-            //{
-            //    MainVoid.ErrorMessage("Заполните номер телефона");
-            //    return;
-            //}
-            //try
-            //{
-            //    if (HimBDEntities.GetContext().Client.Where(x => x.phone.Trim() == phone_client.Text.Trim()).FirstOrDefault() != null)
-            //    {
-            //        MainVoid.InformationMessage("Клиент существует");
-            //        return;
-            //    }
-            //    HimBDEntities.GetContext().Client.Add(new Client()
-            //    {
-            //        first_name = first_name_client.Text.Trim(),
-            //        last_name = last_name_client.Text.Trim(),
-            //        phone = phone_client.Text.Trim(),
-            //    });
-            //    HimBDEntities.GetContext().SaveChanges();
-            //    MainVoid.InformationMessage($"Клиент {phone_client.Text.Trim()} добавлен.");
-            //}
-            //catch (Exception ex)
-            //{
-            //    MainVoid.FatalErrorMessage(ex.ToString());
-            //}
+            
+            if (brand_car.Text.Length <= 2 || num_car.Text.Length <= 2 || model_car.Text.Length < 2 || category_car.SelectedItem == null)
+            {
+                MainVoid.ErrorMessage("Заполните все обязательные поля");
+                return;
+            }
+            try
+            {
+                //обработка нескольких номеров на автомобиль у клиента
+                void add()
+                {
+                    HimBDEntities.GetContext().ClientCar.Add(new ClientCar()
+                    {
+                        client_id = OrderComplit.client.id,
+                        car_id = OrderComplit.car.id,
+                        car_number = num_car.Text.Trim().ToUpper(),
+                    });
+                    HimBDEntities.GetContext().SaveChanges();
+                }
+
+                OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x =>
+                                        x.car_brand.ToLower().Trim() == brand_car.Text.ToLower().Trim() &&
+                                        x.car_model.ToLower().Trim() == model_car.Text.ToLower().Trim()).FirstOrDefault();
+                if (OrderComplit.car != null)
+                {
+                    add();
+                    return;
+                }
+                OrderComplit.car = HimBDEntities.GetContext().Cars.Add(new Cars()
+                {
+                    car_brand = brand_car.Text.Trim(),
+                    car_model = model_car.Text.Trim(),
+                    car_body_id = ((CarBody)category_car.SelectedItem).id,
+                });
+                add();
+
+                MainVoid.InformationMessage($"Автомобиль {brand_car.Text} {model_car.Text} добавлен клиенту {OrderComplit.client.first_name} {OrderComplit.client.last_name}.");
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.ToString());
+            }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            HideOtherPage();
+            DopPageOther.Visibility = Visibility.Visible;
+        }
+
+        private void carout_Checked(object sender, RoutedEventArgs e)
+        {
+            DG_client_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
+        }
+
+        private void carout_Checked_1(object sender, RoutedEventArgs e)
+        {
+            DG_client_car.ItemsSource = HimBDEntities.GetContext().Cars.Where(x => x.id == x.ClientCar.Where(z => z.client_id == OrderComplit.client.id).FirstOrDefault().car_id).ToList();
+        }
+
     }
 }
 

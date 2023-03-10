@@ -20,19 +20,12 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="body_name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="CarBrand">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="car_brand" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="car_brand_id" Type="int" Nullable="false" />
+          <Property Name="car_brand" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="car_model" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="car_body_id" Type="int" Nullable="false" />
         </EntityType>
@@ -233,18 +226,6 @@
             </Principal>
             <Dependent Role="Cars">
               <PropertyRef Name="car_body_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cars_CarBrand">
-          <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="1" />
-          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarBrand">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Cars">
-              <PropertyRef Name="car_brand_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -501,7 +482,6 @@
         <EntityContainer Name="Хранилище HimBDModelContainer">
           <EntitySet Name="AuthDouble" EntityType="Self.AuthDouble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarBody" EntityType="Self.CarBody" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarBrand" EntityType="Self.CarBrand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientCar" EntityType="Self.ClientCar" Schema="dbo" store:Type="Tables" />
@@ -528,10 +508,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Cars_CarBody" Association="Self.FK_Cars_CarBody">
             <End Role="CarBody" EntitySet="CarBody" />
-            <End Role="Cars" EntitySet="Cars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cars_CarBrand" Association="Self.FK_Cars_CarBrand">
-            <End Role="CarBrand" EntitySet="CarBrand" />
             <End Role="Cars" EntitySet="Cars" />
           </AssociationSet>
           <AssociationSet Name="FK_ClientCar_Cars" Association="Self.FK_ClientCar_Cars">
@@ -629,24 +605,15 @@
           <Property Name="body_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_CarBody" FromRole="CarBody" ToRole="Cars" />
         </EntityType>
-        <EntityType Name="CarBrand">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="car_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_CarBrand" FromRole="CarBrand" ToRole="Cars" />
-        </EntityType>
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="car_brand_id" Type="Int32" Nullable="false" />
+          <Property Name="car_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="car_model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="car_body_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CarBody" Relationship="Self.FK_Cars_CarBody" FromRole="Cars" ToRole="CarBody" />
-          <NavigationProperty Name="CarBrand" Relationship="Self.FK_Cars_CarBrand" FromRole="Cars" ToRole="CarBrand" />
           <NavigationProperty Name="ClientCar" Relationship="Self.FK_ClientCar_Cars" FromRole="Cars" ToRole="ClientCar" />
         </EntityType>
         <EntityType Name="Client">
@@ -885,18 +852,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cars_CarBrand">
-          <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="1" />
-          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CarBrand">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Cars">
-              <PropertyRef Name="car_brand_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClientCar_Cars">
           <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
           <End Role="ClientCar" Type="Self.ClientCar" Multiplicity="*" />
@@ -1116,7 +1071,6 @@
         <EntityContainer Name="HimBDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AuthDouble" EntityType="Self.AuthDouble" />
           <EntitySet Name="CarBody" EntityType="Self.CarBody" />
-          <EntitySet Name="CarBrand" EntityType="Self.CarBrand" />
           <EntitySet Name="Cars" EntityType="Self.Cars" />
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="ClientCar" EntityType="Self.ClientCar" />
@@ -1143,10 +1097,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Cars_CarBody" Association="Self.FK_Cars_CarBody">
             <End Role="CarBody" EntitySet="CarBody" />
-            <End Role="Cars" EntitySet="Cars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cars_CarBrand" Association="Self.FK_Cars_CarBrand">
-            <End Role="CarBrand" EntitySet="CarBrand" />
             <End Role="Cars" EntitySet="Cars" />
           </AssociationSet>
           <AssociationSet Name="FK_ClientCar_Cars" Association="Self.FK_ClientCar_Cars">
@@ -1289,19 +1239,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CarBrand">
-            <EntityTypeMapping TypeName="HimBDModel.CarBrand">
-              <MappingFragment StoreEntitySet="CarBrand">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="car_brand" ColumnName="car_brand" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="HimBDModel.Cars">
               <MappingFragment StoreEntitySet="Cars">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="car_brand_id" ColumnName="car_brand_id" />
+                <ScalarProperty Name="car_brand" ColumnName="car_brand" />
                 <ScalarProperty Name="car_model" ColumnName="car_model" />
                 <ScalarProperty Name="car_body_id" ColumnName="car_body_id" />
               </MappingFragment>

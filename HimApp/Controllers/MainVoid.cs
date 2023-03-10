@@ -51,7 +51,7 @@ namespace HimApp.Controllers
         }
         public static void QuestionMessage(string question)
         {
-            MessageBox.Show(question, "", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(question, "", MessageBoxButton.OK, MessageBoxImage.Question);
         }
         
 

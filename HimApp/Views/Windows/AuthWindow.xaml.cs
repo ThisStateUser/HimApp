@@ -65,7 +65,7 @@ namespace HimApp.Views.Windows
                         return true;
                     }
                     if (new DoubleAuth(true).ShowDialog() == true)
-                    { 
+                    {
                         auth(); 
                         return true; 
                     }
