@@ -149,47 +149,88 @@
                             <TextBlock Text="Найти автомобиль" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                             <StackPanel Orientation="Horizontal" Margin="43 0 0 0">
                                 <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="firstloadcheck" Checked="carout_Checked" Content="Все"/>
-                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" Checked="carout_Checked_1" Margin="5 0 0 0" Content="Клиент"/>
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="secondloadcheck" Checked="carout_Checked_1" Margin="5 0 0 0" Content="Клиент"/>
                             </StackPanel>
                         </StackPanel>
                         <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
                         <ScrollViewer Padding="0 0 10 0" MaxHeight="200">
-                            <DataGrid IsReadOnly="True" x:Name="DG_client_car" Style="{DynamicResource DataGridShow}">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn Width="1*">
-                                        <DataGridTemplateColumn.Header>
-                                            <TextBlock Text="№"/>
-                                        </DataGridTemplateColumn.Header>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="3*">
-                                        <DataGridTemplateColumn.Header>
-                                            <TextBlock Text="Авто"/>
-                                        </DataGridTemplateColumn.Header>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock VerticalAlignment="Center" Text="{Binding car_brand}"/>
-                                                    <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding car_model}"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="27">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button Tag="{Binding id}" Click="SelectCarClient_Click">
-                                                    <Icon:PackIconMaterial Kind="Check"/>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                            <StackPanel>
+                                <DataGrid IsReadOnly="True" x:Name="DG_car" Style="{DynamicResource DataGridShow}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Width="1*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="№"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Width="3*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="Авто"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <TextBlock VerticalAlignment="Center" Text="{Binding car_brand}"/>
+                                                        <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding car_model}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Width="27">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Tag="{Binding id}" Click="SelectCarClient_Click">
+                                                        <Icon:PackIconMaterial Kind="Check"/>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid IsReadOnly="True" x:Name="DG_client_car" Visibility="Collapsed" Style="{DynamicResource DataGridShow}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Width="1*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="№"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Width="3*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="Авто"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="{Binding Cars.car_brand}"/>
+                                                            <TextBlock Margin="5 0 0 0" Text="{Binding Cars.car_model}"/>
+                                                        </StackPanel>
+                                                        <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding car_number}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Width="27">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Tag="{Binding car_number}" Click="SelectCar_Click">
+                                                        <Icon:PackIconMaterial Kind="Check"/>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
                         </ScrollViewer>
                     </StackPanel>
                     <StackPanel Visibility="Collapsed" x:Name="ClientPageOther">

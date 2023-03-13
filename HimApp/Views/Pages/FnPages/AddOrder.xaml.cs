@@ -109,6 +109,7 @@ namespace HimApp.Views.Pages.FnPages
             HideOtherPage();
             TitleOther.Text = "Выбор клиента";
             ClientPageOther.Visibility = Visibility.Visible;
+            ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
         }
 
         private void addAutoForm_Click(object sender, RoutedEventArgs e)
@@ -120,7 +121,10 @@ namespace HimApp.Views.Pages.FnPages
             }
             additionalVis(true);
             HideOtherPage();
-            firstloadcheck.IsChecked = true;
+            if (HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).FirstOrDefault() == null)
+                firstloadcheck.IsChecked = true;
+            else
+                secondloadcheck.IsChecked = true;
             TitleOther.Text = "Выбор автомобиля";
             AutoPageOther.Visibility = Visibility.Visible;
         }
@@ -154,11 +158,13 @@ namespace HimApp.Views.Pages.FnPages
                 });
                 HimBDEntities.GetContext().SaveChanges();
                 MainVoid.InformationMessage($"Клиент {phone_client.Text.Trim()} добавлен.");
+                ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
             }
             catch (Exception ex)
             {
                 MainVoid.FatalErrorMessage(ex.ToString());
             }
+
         }
 
         private void phone_client_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -190,21 +196,24 @@ namespace HimApp.Views.Pages.FnPages
             Button thisbt = (Button)sender;
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
             OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x => x.id == ltp).FirstOrDefault();
-            if (OrderComplit.client.ClientCar.Where(x => x.car_id == ltp).FirstOrDefault() == null)
-            {
-                MessageBoxResult result = MessageBox.Show("Добавить новый автомобиль клиенту?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                    additionalVis(false);
-                else
-                    return;
-                return;
-            }
-            OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_id == ltp && x.client_id == OrderComplit.client.id).FirstOrDefault();
+            MessageBoxResult result = MessageBox.Show("Добавить новый автомобиль клиенту?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+             if (result == MessageBoxResult.Yes)
+                additionalVis(false);
+        }
+
+        private void SelectCar_Click(object sender, RoutedEventArgs e)
+        {
+            Button thisbt = (Button)sender;
+            string ltp = thisbt.Tag.ToString();
+            ClientCar car = HimBDEntities.GetContext().ClientCar.Where(z => z.car_number == ltp).FirstOrDefault();
+            OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x => x.id == car.car_id).FirstOrDefault();
+            OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_number == ltp && x.client_id == OrderComplit.client.id).FirstOrDefault();
             info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
             info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
             HideOtherPage();
             DopPageOther.Visibility = Visibility.Visible;
         }
+
         private void AddNumCar_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -244,7 +253,6 @@ namespace HimApp.Views.Pages.FnPages
             }
             try
             {
-                //обработка нескольких номеров на автомобиль у клиента
                 void add()
                 {
                     HimBDEntities.GetContext().ClientCar.Add(new ClientCar()
@@ -288,12 +296,16 @@ namespace HimApp.Views.Pages.FnPages
 
         private void carout_Checked(object sender, RoutedEventArgs e)
         {
-            DG_client_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
+            DG_car.Visibility = Visibility.Visible;
+            DG_client_car.Visibility = Visibility.Collapsed;
+            DG_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
         }
 
         private void carout_Checked_1(object sender, RoutedEventArgs e)
         {
-            DG_client_car.ItemsSource = HimBDEntities.GetContext().Cars.Where(x => x.id == x.ClientCar.Where(z => z.client_id == OrderComplit.client.id).FirstOrDefault().car_id).ToList();
+            DG_car.Visibility = Visibility.Collapsed;
+            DG_client_car.Visibility = Visibility.Visible;
+            DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).ToList();
         }
 
     }
