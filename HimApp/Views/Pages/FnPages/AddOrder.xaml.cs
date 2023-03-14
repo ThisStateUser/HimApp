@@ -23,7 +23,7 @@ namespace HimApp.Views.Pages.FnPages
     /// <summary>
     /// Логика взаимодействия для AddOrder.xaml
     /// </summary>
-    
+
     public class OrderComplit
     {
         //client
@@ -48,8 +48,8 @@ namespace HimApp.Views.Pages.FnPages
             executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
             category_car.ItemsSource = HimBDEntities.GetContext().CarBody.ToList();
             ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
+            DG_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
             additionalVis(true);
-            //condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
         }
 
         private void additionalVis(bool shide)
@@ -59,7 +59,8 @@ namespace HimApp.Views.Pages.FnPages
                 MainAddCar.Visibility = Visibility.Visible;
                 AddCar.Visibility = Visibility.Visible;
                 AddNumCar.Visibility = Visibility.Collapsed;
-            } else
+            }
+            else
             {
                 MainAddCar.Visibility = Visibility.Collapsed;
                 AddCar.Visibility = Visibility.Collapsed;
@@ -114,13 +115,14 @@ namespace HimApp.Views.Pages.FnPages
 
         private void addAutoForm_Click(object sender, RoutedEventArgs e)
         {
-            if(OrderComplit.client == null)
+            if (OrderComplit.client == null)
             {
                 MainVoid.ErrorMessage("Выберите клиента.");
                 return;
             }
             additionalVis(true);
             HideOtherPage();
+            DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).ToList();
             if (HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).FirstOrDefault() == null)
                 firstloadcheck.IsChecked = true;
             else
@@ -138,7 +140,7 @@ namespace HimApp.Views.Pages.FnPages
 
         private void AddClient_Click(object sender, RoutedEventArgs e)
         {
-            if(phone_client.Text.Length < 11)
+            if (phone_client.Text.Length < 11)
             {
                 MainVoid.ErrorMessage("Заполните номер телефона");
                 return;
@@ -182,13 +184,17 @@ namespace HimApp.Views.Pages.FnPages
             Button thisbt = (Button)sender;
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
             OrderComplit.client = HimBDEntities.GetContext().Client.Where(x => x.id == ltp).FirstOrDefault();
-            info_Client.Text = OrderComplit.client.first_name + " " + OrderComplit.client.last_name;
+            if (OrderComplit.client.first_name.Length < 1 || OrderComplit.client.last_name.Length < 1)
+                info_Client.Text = "Неизвестно";
+            else
+                info_Client.Text = ($"{OrderComplit.client.first_name} {OrderComplit.client.last_name}");
             info_ClientNumber.Text = OrderComplit.client.phone;
             HideOtherPage();
             OrderComplit.car = null;
             OrderComplit.client_car = null;
             info_ClientCar.Text = "";
             info_ClientCarNumber.Text = "";
+            orderbox_car.Text = "";
             DopPageOther.Visibility = Visibility.Visible;
         }
         private void SelectCarClient_Click(object sender, RoutedEventArgs e)
@@ -197,7 +203,7 @@ namespace HimApp.Views.Pages.FnPages
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
             OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x => x.id == ltp).FirstOrDefault();
             MessageBoxResult result = MessageBox.Show("Добавить новый автомобиль клиенту?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-             if (result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
                 additionalVis(false);
         }
 
@@ -211,6 +217,7 @@ namespace HimApp.Views.Pages.FnPages
             info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
             info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
             HideOtherPage();
+            orderbox_car.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model} {OrderComplit.client_car.car_number}");
             DopPageOther.Visibility = Visibility.Visible;
         }
 
@@ -245,7 +252,7 @@ namespace HimApp.Views.Pages.FnPages
 
         private void AddCar_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (brand_car.Text.Length <= 2 || num_car.Text.Length <= 2 || model_car.Text.Length < 2 || category_car.SelectedItem == null)
             {
                 MainVoid.ErrorMessage("Заполните все обязательные поля");
@@ -267,20 +274,18 @@ namespace HimApp.Views.Pages.FnPages
                 OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x =>
                                         x.car_brand.ToLower().Trim() == brand_car.Text.ToLower().Trim() &&
                                         x.car_model.ToLower().Trim() == model_car.Text.ToLower().Trim()).FirstOrDefault();
-                if (OrderComplit.car != null)
+                if (OrderComplit.car == null)
                 {
-                    add();
-                    return;
+                    OrderComplit.car = HimBDEntities.GetContext().Cars.Add(new Cars()
+                    {
+                        car_brand = brand_car.Text.Trim(),
+                        car_model = model_car.Text.Trim(),
+                        car_body_id = ((CarBody)category_car.SelectedItem).id,
+                    });
                 }
-                OrderComplit.car = HimBDEntities.GetContext().Cars.Add(new Cars()
-                {
-                    car_brand = brand_car.Text.Trim(),
-                    car_model = model_car.Text.Trim(),
-                    car_body_id = ((CarBody)category_car.SelectedItem).id,
-                });
                 add();
-
                 MainVoid.InformationMessage($"Автомобиль {brand_car.Text} {model_car.Text} добавлен клиенту {OrderComplit.client.first_name} {OrderComplit.client.last_name}.");
+                secondloadcheck.IsChecked = true;
             }
             catch (Exception ex)
             {
@@ -298,14 +303,12 @@ namespace HimApp.Views.Pages.FnPages
         {
             DG_car.Visibility = Visibility.Visible;
             DG_client_car.Visibility = Visibility.Collapsed;
-            DG_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
         }
 
         private void carout_Checked_1(object sender, RoutedEventArgs e)
         {
             DG_car.Visibility = Visibility.Collapsed;
             DG_client_car.Visibility = Visibility.Visible;
-            DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).ToList();
         }
 
     }
