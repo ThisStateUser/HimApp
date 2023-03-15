@@ -30,12 +30,7 @@
                         <Button HorizontalAlignment="Left">
                             <TextBlock Text="Показать" Foreground="{DynamicResource TextBtn}"/>
                         </Button>
-                        <Border Margin="0 10 0 5" CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="Категории"/>
-                        </Border>
-                        <Button HorizontalAlignment="Left">
-                            <TextBlock Text="Показать" Foreground="{DynamicResource TextBtn}"/>
-                        </Button>
+
                         <Border Margin="0 10 0 5" CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
                             <TextBlock Text="Комплексы услуг"/>
                         </Border>
@@ -46,13 +41,9 @@
                     </StackPanel>
                 </Border>
                 <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="8*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Margin="20 5" Grid.Row="0">
+                    <StackPanel Margin="20 5">
                         <TextBox Style="{DynamicResource Search}"/>
-                        <ScrollViewer Margin="0 5" Height="530">
+                        <ScrollViewer Margin="0 5" Height="604">
                             <ListView Margin="0 0 7 0" d:ItemsSource="{d:SampleData ItemCount=32}" Background="Transparent" BorderThickness="0">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
@@ -100,17 +91,55 @@
                         </ScrollViewer>
                     </StackPanel>
                     <DockPanel Margin="20 5" Grid.Row="1" LastChildFill="True">
-                        <Button DockPanel.Dock="Left">
-                            <TextBlock Text="Добавить категорию" Foreground="{DynamicResource TextBtn}"/>
-                        </Button>
+
                         <Button DockPanel.Dock="Right">
                             <TextBlock Text="Добавить комплекс услуг" Foreground="{DynamicResource TextBtn}"/>
                         </Button>
-                        <Button>
-                            <TextBlock Text="Добавить услугу" Foreground="{DynamicResource TextBtn}"/>
-                        </Button>
+
                     </DockPanel>
                 </Grid>
+
+                <DockPanel Margin="20 5" Grid.Row="0" Grid.Column="2">
+                    <StackPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <TextBlock HorizontalAlignment="Center" Text="Добавление услуги" Style="{DynamicResource TitleText}"/>
+
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Название" x:Name="Title" Margin="0 10 0 5"/>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Описание" x:Name="Description" Margin="0 10 0 5"/>
+                        <ComboBox Tag="Категория" x:Name="Сategory" Margin="0 10 0 5">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding category_name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Описание" x:Name="Cost" Margin="0 10 0 10"/>
+                        <Button>
+                            <TextBlock Text="Создать"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                        <DataGrid x:Name="CategoryDG" Margin="0 10" Height="150" d:ItemsSource="{d:SampleData ItemCount=2}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.Header>
+                                        <TextBlock Style="{DynamicResource TitleText}"  Text="Категории"/>
+                                    </DataGridTemplateColumn.Header>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock VerticalAlignment="Center" Margin="2" TextWrapping="Wrap" Text="{Binding category_name}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="1"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button>
+                            <TextBlock Text="Добавить категорию" Foreground="{DynamicResource TextBtn}"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
             </Grid>
         </Border>
     </Grid>
