@@ -17,6 +17,9 @@
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
+    
+
+    
     <Style TargetType="Border" x:Key="BorderPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
         <Setter Property="CornerRadius" Value="10"/>
