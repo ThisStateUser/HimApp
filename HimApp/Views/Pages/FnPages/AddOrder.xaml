@@ -16,42 +16,69 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Border CornerRadius="10 0 0 10" Padding="20 5" Background="{DynamicResource Panel2}" Grid.Column="0">
+                <Border CornerRadius="10 0 0 10" Padding="15" Background="{DynamicResource Panel2}" Grid.Column="0">
                     <StackPanel>
                         <TextBlock HorizontalAlignment="Center" Text="Заказ" Style="{DynamicResource TitleText}"/>
                         <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text=""/>
+                            <TextBlock x:Name="executer_order"/>
                         </Border>
                         <TextBlock Text="Автомобиль" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_car" Text=""/>
+                            <TextBlock x:Name="orderbox_car"/>
                         </Border>
                         <TextBlock Text="Состояние автомобиля" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="Хорошее"/>
+                            <TextBlock x:Name="orderbox_condition"/>
                         </Border>
                         <TextBlock Text="Цена работ" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="10000"/>
+                            <TextBlock x:Name="orderbox_cost"/>
                         </Border>
                         <TextBlock Text="Предоплата" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="0"/>
+                            <TextBlock x:Name="orderbox_prepay"/>
                         </Border>
                         <TextBlock Text="Дата приема" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="19.09.2023"/>
+                            <TextBlock x:Name="orderbox_arrival"/>
                         </Border>
                         <TextBlock Text="Дата выдачи" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock Text="10.10.2023"/>
+                            <TextBlock x:Name="orderbox_departure"/>
+                        </Border>
+                        <TextBlock Text="Состав заказа" Margin="0 10 0 5"/>
+                        <Border CornerRadius="5" Height="128" Padding="5" Background="{DynamicResource Panel1}">
+                            <DataGrid IsReadOnly="True" x:Name="DG_SelectService" d:ItemsSource="{d:SampleData ItemCount=3}" Style="{DynamicResource DataGridShow}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="1*">
+                                        <DataGridTemplateColumn.Header>
+                                            <TextBlock Text="№"/>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="5*">
+                                        <DataGridTemplateColumn.Header>
+                                            <TextBlock Text="Услуги"/>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding title}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Border>
                     </StackPanel>
                 </Border>
-                <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 15 0 0"/>
                 <StackPanel VerticalAlignment="Center" Grid.Column="1">
-                    <StackPanel Margin="20">
+                    <StackPanel Margin="15">
                         <ScrollViewer x:Name="OrderSetPageOne" Visibility="Visible" MaxHeight="500" Padding="0 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Клиент"/>
@@ -63,15 +90,22 @@
                                     <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Состав заказа"/>
-                                <Button Margin="0 5 0 10" Click="Button_Click" HorizontalAlignment="Left">
+                                <Button Margin="0 5 0 10" Click="newGroupOrder_Click" x:Name="newGroupOrder" HorizontalAlignment="Left">
                                     <TextBlock Text="Выбрать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
+                                <ComboBox Tag="Состояние автомобиля" SelectionChanged="condition_SelectionChanged" x:Name="condition" Margin="0 5 0 10">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="{DynamicResource Text}" Text="{Binding condition_rate}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                                 <TextBlock Text="Заметка к заказу"/>
-                                <RichTextBox x:Name="comments" MinHeight="130" Margin="0 5"/>
+                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="comments" Margin="0 5 0 0"/>
                             </StackPanel>
                         </ScrollViewer>
                         <StackPanel x:Name="OrderSetPageTwo" Visibility="Collapsed">
-                            <ComboBox Tag="Ответственный за заказ" x:Name="executor" Margin="0 5 0 10">
+                            <ComboBox Tag="Ответственный за заказ" SelectionChanged="executor_SelectionChanged" x:Name="executor" Margin="0 5 0 10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -82,32 +116,33 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
 
-                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Стоимость работ" x:Name="cost" Margin="0 5 0 10"/>
-                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Предоплата (при наличии)" x:Name="prepay" Margin="0 5 0 10"/>
-                            <DatePicker Tag="Дата записи" CalendarStyle="{DynamicResource Calendars}" x:Name="arrival" Margin="0 5 0 10"/>
-                            <DatePicker Tag="Дата выдачи" CalendarStyle="{DynamicResource Calendars}" x:Name="departure" Margin="0 5 0 10"/>
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Стоимость работ" TextChanged="cost_TextChanged" PreviewTextInput="cost_PreviewTextInput" x:Name="cost" Margin="0 5 0 10"/>
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Предоплата (при наличии)" TextChanged="prepay_TextChanged" PreviewTextInput="prepay_PreviewTextInput" x:Name="prepay" Margin="0 5 0 10"/>
+                            <DatePicker Tag="Дата записи" CalendarStyle="{DynamicResource Calendars}" x:Name="arrival" SelectedDateChanged="arrival_SelectedDateChanged" Margin="0 5 0 10"/>
+                            <DatePicker Tag="Дата выдачи" CalendarStyle="{DynamicResource Calendars}" x:Name="departure" SelectedDateChanged="departure_SelectedDateChanged" Margin="0 5 0 10"/>
+                            
                         </StackPanel>
                         <StackPanel x:Name="OrderSetPageThree" Visibility="Collapsed">
                             <TextBlock Text="Ответственный за заказ"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <Button Margin="20 10" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Button Margin="15" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                     <StackPanel>
                         <Icon:PackIconMaterial Kind="ArrowLeft" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
                         <TextBlock Text="Назад" Style="{DynamicResource SmallText}" Foreground="{DynamicResource Text}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Margin="20 10" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
+                <Button Margin="15" Grid.Column="1" VerticalAlignment="Bottom" Name="PageNext" Click="PageNext_Click" HorizontalAlignment="Right">
                     <StackPanel>
-                        <Icon:PackIconMaterial Kind="ArrowRight" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
-                        <TextBlock Text="Далее" Style="{DynamicResource SmallText}" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
+                        <Icon:PackIconMaterial Kind="ArrowRight" x:Name="PageNextIcon" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="14"/>
+                        <TextBlock Text="Далее" x:Name="PageNextTxt" Style="{DynamicResource SmallText}" Foreground="{DynamicResource TextBtn}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <TextBlock Margin="5" Text="Доп. задача" x:Name="TitleOther" HorizontalAlignment="Center" Grid.Column="2" Style="{DynamicResource TitleText}"/>
-                <StackPanel Margin="20 5" VerticalAlignment="Center" Grid.Column="2">
-                    <StackPanel x:Name="DopPageOther">
+                <TextBlock Margin="15" Text="Доп. задача" x:Name="TitleOther" HorizontalAlignment="Center" Grid.Column="2" Style="{DynamicResource TitleText}"/>
+                <StackPanel Margin="15" VerticalAlignment="Center" Grid.Column="2">
+                    <StackPanel Visibility="Visible" x:Name="DopPageOther">
                         <TextBlock Text="Клиент" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
                             <TextBlock x:Name="info_Client"/>
@@ -124,6 +159,38 @@
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
                             <TextBlock x:Name="info_ClientCarNumber" Text=""/>
                         </Border>
+                    </StackPanel>
+                    <StackPanel Visibility="Collapsed" x:Name="ServicePageOther">
+                        <TextBox Style="{DynamicResource Search}"/>
+                        <ScrollViewer Margin="0 5" Height="450">
+                            <ListView Margin="0 0 7 0" x:Name="LV_services" d:ItemsSource="{d:SampleData ItemCount=1}" Background="Transparent" BorderThickness="0">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="Margin" Value="-5 0" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Width="193" Text="{Binding title}" TextWrapping="Wrap"/>
+                                                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                                                    <CheckBox Style="{DynamicResource Remember}" Tag="{Binding tag}" Padding="0" Margin="0 0 0 5" Checked="Service_Checked" Unchecked="Service_Unchecked" HorizontalAlignment="Right"/>
+                                                    <Border CornerRadius="3" Padding="5" Background="{DynamicResource Panel1}">
+                                                        <TextBlock HorizontalAlignment="Right" Text="{Binding cost}"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </ScrollViewer>
                     </StackPanel>
                     <StackPanel Visibility="Collapsed" x:Name="AutoPageOther">
                             <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
@@ -280,7 +347,7 @@
                         </ScrollViewer>
                     </StackPanel>
                 </StackPanel>
-                <TextBlock Margin="10" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="Обязательные поля помечены *" Style="{DynamicResource SmallText}"/>
+                <TextBlock Margin="15" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Text="Обязательные поля помечены *" Style="{DynamicResource SmallText}"/>
             </Grid>
         </Border>
     </Grid>

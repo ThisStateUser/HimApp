@@ -1,5 +1,6 @@
 ﻿using HimApp.BD;
 using HimApp.Controllers;
+using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,16 @@ namespace HimApp.Views.Pages.FnPages
         public static Client client;
         public static Cars car;
         public static ClientCar client_car;
+        public static Order order = new Order();
+        public static OrderGroup orderGroup;
+        public static List<OrderSet> orderSet = new List<OrderSet>();
+    }
+
+    public class SorP
+    {
+        public string tag { get; set; }
+        public string title { get; set; }
+        public double cost { get; set; }
     }
 
     public partial class AddOrder : Page
@@ -49,7 +60,32 @@ namespace HimApp.Views.Pages.FnPages
             category_car.ItemsSource = HimBDEntities.GetContext().CarBody.ToList();
             ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
             DG_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
+            condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
             additionalVis(true);
+            updLVservice();
+        }
+
+        private void updLVservice()
+        {
+            List<object> list = new List<object>();
+            foreach (var item in HimBDEntities.GetContext().Services.ToList())
+                list.Add(new SorP() { tag = $"S{item.id}", title = item.title, cost = item.cost });
+            foreach (var item in HimBDEntities.GetContext().PresetGroup.ToList())
+                list.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost });
+            LV_services.ItemsSource = list;
+        }
+
+        private void updDGservice()
+        {
+            List<object> list = new List<object>();
+            foreach (var item in OrderComplit.orderSet)
+            {
+                if (item.preset_id != null)
+                    list.Add(HimBDEntities.GetContext().PresetGroup.Where(x => x.id == item.preset_id).FirstOrDefault());
+                if (item.service_id != null)
+                    list.Add(HimBDEntities.GetContext().Services.Where(x => x.id == item.service_id).FirstOrDefault());
+            }
+            DG_SelectService.ItemsSource = list;
         }
 
         private void additionalVis(bool shide)
@@ -71,13 +107,67 @@ namespace HimApp.Views.Pages.FnPages
 
         private void PageBack_Click(object sender, RoutedEventArgs e)
         {
+            if (PageSetIndex == 1)
+            {
+                PageNextIcon.Kind = PackIconMaterialKind.ArrowRight;
+                PageNextTxt.Text = "Далее";
+            }
             if (PageSetIndex > 0)
                 PageSetIndex = PageSetIndex - 1;
             ShowPage();
         }
         private void PageNext_Click(object sender, RoutedEventArgs e)
         {
-            if (PageSetIndex < 2)
+            if (PageSetIndex == 0)
+            {
+                List<string> list = new List<string>();
+                if (OrderComplit.client == null)
+                    list.Add("Вы не выбрали клиента");
+                if (OrderComplit.car == null)
+                    list.Add("Вы не выбрали автомобиль клиента");
+                if (condition.SelectedItem == null)
+                    list.Add("Вы не выбрали состояние автомобиля");
+                if (OrderComplit.orderSet.Count == 0)
+                    list.Add("Вы не выбрали состав заказа");
+                if (list.Count > 0)
+                {
+                    string result = "Вы допустили данные ошибки: \n";
+                    foreach (var item in list)
+                        result += item + "\n";
+                    MainVoid.ErrorMessage(result);
+                    return;
+                }
+
+                OrderComplit.order.client_car_id = OrderComplit.client_car.id;
+                OrderComplit.order.condition_id = ((Conditions)condition.SelectedItem).id;
+                OrderComplit.order.comments = comments.Text;
+                PageNextIcon.Kind = PackIconMaterialKind.Check;
+                PageNextTxt.Text = "Готово";
+            }
+
+            if (PageSetIndex == 1)
+            {
+                OrderComplit.order.executor_id = ((Users)executor.SelectedItem).id;
+                OrderComplit.order.custom_cost = double.Parse(cost.Text);
+                OrderComplit.order.prepayment = double.Parse(prepay.Text);
+                OrderComplit.order.arrival_date = arrival.SelectedDate;
+                OrderComplit.order.departure_date = departure.SelectedDate;
+                OrderComplit.order.status_id = 3;
+                OrderComplit.order.order_group_id = OrderComplit.orderGroup.id;
+                try
+                {
+                    HimBDEntities.GetContext().OrderSet.AddRange(OrderComplit.orderSet);
+                    HimBDEntities.GetContext().Order.Add(OrderComplit.order);
+                    HimBDEntities.GetContext().SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MainVoid.FatalErrorMessage(ex.Message);
+                }
+            }
+
+
+            if (PageSetIndex < 1)
                 PageSetIndex = PageSetIndex + 1;
             ShowPage();
         }
@@ -133,6 +223,7 @@ namespace HimApp.Views.Pages.FnPages
 
         private void HideOtherPage()
         {
+            ServicePageOther.Visibility = Visibility.Collapsed;
             DopPageOther.Visibility = Visibility.Collapsed;
             ClientPageOther.Visibility = Visibility.Collapsed;
             AutoPageOther.Visibility = Visibility.Collapsed;
@@ -159,24 +250,19 @@ namespace HimApp.Views.Pages.FnPages
                     phone = phone_client.Text.Trim(),
                 });
                 HimBDEntities.GetContext().SaveChanges();
-                MainVoid.InformationMessage($"Клиент {phone_client.Text.Trim()} добавлен.");
+                MainVoid.InformationMessage($"Клиент \"{phone_client.Text.Trim()}\" добавлен.");
                 ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
             }
             catch (Exception ex)
             {
-                MainVoid.FatalErrorMessage(ex.ToString());
+                MainVoid.FatalErrorMessage(ex.Message);
             }
 
         }
 
         private void phone_client_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
-            && !phone_client.Text.Contains(".")
-            && phone_client.Text.Length != 0))
-            {
-                e.Handled = true;
-            }
+            MainVoid.OnlyNumber((TextBox)sender, e);
         }
 
         private void SelectClient_Click(object sender, RoutedEventArgs e)
@@ -238,7 +324,7 @@ namespace HimApp.Views.Pages.FnPages
                 });
                 HimBDEntities.GetContext().SaveChanges();
                 OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_id == OrderComplit.car.id && x.client_id == OrderComplit.client.id).FirstOrDefault();
-                MainVoid.InformationMessage($"Автомобиль {OrderComplit.car.car_brand} {OrderComplit.car.car_model} добавлен клиенту {OrderComplit.client.first_name} {OrderComplit.client.last_name}.");
+                MainVoid.InformationMessage($"Автомобиль \"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}\" добавлен клиенту \"{OrderComplit.client.first_name} {OrderComplit.client.last_name}\".");
                 info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
                 info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
                 HideOtherPage();
@@ -246,7 +332,7 @@ namespace HimApp.Views.Pages.FnPages
             }
             catch (Exception ex)
             {
-                MainVoid.FatalErrorMessage(ex.ToString());
+                MainVoid.FatalErrorMessage(ex.Message);
             }
         }
 
@@ -284,19 +370,13 @@ namespace HimApp.Views.Pages.FnPages
                     });
                 }
                 add();
-                MainVoid.InformationMessage($"Автомобиль {brand_car.Text} {model_car.Text} добавлен клиенту {OrderComplit.client.first_name} {OrderComplit.client.last_name}.");
+                MainVoid.InformationMessage($"Автомобиль \"{brand_car.Text} {model_car.Text}\" добавлен клиенту \"{OrderComplit.client.first_name} {OrderComplit.client.last_name}\".");
                 secondloadcheck.IsChecked = true;
             }
             catch (Exception ex)
             {
-                MainVoid.FatalErrorMessage(ex.ToString());
+                MainVoid.FatalErrorMessage(ex.Message);
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            HideOtherPage();
-            DopPageOther.Visibility = Visibility.Visible;
         }
 
         private void carout_Checked(object sender, RoutedEventArgs e)
@@ -311,47 +391,111 @@ namespace HimApp.Views.Pages.FnPages
             DG_client_car.Visibility = Visibility.Visible;
         }
 
+        private void executor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            executer_order.Text = ($"{((Users)executor.SelectedItem).UserInfo.first_name} {((Users)executor.SelectedItem).UserInfo.last_name}");
+        }
+
+        private void cost_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            MainVoid.OnlyNumber((TextBox)sender, e);
+        }
+
+        private void prepay_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            MainVoid.OnlyNumber((TextBox)sender, e);
+        }
+
+        private void condition_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            orderbox_condition.Text = ($"{((Conditions)condition.SelectedItem).condition_rate}");
+        }
+
+        private void arrival_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OrderComplit.order.arrival_date = arrival.SelectedDate.Value;
+            orderbox_arrival.Text = ($"{OrderComplit.order.arrival_date.Value.ToString("dd.MM.yyyy")}");
+        }
+
+        private void departure_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OrderComplit.order.departure_date = departure.SelectedDate.Value;
+            orderbox_departure.Text = ($"{OrderComplit.order.departure_date.Value.ToString("dd.MM.yyyy")}");
+        }
+
+        private void cost_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            orderbox_cost.Text = cost.Text;
+        }
+
+        private void prepay_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            orderbox_prepay.Text = prepay.Text;
+        }
+
+        bool isCreated = false;
+        private void newGroupOrder_Click(object sender, RoutedEventArgs e)
+        {
+            HideOtherPage();
+            if (!isCreated)
+            {
+                try
+                {
+                    OrderGroup ordergadd = new OrderGroup()
+                    {
+                        created_at = DateTime.Now,
+                        updated_at = DateTime.Now,
+                    };
+                    HimBDEntities.GetContext().OrderGroup.Add(ordergadd);
+                    HimBDEntities.GetContext().SaveChanges();
+                    OrderComplit.orderGroup = ordergadd;
+                    isCreated = true;
+                    ((TextBlock)newGroupOrder.Content).Text = "Изменить";
+                }
+                catch (Exception ex)
+                {
+                    MainVoid.FatalErrorMessage(ex.Message);
+                }
+            }
+            ServicePageOther.Visibility = Visibility.Visible;
+        }
+
+        private void Service_Checked(object sender, RoutedEventArgs e)
+        {
+            int OpenID = int.Parse(((CheckBox)sender).Tag.ToString().Remove(0, 1));
+            Services idserv = null;
+            PresetGroup idpres = null;
+
+            if (((CheckBox)sender).Tag.ToString()[0] == 'S')
+                idserv = HimBDEntities.GetContext().Services.Where(x => x.id == OpenID).FirstOrDefault();
+            else
+                idpres = HimBDEntities.GetContext().PresetGroup.Where(x => x.id == OpenID).FirstOrDefault();
+
+            if (idpres != null)
+                OrderComplit.orderSet.Add(new OrderSet()
+                {
+                    preset_id = OpenID,
+                    group_id = OrderComplit.orderGroup.id,
+                });
+            if (idserv != null)
+                OrderComplit.orderSet.Add(new OrderSet()
+                {
+                    service_id = OpenID,
+                    group_id = OrderComplit.orderGroup.id,
+                });
+            updDGservice();
+        }
+
+        private void Service_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int OpenID = int.Parse(((CheckBox)sender).Tag.ToString().Remove(0, 1));
+
+            if (((CheckBox)sender).Tag.ToString()[0] == 'S')
+                OrderComplit.orderSet.Remove(OrderComplit.orderSet.Where(x => x.service_id == OpenID).FirstOrDefault());
+            else
+                OrderComplit.orderSet.Remove(OrderComplit.orderSet.Where(x => x.preset_id == OpenID).FirstOrDefault());
+            updDGservice();
+        }
     }
 }
-
-
-//<Border Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource BorderPanel}" Width="400" Height="560">
-//    <ScrollViewer>
-//        <StackPanel Width="350" HorizontalAlignment="Left">
-//            <TextBlock Text="Заказ" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
-//            <TextBlock Text="Ответственный за заказ"/>
-//            <ComboBox x:Name="executor" >
-//                <ComboBox.ItemTemplate>
-//                    <DataTemplate>
-//                        <StackPanel Orientation="Horizontal">
-//                            <TextBlock Text="{Binding UserInfo.first_name}" Foreground="{DynamicResource Text}" Margin="0 0 5 0"/>
-//                            <TextBlock Text="{Binding UserInfo.last_name}" Foreground="{DynamicResource Text}"/>
-//                        </StackPanel>
-//                    </DataTemplate>
-//                </ComboBox.ItemTemplate>
-//            </ComboBox>
-
-//            <TextBlock Text="Состав заказа"/>
-//            <WrapPanel>
-//                <Button>
-//                    <Icon:PackIconMaterial Kind="Plus"/>
-//                </Button>
-//            </WrapPanel>
-//            <TextBlock Text="Заметка к заказу"/>
-//            <RichTextBox x:Name="comments"/>
-//            <TextBlock Text="Стоимость работ"/>
-//            <TextBox x:Name="cost"/>
-//            <TextBlock Text="Предоплата (при наличии)"/>
-//            <TextBox x:Name="prepay"/>
-//            <TextBlock Text="Дата записи"/>
-//            <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="arrival"/>
-//            <TextBlock Text="Дата выдачи"/>
-//            <DatePicker CalendarStyle="{DynamicResource Calendars}" SelectedDate="10 10" x:Name="departure"/>
-//            <Button Margin="0 10 0 0">
-//                <StackPanel Orientation="Horizontal">
-//                    <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
-//                </StackPanel>
-//            </Button>
-//        </StackPanel>
-//    </ScrollViewer>
-//</Border>

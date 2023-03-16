@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HimApp.BD;
+using HimApp.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,70 @@ namespace HimApp.Views.Pages
         public ServicePage()
         {
             InitializeComponent();
+            PreLoad();
+        }
+
+        private void PreLoad()
+        {
+            firstloadcheck.IsChecked = true;
+            DG_Category.ItemsSource = HimBDEntities.GetContext().ServiceCategory.ToList();
+            Category_service.ItemsSource = HimBDEntities.GetContext().ServiceCategory.ToList();
+            UpdLVSource();
+        }
+
+        private void UpdLVSource()
+        {
+            if (secondloadcheck.IsChecked == true)
+                LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
+            else
+                LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
+        }
+
+        private void firstloadcheck_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void secondloadcheck_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NewService_Click(object sender, RoutedEventArgs e)
+        {
+            if (Title_service.Text.Length < 2
+                || Description_service.Text.Length < 2
+                || Category_service.SelectedItem == null
+                || Cost_service.Text.Length < 2)
+            {
+                MainVoid.ErrorMessage("Заполните все поля добавления услуги");
+                return;
+            }
+            try
+            {
+                HimBDEntities.GetContext().Services.Add(new Services()
+                {
+                    title = Title_service.Text.Trim(),
+                    description = Description_service.Text.Trim(),
+                    category_id = ((ServiceCategory)Category_service.SelectedItem).id,
+                    cost = double.Parse(Cost_service.Text.Trim()),
+                });
+                HimBDEntities.GetContext().SaveChanges();
+                MainVoid.InformationMessage($"Услуга \"{Title_service.Text.Trim()}\" добавлена.");
+                UpdLVSource();
+                Title_service.Text = "";
+                Description_service.Text = "";
+                Cost_service.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.ToString());
+            }
+        }
+
+        private void Cost_service_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            MainVoid.OnlyNumber((TextBox)sender, e);
         }
     }
 }

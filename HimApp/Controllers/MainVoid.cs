@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace HimApp.Controllers
 {
@@ -52,6 +54,16 @@ namespace HimApp.Controllers
         public static void QuestionMessage(string question)
         {
             MessageBox.Show(question, "", MessageBoxButton.OK, MessageBoxImage.Question);
+        }
+
+        public static void OnlyNumber(TextBox tb, TextCompositionEventArgs e)
+        {
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
+                && !tb.Text.Contains(".")
+                && tb.Text.Length != 0))
+            {
+                e.Handled = true;
+            }
         }
         
 
