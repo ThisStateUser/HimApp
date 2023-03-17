@@ -122,9 +122,6 @@
                             <DatePicker Tag="Дата выдачи" CalendarStyle="{DynamicResource Calendars}" x:Name="departure" SelectedDateChanged="departure_SelectedDateChanged" Margin="0 5 0 10"/>
                             
                         </StackPanel>
-                        <StackPanel x:Name="OrderSetPageThree" Visibility="Collapsed">
-                            <TextBlock Text="Ответственный за заказ"/>
-                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
                 <Button Margin="15" Grid.Column="1" Background="{DynamicResource Panel2}" Name="PageBack" Click="PageBack_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left">
@@ -142,7 +139,7 @@
 
                 <TextBlock Margin="15" Text="Доп. задача" x:Name="TitleOther" HorizontalAlignment="Center" Grid.Column="2" Style="{DynamicResource TitleText}"/>
                 <StackPanel Margin="15" VerticalAlignment="Center" Grid.Column="2">
-                    <StackPanel Visibility="Visible" x:Name="DopPageOther">
+                    <StackPanel Visibility="Collapsed" x:Name="DopPageOther">
                         <TextBlock Text="Клиент" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel2}">
                             <TextBlock x:Name="info_Client"/>
@@ -160,8 +157,8 @@
                             <TextBlock x:Name="info_ClientCarNumber" Text=""/>
                         </Border>
                     </StackPanel>
-                    <StackPanel Visibility="Collapsed" x:Name="ServicePageOther">
-                        <TextBox Style="{DynamicResource Search}"/>
+                    <StackPanel Visibility="Visible" x:Name="ServicePageOther">
+                        <TextBox Style="{DynamicResource Search}" TextChanged="SearchService_TextChanged"/>
                         <ScrollViewer Margin="0 5" Height="450">
                             <ListView Margin="0 0 7 0" x:Name="LV_services" d:ItemsSource="{d:SampleData ItemCount=1}" Background="Transparent" BorderThickness="0">
                                 <ListView.ItemContainerStyle>
@@ -219,7 +216,7 @@
                                 <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="secondloadcheck" Checked="carout_Checked_1" Margin="5 0 0 0" Content="Клиент"/>
                             </StackPanel>
                         </StackPanel>
-                        <TextBox Style="{DynamicResource Search}" Margin="0 10 0 5"/>
+                        <TextBox Style="{DynamicResource Search}"  TextChanged="SearchCar_TextChanged" Margin="0 10 0 5"/>
                         <ScrollViewer Padding="0 0 10 0" MaxHeight="200">
                             <StackPanel>
                                 <DataGrid IsReadOnly="True" x:Name="DG_car" Style="{DynamicResource DataGridShow}">

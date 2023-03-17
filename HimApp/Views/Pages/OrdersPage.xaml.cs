@@ -1,4 +1,5 @@
-﻿using HimApp.Controllers;
+﻿using HimApp.BD;
+using HimApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,34 @@ namespace HimApp.Views.Pages
         {
             InitializeComponent();
             WConnect.MainWindowMethod.PageTitle.Text = "Заказы";
+            PreLoad();
+        }
+        
+        private void PreLoad()
+        {
+            updDGOrder();
+        }
+
+        private void updDGOrder(string search = "")
+        {
+            if(search == "")
+            {
+                DG_orders.ItemsSource = HimBDEntities.GetContext().Order.ToList();
+                return;
+            }
+            DG_orders.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.ClientCar.Cars.car_brand.Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Cars.car_model.Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.car_number.Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Client.first_name.Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Client.last_name.Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Client.phone.Contains(search.Trim().ToLower())
+                                                                          ).ToList();
+
+        }
+
+        private void SearchOrder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            updDGOrder(((TextBox)sender).Text.Trim().ToLower());
         }
     }
 }

@@ -45,6 +45,7 @@ namespace HimApp.Views.Pages.FnPages
 
     public partial class AddOrder : Page
     {
+        List<object> listService = new List<object>();
         int PageSetIndex = 0;
         public AddOrder()
         {
@@ -59,7 +60,6 @@ namespace HimApp.Views.Pages.FnPages
             executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
             category_car.ItemsSource = HimBDEntities.GetContext().CarBody.ToList();
             ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
-            DG_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
             condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
             additionalVis(true);
             updLVservice();
@@ -67,12 +67,43 @@ namespace HimApp.Views.Pages.FnPages
 
         private void updLVservice()
         {
-            List<object> list = new List<object>();
             foreach (var item in HimBDEntities.GetContext().Services.ToList())
-                list.Add(new SorP() { tag = $"S{item.id}", title = item.title, cost = item.cost });
+                listService.Add(new SorP() { tag = $"S{item.id}", title = item.title, cost = item.cost });
             foreach (var item in HimBDEntities.GetContext().PresetGroup.ToList())
-                list.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost });
-            LV_services.ItemsSource = list;
+                listService.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost });
+            searchService();
+        }
+        private void searchService(string search = "")
+        {
+            if (search == "")
+            {
+                LV_services.ItemsSource = listService;
+                return;
+            }
+            LV_services.ItemsSource = listService.Where(x => ((SorP)x).title.Trim().ToLower().Contains(search) || 
+                                                             ((SorP)x).cost.ToString().Trim().ToLower().StartsWith(search)
+                                                       ).ToList();
+        }
+        private void updDGcar(string search = "")
+        {
+            if (search == "")
+            {
+                DG_car.ItemsSource = HimBDEntities.GetContext().Cars.ToList();
+                DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).ToList();
+                return;
+            }
+
+            DG_car.ItemsSource = HimBDEntities.GetContext().Cars
+                .Where(x => x.car_model.Trim().ToLower().Contains(search) || 
+                            x.car_brand.Trim().ToLower().Contains(search)
+                ).ToList();
+            
+            DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar
+                .Where(x => x.client_id == OrderComplit.client.id)
+                .Where(z => z.Cars.car_model.Trim().ToLower().Contains(search) || 
+                            z.car_number.Trim().ToLower().Contains(search) ||
+                            z.Cars.car_brand.Trim().ToLower().Contains(search)
+                      ).ToList();
         }
 
         private void updDGservice()
@@ -147,6 +178,27 @@ namespace HimApp.Views.Pages.FnPages
 
             if (PageSetIndex == 1)
             {
+                List<string> list = new List<string>();
+                if (executor.SelectedItem == null)
+                    list.Add("Вы не выбрали ответственного за заказ");
+                if (cost.Text.Length < 1)
+                    list.Add("Вы не указали стоимость работ");
+                if (arrival.SelectedDate == null)
+                    list.Add("Вы не выбрали дату приема");
+                if (departure.SelectedDate == null)
+                    list.Add("Вы не выбрали дату выдачи");
+                if (departure.SelectedDate < arrival.SelectedDate)
+                    list.Add("Дата приема не может быть позднее даты выдачи");
+                                    
+                if (list.Count > 0)
+                {
+                    string result = "Вы допустили данные ошибки: \n";
+                    foreach (var item in list)
+                        result += item + "\n";
+                    MainVoid.ErrorMessage(result);
+                    return;
+                }
+
                 OrderComplit.order.executor_id = ((Users)executor.SelectedItem).id;
                 OrderComplit.order.custom_cost = double.Parse(cost.Text);
                 OrderComplit.order.prepayment = double.Parse(prepay.Text);
@@ -164,6 +216,8 @@ namespace HimApp.Views.Pages.FnPages
                 {
                     MainVoid.FatalErrorMessage(ex.Message);
                 }
+                MainVoid.InformationMessage("Заказ добавлен");
+                WConnect.MainWindowMethod.FrameM.Navigate(new HomePage());
             }
 
 
@@ -176,17 +230,12 @@ namespace HimApp.Views.Pages.FnPages
         {
             OrderSetPageOne.Visibility = Visibility.Collapsed;
             OrderSetPageTwo.Visibility = Visibility.Collapsed;
-            OrderSetPageThree.Visibility = Visibility.Collapsed;
 
             switch (PageSetIndex)
             {
                 case 1:
                     PageBack.Visibility = Visibility.Visible;
                     OrderSetPageTwo.Visibility = Visibility.Visible;
-                    break;
-                case 2:
-                    PageBack.Visibility = Visibility.Visible;
-                    OrderSetPageThree.Visibility = Visibility.Visible;
                     break;
                 default:
                     PageBack.Visibility = Visibility.Collapsed;
@@ -212,7 +261,7 @@ namespace HimApp.Views.Pages.FnPages
             }
             additionalVis(true);
             HideOtherPage();
-            DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).ToList();
+            updDGcar();
             if (HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).FirstOrDefault() == null)
                 firstloadcheck.IsChecked = true;
             else
@@ -243,11 +292,15 @@ namespace HimApp.Views.Pages.FnPages
                     MainVoid.InformationMessage("Клиент существует");
                     return;
                 }
-                HimBDEntities.GetContext().Client.Add(new Client()
+                Client client = HimBDEntities.GetContext().Client.Add(new Client()
                 {
                     first_name = first_name_client.Text.Trim(),
                     last_name = last_name_client.Text.Trim(),
                     phone = phone_client.Text.Trim(),
+                });
+                HimBDEntities.GetContext().ClientStat.Add(new ClientStat()
+                {
+                    client_id = client.id,
                 });
                 HimBDEntities.GetContext().SaveChanges();
                 MainVoid.InformationMessage($"Клиент \"{phone_client.Text.Trim()}\" добавлен.");
@@ -372,6 +425,7 @@ namespace HimApp.Views.Pages.FnPages
                 add();
                 MainVoid.InformationMessage($"Автомобиль \"{brand_car.Text} {model_car.Text}\" добавлен клиенту \"{OrderComplit.client.first_name} {OrderComplit.client.last_name}\".");
                 secondloadcheck.IsChecked = true;
+                
             }
             catch (Exception ex)
             {
@@ -437,6 +491,11 @@ namespace HimApp.Views.Pages.FnPages
         bool isCreated = false;
         private void newGroupOrder_Click(object sender, RoutedEventArgs e)
         {
+            if (OrderComplit.car == null)
+            {
+                MainVoid.ErrorMessage("Выберите автомобиль.");
+                return;
+            }
             HideOtherPage();
             if (!isCreated)
             {
@@ -496,6 +555,16 @@ namespace HimApp.Views.Pages.FnPages
             else
                 OrderComplit.orderSet.Remove(OrderComplit.orderSet.Where(x => x.preset_id == OpenID).FirstOrDefault());
             updDGservice();
+        }
+
+        private void SearchService_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchService(((TextBox)sender).Text.Trim().ToLower());
+        }
+
+        private void SearchCar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            updDGcar(((TextBox)sender).Text.Trim().ToLower());
         }
     }
 }
