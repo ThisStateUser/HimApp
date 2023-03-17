@@ -101,7 +101,7 @@ namespace HimApp.Views.Pages.FnPages
             DG_client_car.ItemsSource = HimBDEntities.GetContext().ClientCar
                 .Where(x => x.client_id == OrderComplit.client.id)
                 .Where(z => z.Cars.car_model.Trim().ToLower().Contains(search) || 
-                            z.car_number.Trim().ToLower().Contains(search) ||
+                            z.car_number    .Trim().ToLower().Contains(search) ||
                             z.Cars.car_brand.Trim().ToLower().Contains(search)
                       ).ToList();
         }
@@ -112,9 +112,9 @@ namespace HimApp.Views.Pages.FnPages
             foreach (var item in OrderComplit.orderSet)
             {
                 if (item.preset_id != null)
-                    list.Add(HimBDEntities.GetContext().PresetGroup.Where(x => x.id == item.preset_id).FirstOrDefault());
+                    list.Add(HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.id == item.preset_id));
                 if (item.service_id != null)
-                    list.Add(HimBDEntities.GetContext().Services.Where(x => x.id == item.service_id).FirstOrDefault());
+                    list.Add(HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == item.service_id));
             }
             DG_SelectService.ItemsSource = list;
         }
@@ -262,7 +262,7 @@ namespace HimApp.Views.Pages.FnPages
             additionalVis(true);
             HideOtherPage();
             updDGcar();
-            if (HimBDEntities.GetContext().ClientCar.Where(x => x.client_id == OrderComplit.client.id).FirstOrDefault() == null)
+            if (HimBDEntities.GetContext().ClientCar.FirstOrDefault(x => x.client_id == OrderComplit.client.id) == null)
                 firstloadcheck.IsChecked = true;
             else
                 secondloadcheck.IsChecked = true;
@@ -287,7 +287,7 @@ namespace HimApp.Views.Pages.FnPages
             }
             try
             {
-                if (HimBDEntities.GetContext().Client.Where(x => x.phone.Trim() == phone_client.Text.Trim()).FirstOrDefault() != null)
+                if (HimBDEntities.GetContext().Client.FirstOrDefault(x => x.phone.Trim() == phone_client.Text.Trim()) != null)
                 {
                     MainVoid.InformationMessage("Клиент существует");
                     return;
@@ -322,7 +322,7 @@ namespace HimApp.Views.Pages.FnPages
         {
             Button thisbt = (Button)sender;
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
-            OrderComplit.client = HimBDEntities.GetContext().Client.Where(x => x.id == ltp).FirstOrDefault();
+            OrderComplit.client = HimBDEntities.GetContext().Client.FirstOrDefault(x => x.id == ltp);
             if (OrderComplit.client.first_name.Length < 1 || OrderComplit.client.last_name.Length < 1)
                 info_Client.Text = "Неизвестно";
             else
@@ -340,7 +340,7 @@ namespace HimApp.Views.Pages.FnPages
         {
             Button thisbt = (Button)sender;
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
-            OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x => x.id == ltp).FirstOrDefault();
+            OrderComplit.car = HimBDEntities.GetContext().Cars.FirstOrDefault(x => x.id == ltp);
             MessageBoxResult result = MessageBox.Show("Добавить новый автомобиль клиенту?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
                 additionalVis(false);
@@ -350,9 +350,9 @@ namespace HimApp.Views.Pages.FnPages
         {
             Button thisbt = (Button)sender;
             string ltp = thisbt.Tag.ToString();
-            ClientCar car = HimBDEntities.GetContext().ClientCar.Where(z => z.car_number == ltp).FirstOrDefault();
-            OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x => x.id == car.car_id).FirstOrDefault();
-            OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_number == ltp && x.client_id == OrderComplit.client.id).FirstOrDefault();
+            ClientCar car = HimBDEntities.GetContext().ClientCar.FirstOrDefault(z => z.car_number == ltp);
+            OrderComplit.car = HimBDEntities.GetContext().Cars.FirstOrDefault(x => x.id == car.car_id);
+            OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.FirstOrDefault(x => x.car_number == ltp && x.client_id == OrderComplit.client.id);
             info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
             info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
             HideOtherPage();
@@ -376,7 +376,7 @@ namespace HimApp.Views.Pages.FnPages
                     car_number = num_car.Text.Trim().ToUpper(),
                 });
                 HimBDEntities.GetContext().SaveChanges();
-                OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.Where(x => x.car_id == OrderComplit.car.id && x.client_id == OrderComplit.client.id).FirstOrDefault();
+                OrderComplit.client_car = HimBDEntities.GetContext().ClientCar.FirstOrDefault(x => x.car_id == OrderComplit.car.id && x.client_id == OrderComplit.client.id);
                 MainVoid.InformationMessage($"Автомобиль \"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}\" добавлен клиенту \"{OrderComplit.client.first_name} {OrderComplit.client.last_name}\".");
                 info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
                 info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
@@ -410,9 +410,9 @@ namespace HimApp.Views.Pages.FnPages
                     HimBDEntities.GetContext().SaveChanges();
                 }
 
-                OrderComplit.car = HimBDEntities.GetContext().Cars.Where(x =>
+                OrderComplit.car = HimBDEntities.GetContext().Cars.FirstOrDefault(x =>
                                         x.car_brand.ToLower().Trim() == brand_car.Text.ToLower().Trim() &&
-                                        x.car_model.ToLower().Trim() == model_car.Text.ToLower().Trim()).FirstOrDefault();
+                                        x.car_model.ToLower().Trim() == model_car.Text.ToLower().Trim());
                 if (OrderComplit.car == null)
                 {
                     OrderComplit.car = HimBDEntities.GetContext().Cars.Add(new Cars()
@@ -527,9 +527,9 @@ namespace HimApp.Views.Pages.FnPages
             PresetGroup idpres = null;
 
             if (((CheckBox)sender).Tag.ToString()[0] == 'S')
-                idserv = HimBDEntities.GetContext().Services.Where(x => x.id == OpenID).FirstOrDefault();
+                idserv = HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == OpenID);
             else
-                idpres = HimBDEntities.GetContext().PresetGroup.Where(x => x.id == OpenID).FirstOrDefault();
+                idpres = HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.id == OpenID);
 
             if (idpres != null)
                 OrderComplit.orderSet.Add(new OrderSet()
@@ -551,9 +551,9 @@ namespace HimApp.Views.Pages.FnPages
             int OpenID = int.Parse(((CheckBox)sender).Tag.ToString().Remove(0, 1));
 
             if (((CheckBox)sender).Tag.ToString()[0] == 'S')
-                OrderComplit.orderSet.Remove(OrderComplit.orderSet.Where(x => x.service_id == OpenID).FirstOrDefault());
+                OrderComplit.orderSet.Remove(OrderComplit.orderSet.FirstOrDefault(x => x.service_id == OpenID));
             else
-                OrderComplit.orderSet.Remove(OrderComplit.orderSet.Where(x => x.preset_id == OpenID).FirstOrDefault());
+                OrderComplit.orderSet.Remove(OrderComplit.orderSet.FirstOrDefault(x => x.preset_id == OpenID));
             updDGservice();
         }
 

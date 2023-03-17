@@ -41,14 +41,13 @@ namespace HimApp.Views.Pages
                 DG_orders.ItemsSource = HimBDEntities.GetContext().Order.ToList();
                 return;
             }
-            DG_orders.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.ClientCar.Cars.car_brand.Contains(search.Trim().ToLower()) ||
-                                                                                x.ClientCar.Cars.car_model.Contains(search.Trim().ToLower()) ||
-                                                                                x.ClientCar.car_number.Contains(search.Trim().ToLower()) ||
-                                                                                x.ClientCar.Client.first_name.Contains(search.Trim().ToLower()) ||
-                                                                                x.ClientCar.Client.last_name.Contains(search.Trim().ToLower()) ||
-                                                                                x.ClientCar.Client.phone.Contains(search.Trim().ToLower())
+            DG_orders.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.ClientCar.Cars.car_brand    .Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Cars.car_model    .Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.car_number        .Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Client.first_name .Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Client.last_name  .Contains(search.Trim().ToLower()) ||
+                                                                                x.ClientCar.Client.phone      .Contains(search.Trim().ToLower())
                                                                           ).ToList();
-
         }
 
         private void SearchOrder_TextChanged(object sender, TextChangedEventArgs e)

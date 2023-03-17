@@ -30,6 +30,7 @@ namespace HimApp.Views.Pages
 
         private void PreLoad()
         {
+            RBService.IsChecked = true;
             firstloadcheck.IsChecked = true;
             DG_Category.ItemsSource = HimBDEntities.GetContext().ServiceCategory.ToList();
             Category_service.ItemsSource = HimBDEntities.GetContext().ServiceCategory.ToList();
@@ -89,6 +90,32 @@ namespace HimApp.Views.Pages
         private void Cost_service_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             MainVoid.OnlyNumber((TextBox)sender, e);
+        }
+
+        private void AddAllHide()
+        {
+            RBS_Service .Visibility = Visibility.Collapsed;
+            RBS_Preset  .Visibility = Visibility.Collapsed;
+            RBS_Category.Visibility = Visibility.Collapsed;
+        }
+
+        private void RBS_Checked(object sender, RoutedEventArgs e)
+        {
+            switch (((RadioButton)sender).Name)
+            {
+                case "RBService":
+                    AddAllHide();
+                    RBS_Service.Visibility = Visibility.Visible;
+                    break;
+                case "RBPreset":
+                    AddAllHide();
+                    RBS_Preset.Visibility = Visibility.Visible;
+                    break;
+                case "RBCategory":
+                    AddAllHide();
+                    RBS_Category.Visibility = Visibility.Visible;
+                    break;
+            }
         }
     }
 }

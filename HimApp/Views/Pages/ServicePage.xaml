@@ -20,58 +20,81 @@
 
 
                 <Border Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
-                    <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
-                        <StackPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                            <TextBlock HorizontalAlignment="Center" Text="Добавление услуги" Style="{DynamicResource TitleText}"/>
-
-                            <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Название" x:Name="Title_service" Margin="0 10 0 5"/>
-                            <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Описание" x:Name="Description_service" Margin="0 5 0 5"/>
-                            <ComboBox Background="{DynamicResource Panel1}" Tag="Категория" x:Name="Category_service" Margin="0 5 0 5">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding category_name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <TextBox Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="Cost_service_PreviewTextInput" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_service" Margin="0 5 0 10"/>
-                            <Button Click="NewService_Click">
-                                <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}"/>
-                            </Button>
-                        </StackPanel>
-                        <Border Background="{DynamicResource Panel1}" Padding="5 0 0 5" CornerRadius="5" DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                            <StackPanel>
-                                <DataGrid x:Name="DG_Category" Margin="0 10" Height="120" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
-                                    <DataGrid.Columns>
-                                        <DataGridTemplateColumn>
-                                            <DataGridTemplateColumn.Header>
-                                                <TextBlock Style="{DynamicResource TitleText}"  Text="Категории"/>
-                                            </DataGridTemplateColumn.Header>
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock VerticalAlignment="Center" Margin="2" TextWrapping="Wrap" Text="{Binding category_name}"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-
-                                        <DataGridTemplateColumn Width="1"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                <Button>
-                                    <TextBlock Text="Добавить категорию" Foreground="{DynamicResource TextBtn}"/>
-                                </Button>
+                    <DockPanel Grid.Row="0" Grid.Column="2">
+                        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Добавление данных" Style="{DynamicResource TitleText}"/>
+                        <Border DockPanel.Dock="Top" CornerRadius="10" Margin="0 10 0 0" HorizontalAlignment="Center" Background="{DynamicResource Panel1}" Padding="5">
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBService" Checked="RBS_Checked" Content="Услуга"/>
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBPreset" Checked="RBS_Checked" Margin="5 0" Content="Комплекс"/>
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBCategory" Checked="RBS_Checked" Content="Категория"/>
                             </StackPanel>
                         </Border>
+                        
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock HorizontalAlignment="Center" Text="Комплекс услуг" Style="{DynamicResource TitleText}"/>
-                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название" x:Name="Title_preset" Margin="0 10 0 5"/>
-                            <Button HorizontalAlignment="Left" Margin="0 5 0 5">
-                                <TextBlock Text="Список услуг" Foreground="{DynamicResource TextBtn}"/>
-                            </Button>
-                            <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_preset" Margin="0 5 0 10"/>
-                            <Button>
-                                <TextBlock Text="Создать" Foreground="{DynamicResource TextBtn}"/>
-                            </Button>
+                            <StackPanel Visibility="Collapsed" x:Name="RBS_Service">
+                                <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Название" x:Name="Title_service" Margin="0 10 0 5"/>
+                                <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Описание" x:Name="Description_service" Margin="0 5 0 5"/>
+                                <ComboBox Background="{DynamicResource Panel1}" Tag="Категория" x:Name="Category_service" Margin="0 5 0 5">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding category_name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <TextBox Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="Cost_service_PreviewTextInput" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_service" Margin="0 5 0 10"/>
+                                <Button Click="NewService_Click">
+                                    <TextBlock Text="Создать услугу" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Visibility="Collapsed" x:Name="RBS_Preset">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название" x:Name="Title_preset" Margin="0 10 0 5"/>
+                                    <Button HorizontalAlignment="Left" Margin="0 5 0 5">
+                                        <TextBlock Text="Список услуг" Foreground="{DynamicResource TextBtn}"/>
+                                    </Button>
+                                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_preset" Margin="0 5 0 10"/>
+                                    <Button>
+                                        <TextBlock Text="Создать комплекс" Foreground="{DynamicResource TextBtn}"/>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            <StackPanel Visibility="Collapsed" x:Name="RBS_Category">
+                                <StackPanel>
+                                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название категории" x:Name="category_name_add" Margin="0 5 0 10"/>
+                                    <Button>
+                                        <TextBlock Text="Создать категорию" Foreground="{DynamicResource TextBtn}"/>
+                                    </Button>
+                                </StackPanel>
+                                <Border Background="{DynamicResource Panel1}" Padding="5 0 0 5" CornerRadius="5" Margin="0 10 0 0">
+                                    <StackPanel>
+                                        <DataGrid x:Name="DG_Category" Margin="0 10" Height="120" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.Header>
+                                                        <TextBlock Style="{DynamicResource TitleText}"  Text="Категории"/>
+                                                    </DataGridTemplateColumn.Header>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock VerticalAlignment="Center" Margin="2" TextWrapping="Wrap" Text="{Binding category_name}"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn Width="1"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                        <Button>
+                                            <TextBlock Text="Добавить категорию" Foreground="{DynamicResource TextBtn}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
                         </StackPanel>
+
+
                     </DockPanel>
                 </Border>
                 <StackPanel Grid.Column="1" Margin="15">

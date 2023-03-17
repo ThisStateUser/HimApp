@@ -172,6 +172,7 @@
                             <Setter Property="Background" TargetName="select" Value="{DynamicResource Pressed}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource TextBtn}"/>
                             <Setter Property="Background" TargetName="select" Value="{DynamicResource Basic}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
