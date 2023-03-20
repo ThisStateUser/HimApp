@@ -157,11 +157,15 @@ namespace HimApp.Views.Pages
 
         private void ShowService_Click(object sender, RoutedEventArgs e)
         {
+            LV_services_preset.ItemsSource = HimBDEntities.GetContext().Services.ToList();
             sel_zone.Visibility = Visibility.Hidden;
+            SV_services_preset.Visibility = Visibility.Visible;
             int cost = int.Parse(Cost_preset.Text.Trim());
             if (HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.title == Title_preset.Text.ToLower().Trim()) != null)
             {
-                MainVoid.ErrorMessage($"Комплекс услуг \"{Title_preset.Text.Trim()}\" уже существует.");
+                MessageBoxResult result = MessageBox.Show($"Комплекс услуг \"{Title_preset.Text.Trim()}\" уже существует. Изменить состав?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.No)
+                    return;
                 return;
             }
 
@@ -180,6 +184,11 @@ namespace HimApp.Views.Pages
             }
         }
 
+        private void updDGservice()
+        {
+            DG_SelectService.ItemsSource = servicePresets.ToList();
+        }
+
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(((CheckBox)sender).Tag.ToString());
@@ -188,12 +197,14 @@ namespace HimApp.Views.Pages
                 service_id = id,
                 preset_group_id = presetGroup.id,
             });
+            updDGservice();
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(((CheckBox)sender).Tag.ToString());
             servicePresets.Remove(servicePresets.FirstOrDefault(x => x.service_id == id));
+            updDGservice();
         }
     }
 }
