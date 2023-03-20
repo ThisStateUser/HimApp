@@ -17,8 +17,6 @@
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
 
-
-
                 <Border Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
                     <DockPanel Grid.Row="0" Grid.Column="2">
                         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Добавление данных" Style="{DynamicResource TitleText}"/>
@@ -47,14 +45,14 @@
                                 </Button>
                             </StackPanel>
 
-                            <StackPanel Visibility="Collapsed" x:Name="RBS_Preset">
+                            <StackPanel Visibility="Visible" x:Name="RBS_Preset">
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название" x:Name="Title_preset" Margin="0 10 0 5"/>
-                                    <Button HorizontalAlignment="Left" Margin="0 5 0 5">
+                                    <Button HorizontalAlignment="Left" Click="ShowService_Click" Margin="0 5 0 5">
                                         <TextBlock Text="Список услуг" Foreground="{DynamicResource TextBtn}"/>
                                     </Button>
                                     <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_preset" Margin="0 5 0 10"/>
-                                    <Button>
+                                    <Button Click="NewPreset_Click">
                                         <TextBlock Text="Создать комплекс" Foreground="{DynamicResource TextBtn}"/>
                                     </Button>
                                 </StackPanel>
@@ -63,7 +61,7 @@
                             <StackPanel Visibility="Collapsed" x:Name="RBS_Category">
                                 <StackPanel>
                                     <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название категории" x:Name="category_name_add" Margin="0 5 0 10"/>
-                                    <Button>
+                                    <Button Click="NewCategory_Click">
                                         <TextBlock Text="Создать категорию" Foreground="{DynamicResource TextBtn}"/>
                                     </Button>
                                 </StackPanel>
@@ -99,12 +97,12 @@
                 </Border>
                 <StackPanel Grid.Column="1" Margin="15">
                     <TextBox Style="{DynamicResource Search}"/>
-                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                    <StackPanel x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
                         <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="firstloadcheck" Checked="firstloadcheck_Checked" Content="Услуги"/>
                         <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="secondloadcheck" Checked="secondloadcheck_Checked" Margin="5 0 0 0" Content="Комплексы"/>
                     </StackPanel>
                     <ScrollViewer Margin="0 5" Height="545">
-                        <ListView Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
+                        <ListView d:ItemsSource="{d:SampleData ItemCount=2}"  Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -116,6 +114,7 @@
                                     <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25"/>
                                                 <ColumnDefinition Width="3*"/>
                                                 <ColumnDefinition Width="1*"/>
                                             </Grid.ColumnDefinitions>
@@ -124,8 +123,9 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
-                                            <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
+                                            <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Tag="{Binding id}" Grid.Column="0" Margin="0 3 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource Remember}"/>
+                                            <TextBlock Margin="0 0 0 5" Grid.Column="1" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
+                                            <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
                                                 <ComboBox Background="{DynamicResource Panel1}" HorizontalAlignment="Stretch" Width="150" Style="{DynamicResource DropDownMenu}">
                                                     <ComboBoxItem>
                                                         <TextBlock Text="Редактировать"/>
@@ -136,10 +136,10 @@
                                                 </ComboBox>
                                             </StackPanel>
 
-                                            <StackPanel Grid.Column="0" Grid.Row="1">
+                                            <StackPanel Grid.Column="1" Grid.Row="1">
                                                 <TextBlock MaxWidth="530" Text="{Binding description}" TextWrapping="Wrap"/>
                                             </StackPanel>
-                                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                            <StackPanel Grid.Column="2" Grid.Row="1">
                                                 <TextBlock HorizontalAlignment="Right" Text="{Binding ServiceCategory.category_name}"/>
                                                 <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
                                             </StackPanel>

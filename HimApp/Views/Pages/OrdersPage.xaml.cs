@@ -22,6 +22,8 @@ namespace HimApp.Views.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
+
+        
         public OrdersPage()
         {
             InitializeComponent();

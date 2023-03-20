@@ -22,6 +22,9 @@ namespace HimApp.Views.Pages
     /// </summary>
     public partial class ServicePage : Page
     {
+        public static PresetGroup presetGroup;
+        public static List<ServicePreset> servicePresets = new List<ServicePreset>();
+
         public ServicePage()
         {
             InitializeComponent();
@@ -67,6 +70,12 @@ namespace HimApp.Views.Pages
             }
             try
             {
+                if (HimBDEntities.GetContext().Services.FirstOrDefault(x => x.title == Title_service.Text.ToLower().Trim()) != null)
+                {
+                    MainVoid.ErrorMessage($"Услуга \"{Title_service.Text}\" уже существует.");
+                    return;
+                }
+
                 HimBDEntities.GetContext().Services.Add(new Services()
                 {
                     title = Title_service.Text.Trim(),
@@ -116,6 +125,75 @@ namespace HimApp.Views.Pages
                     RBS_Category.Visibility = Visibility.Visible;
                     break;
             }
+        }
+
+        private void NewPreset_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        private void NewCategory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                HimBDEntities.GetContext().ServiceCategory.Add(new ServiceCategory
+                {
+                    category_name = category_name_add.Text.Trim(),
+                });
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        private void ShowService_Click(object sender, RoutedEventArgs e)
+        {
+            sel_zone.Visibility = Visibility.Hidden;
+            int cost = int.Parse(Cost_preset.Text.Trim());
+            if (HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.title == Title_preset.Text.ToLower().Trim()) != null)
+            {
+                MainVoid.ErrorMessage($"Комплекс услуг \"{Title_preset.Text.Trim()}\" уже существует.");
+                return;
+            }
+
+            try
+            {
+                presetGroup = HimBDEntities.GetContext().PresetGroup.Add(new PresetGroup
+                {
+                    title = Title_preset.Text.Trim(),
+                    cost = cost,
+                });
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((CheckBox)sender).Tag.ToString());
+            servicePresets.Add(new ServicePreset
+            {
+                service_id = id,
+                preset_group_id = presetGroup.id,
+            });
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((CheckBox)sender).Tag.ToString());
+            servicePresets.Remove(servicePresets.FirstOrDefault(x => x.service_id == id));
         }
     }
 }
