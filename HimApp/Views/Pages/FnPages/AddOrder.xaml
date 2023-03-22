@@ -21,31 +21,31 @@
                         <TextBlock HorizontalAlignment="Center" Text="Заказ" Style="{DynamicResource TitleText}"/>
                         <TextBlock Text="Ответственный за заказ" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="executer_order"/>
+                            <TextBlock x:Name="TB_orderbox_executer"/>
                         </Border>
                         <TextBlock Text="Автомобиль" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_car"/>
+                            <TextBlock x:Name="TB_orderbox_car"/>
                         </Border>
                         <TextBlock Text="Состояние автомобиля" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_condition"/>
+                            <TextBlock x:Name="TB_orderbox_condition"/>
                         </Border>
                         <TextBlock Text="Цена работ" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_cost"/>
+                            <TextBlock x:Name="TB_orderbox_cost"/>
                         </Border>
                         <TextBlock Text="Предоплата" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_prepay"/>
+                            <TextBlock x:Name="TB_orderbox_prepay"/>
                         </Border>
                         <TextBlock Text="Дата приема" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_arrival"/>
+                            <TextBlock x:Name="TB_orderbox_arrival"/>
                         </Border>
                         <TextBlock Text="Дата выдачи" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                            <TextBlock x:Name="orderbox_departure"/>
+                            <TextBlock x:Name="TB_orderbox_departure"/>
                         </Border>
                         <TextBlock Text="Состав заказа" Margin="0 10 0 5"/>
                         <Border CornerRadius="5" Height="128" Padding="5" Background="{DynamicResource Panel1}">
@@ -79,14 +79,14 @@
                 <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 15 0 0"/>
                 <StackPanel VerticalAlignment="Center" Grid.Column="1">
                     <StackPanel Margin="15">
-                        <ScrollViewer x:Name="OrderSetPageOne" Visibility="Visible" MaxHeight="500" Padding="0 0 10 0">
+                        <ScrollViewer x:Name="SV_OrderSetPageOne" Visibility="Visible" MaxHeight="500" Padding="0 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Клиент"/>
-                                <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="addClientForm" Click="addClientForm_Click">
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="SelectClientForm" Click="SelectClientForm_Click">
                                     <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Автомобиль"/>
-                                <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="addAutoForm" Click="addAutoForm_Click">
+                                <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="SelectAutoForm" Click="SelectAutoForm_Click">
                                     <TextBlock Text="Выбрать или создать" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
                                 <TextBlock Text="Состав заказа"/>
@@ -104,7 +104,7 @@
                                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="comments" Margin="0 5 0 0"/>
                             </StackPanel>
                         </ScrollViewer>
-                        <StackPanel x:Name="OrderSetPageTwo" Visibility="Collapsed">
+                        <StackPanel x:Name="SV_OrderSetPageTwo" Visibility="Collapsed">
                             <ComboBox Tag="Ответственный за заказ" SelectionChanged="executor_SelectionChanged" x:Name="executor" Margin="0 5 0 10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -212,8 +212,8 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                             <TextBlock Text="Найти автомобиль" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                             <StackPanel Orientation="Horizontal" Margin="43 0 0 0">
-                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="firstloadcheck" Checked="carout_Checked" Content="Все"/>
-                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="secondloadcheck" Checked="carout_Checked_1" Margin="5 0 0 0" Content="Клиент"/>
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="firstloadcheck" Checked="CarOut_Checked" Content="Все"/>
+                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="secondloadcheck" Checked="CarOut_Checked" Margin="5 0 0 0" Content="Клиент"/>
                             </StackPanel>
                         </StackPanel>
                         <TextBox Style="{DynamicResource Search}"  TextChanged="SearchCar_TextChanged" Margin="0 10 0 5"/>

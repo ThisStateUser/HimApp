@@ -135,8 +135,12 @@ namespace HimApp.Views.Pages.FnPages
             }
         }
 
-
         private void PageBack_Click(object sender, RoutedEventArgs e)
+        {
+            PageBackVoid();
+        }
+
+        private void PageBackVoid()
         {
             if (PageSetIndex == 1)
             {
@@ -147,7 +151,13 @@ namespace HimApp.Views.Pages.FnPages
                 PageSetIndex = PageSetIndex - 1;
             ShowPage();
         }
+
         private void PageNext_Click(object sender, RoutedEventArgs e)
+        {
+            PageNextVoid();
+        }
+
+        private void PageNextVoid()
         {
             if (PageSetIndex == 0)
             {
@@ -189,7 +199,7 @@ namespace HimApp.Views.Pages.FnPages
                     list.Add("Вы не выбрали дату выдачи");
                 if (departure.SelectedDate < arrival.SelectedDate)
                     list.Add("Дата приема не может быть позднее даты выдачи");
-                                    
+
                 if (list.Count > 0)
                 {
                     string result = "Вы допустили данные ошибки: \n";
@@ -220,7 +230,6 @@ namespace HimApp.Views.Pages.FnPages
                 WConnect.MainWindowMethod.FrameM.Navigate(new HomePage());
             }
 
-
             if (PageSetIndex < 1)
                 PageSetIndex = PageSetIndex + 1;
             ShowPage();
@@ -228,23 +237,28 @@ namespace HimApp.Views.Pages.FnPages
 
         private void ShowPage()
         {
-            OrderSetPageOne.Visibility = Visibility.Collapsed;
-            OrderSetPageTwo.Visibility = Visibility.Collapsed;
+            SV_OrderSetPageOne.Visibility = Visibility.Collapsed;
+            SV_OrderSetPageTwo.Visibility = Visibility.Collapsed;
 
             switch (PageSetIndex)
             {
                 case 1:
                     PageBack.Visibility = Visibility.Visible;
-                    OrderSetPageTwo.Visibility = Visibility.Visible;
+                    SV_OrderSetPageTwo.Visibility = Visibility.Visible;
                     break;
                 default:
                     PageBack.Visibility = Visibility.Collapsed;
-                    OrderSetPageOne.Visibility = Visibility.Visible;
+                    SV_OrderSetPageOne.Visibility = Visibility.Visible;
                     break;
             }
         }
 
-        private void addClientForm_Click(object sender, RoutedEventArgs e)
+        private void SelectClientForm_Click(object sender, RoutedEventArgs e)
+        {
+            SelectClientFormVoid();
+        }
+        
+        private void SelectClientFormVoid()
         {
             HideOtherPage();
             TitleOther.Text = "Выбор клиента";
@@ -252,7 +266,12 @@ namespace HimApp.Views.Pages.FnPages
             ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
         }
 
-        private void addAutoForm_Click(object sender, RoutedEventArgs e)
+        private void SelectAutoForm_Click(object sender, RoutedEventArgs e)
+        {
+            SelectAutoFormVoid();
+        }
+
+        private void SelectAutoFormVoid()
         {
             if (OrderComplit.client == null)
             {
@@ -279,6 +298,11 @@ namespace HimApp.Views.Pages.FnPages
         }
 
         private void AddClient_Click(object sender, RoutedEventArgs e)
+        {
+            AddClientVoid();
+        }
+
+        private void AddClientVoid()
         {
             if (phone_client.Text.Length < 11)
             {
@@ -310,7 +334,6 @@ namespace HimApp.Views.Pages.FnPages
             {
                 MainVoid.FatalErrorMessage(ex.Message);
             }
-
         }
 
         private void phone_client_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -319,6 +342,11 @@ namespace HimApp.Views.Pages.FnPages
         }
 
         private void SelectClient_Click(object sender, RoutedEventArgs e)
+        {
+            SelectClientVoid(sender);
+        }
+
+        private void SelectClientVoid(object sender)
         {
             Button thisbt = (Button)sender;
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
@@ -333,10 +361,16 @@ namespace HimApp.Views.Pages.FnPages
             OrderComplit.client_car = null;
             info_ClientCar.Text = "";
             info_ClientCarNumber.Text = "";
-            orderbox_car.Text = "";
+            TB_orderbox_car.Text = "";
             DopPageOther.Visibility = Visibility.Visible;
         }
+
         private void SelectCarClient_Click(object sender, RoutedEventArgs e)
+        {
+            SelectCarClientVoid(sender);
+        }
+
+        private void SelectCarClientVoid(object sender)
         {
             Button thisbt = (Button)sender;
             int ltp = Convert.ToInt32(thisbt.Tag.ToString());
@@ -348,6 +382,11 @@ namespace HimApp.Views.Pages.FnPages
 
         private void SelectCar_Click(object sender, RoutedEventArgs e)
         {
+            SelectCarVoid(sender);
+        }
+
+        private void SelectCarVoid(object sender)
+        {
             Button thisbt = (Button)sender;
             string ltp = thisbt.Tag.ToString();
             ClientCar car = HimBDEntities.GetContext().ClientCar.FirstOrDefault(z => z.car_number == ltp);
@@ -356,11 +395,16 @@ namespace HimApp.Views.Pages.FnPages
             info_ClientCar.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model}");
             info_ClientCarNumber.Text = OrderComplit.client_car.car_number;
             HideOtherPage();
-            orderbox_car.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model} {OrderComplit.client_car.car_number}");
+            TB_orderbox_car.Text = ($"{OrderComplit.car.car_brand} {OrderComplit.car.car_model} {OrderComplit.client_car.car_number}");
             DopPageOther.Visibility = Visibility.Visible;
         }
 
         private void AddNumCar_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumCarVoid();
+        }
+
+        private void AddNumCarVoid()
         {
             try
             {
@@ -391,7 +435,11 @@ namespace HimApp.Views.Pages.FnPages
 
         private void AddCar_Click(object sender, RoutedEventArgs e)
         {
+            AddCarVoid();
+        }
 
+        private void AddCarVoid()
+        {
             if (brand_car.Text.Length <= 2 || num_car.Text.Length <= 2 || model_car.Text.Length < 2 || category_car.SelectedItem == null)
             {
                 MainVoid.ErrorMessage("Заполните все обязательные поля");
@@ -425,7 +473,7 @@ namespace HimApp.Views.Pages.FnPages
                 add();
                 MainVoid.InformationMessage($"Автомобиль \"{brand_car.Text} {model_car.Text}\" добавлен клиенту \"{OrderComplit.client.first_name} {OrderComplit.client.last_name}\".");
                 secondloadcheck.IsChecked = true;
-                
+
             }
             catch (Exception ex)
             {
@@ -433,21 +481,24 @@ namespace HimApp.Views.Pages.FnPages
             }
         }
 
-        private void carout_Checked(object sender, RoutedEventArgs e)
+        private void CarOut_Checked(object sender, RoutedEventArgs e)
         {
-            DG_car.Visibility = Visibility.Visible;
-            DG_client_car.Visibility = Visibility.Collapsed;
-        }
-
-        private void carout_Checked_1(object sender, RoutedEventArgs e)
-        {
-            DG_car.Visibility = Visibility.Collapsed;
-            DG_client_car.Visibility = Visibility.Visible;
+            switch (((RadioButton)sender).Name)
+            {
+                case "firstloadcheck":
+                    DG_car.Visibility = Visibility.Visible;
+                    DG_client_car.Visibility = Visibility.Collapsed;
+                    break;
+                case "secondloadcheck":
+                    DG_car.Visibility = Visibility.Collapsed;
+                    DG_client_car.Visibility = Visibility.Visible;
+                    break;
+            }
         }
 
         private void executor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            executer_order.Text = ($"{((Users)executor.SelectedItem).UserInfo.first_name} {((Users)executor.SelectedItem).UserInfo.last_name}");
+            TB_orderbox_executer.Text = ($"{((Users)executor.SelectedItem).UserInfo.first_name} {((Users)executor.SelectedItem).UserInfo.last_name}");
         }
 
         private void cost_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -462,34 +513,38 @@ namespace HimApp.Views.Pages.FnPages
 
         private void condition_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            orderbox_condition.Text = ($"{((Conditions)condition.SelectedItem).condition_rate}");
+            TB_orderbox_condition.Text = ($"{((Conditions)condition.SelectedItem).condition_rate}");
         }
 
         private void arrival_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderComplit.order.arrival_date = arrival.SelectedDate.Value;
-            orderbox_arrival.Text = ($"{OrderComplit.order.arrival_date.Value.ToString("dd.MM.yyyy")}");
+            TB_orderbox_arrival.Text = ($"{OrderComplit.order.arrival_date.Value.ToString("dd.MM.yyyy")}");
         }
 
         private void departure_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderComplit.order.departure_date = departure.SelectedDate.Value;
-            orderbox_departure.Text = ($"{OrderComplit.order.departure_date.Value.ToString("dd.MM.yyyy")}");
+            TB_orderbox_departure.Text = ($"{OrderComplit.order.departure_date.Value.ToString("dd.MM.yyyy")}");
         }
 
         private void cost_TextChanged(object sender, TextChangedEventArgs e)
         {
-            orderbox_cost.Text = cost.Text;
+            TB_orderbox_cost.Text = cost.Text;
         }
 
         private void prepay_TextChanged(object sender, TextChangedEventArgs e)
         {
-            orderbox_prepay.Text = prepay.Text;
+            TB_orderbox_prepay.Text = prepay.Text;
         }
 
         bool isCreated = false;
         private void newGroupOrder_Click(object sender, RoutedEventArgs e)
+        {
+            newGroupOrderVoid();
+        }
+
+        private void newGroupOrderVoid()
         {
             if (OrderComplit.car == null)
             {
