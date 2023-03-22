@@ -1,5 +1,7 @@
 ﻿using HimApp.BD;
 using HimApp.Controllers;
+using HimApp.Models;
+using HimApp.Views.Pages.FnPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +37,14 @@ namespace HimApp.Views.Pages
         {
             RBService.IsChecked = true;
             firstloadcheck.IsChecked = true;
+            updCategory();
+            UpdLVSource();
+        }
+
+        private void updCategory()
+        {
             DG_Category.ItemsSource = HimBDEntities.GetContext().ServiceCategory.ToList();
             Category_service.ItemsSource = HimBDEntities.GetContext().ServiceCategory.ToList();
-            UpdLVSource();
         }
 
         private void UpdLVSource()
@@ -50,7 +57,7 @@ namespace HimApp.Views.Pages
 
         private void firstloadcheck_Checked(object sender, RoutedEventArgs e)
         {
-
+            LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
         }
 
         private void secondloadcheck_Checked(object sender, RoutedEventArgs e)
@@ -60,14 +67,22 @@ namespace HimApp.Views.Pages
 
         private void NewService_Click(object sender, RoutedEventArgs e)
         {
-            if (Title_service.Text.Length < 2
-                || Description_service.Text.Length < 2
-                || Category_service.SelectedItem == null
-                || Cost_service.Text.Length < 2)
+            List<string> list = new List<string>();
+            if (Title_service.Text.Length < 1)
+                list.Add("Вы не указали название услуги");
+            if (Category_service.SelectedItem == null)
+                list.Add("Вы не выбрали категорию услуги");
+            if (Cost_service.Text.Length < 1)
+                list.Add("Вы не указали стоимость услуги");
+            if (list.Count > 0)
             {
-                MainVoid.ErrorMessage("Заполните все поля добавления услуги");
+                string result = "Вы допустили данные ошибки: \n";
+                foreach (var item in list)
+                    result += item + "\n";
+                MainVoid.ErrorMessage(result);
                 return;
             }
+
             try
             {
                 if (HimBDEntities.GetContext().Services.FirstOrDefault(x => x.title == Title_service.Text.ToLower().Trim()) != null)
@@ -103,9 +118,11 @@ namespace HimApp.Views.Pages
 
         private void AddAllHide()
         {
-            RBS_Service .Visibility = Visibility.Collapsed;
-            RBS_Preset  .Visibility = Visibility.Collapsed;
-            RBS_Category.Visibility = Visibility.Collapsed;
+            RBS_Service     .Visibility = Visibility.Collapsed;
+            RBS_Preset      .Visibility = Visibility.Collapsed;
+            RBS_Category    .Visibility = Visibility.Collapsed;
+            DG_SelectService.Visibility = Visibility.Collapsed;
+            DG_Category     .Visibility = Visibility.Collapsed;
         }
 
         private void RBS_Checked(object sender, RoutedEventArgs e)
@@ -119,10 +136,12 @@ namespace HimApp.Views.Pages
                 case "RBPreset":
                     AddAllHide();
                     RBS_Preset.Visibility = Visibility.Visible;
+                    DG_SelectService.Visibility = Visibility.Visible;
                     break;
                 case "RBCategory":
                     AddAllHide();
                     RBS_Category.Visibility = Visibility.Visible;
+                    DG_Category.Visibility = Visibility.Visible;
                     break;
             }
         }
@@ -131,7 +150,35 @@ namespace HimApp.Views.Pages
         {
             try
             {
-
+                int cost = int.Parse(Cost_preset.Text.Trim());
+                presetGroup.cost = cost;
+                List<ServicePreset> list = HimBDEntities.GetContext().ServicePreset.Where(x => x.preset_group_id == presetGroup.id).ToList();
+                if (list.Count != 0)
+                { 
+                    foreach (var item in servicePresets)
+                    {
+                        if (list.FirstOrDefault(s => s.service_id == item.service_id) != null)
+                            list.Remove(item);
+                        else
+                            HimBDEntities.GetContext().ServicePreset.Add(item);
+                    }
+                    foreach (var item in list)
+                    {
+                        if (!servicePresets.Any(x => x.service_id == item.service_id))
+                            HimBDEntities.GetContext().ServicePreset.Remove(item);
+                    }
+                    HimBDEntities.GetContext().SaveChanges();
+                    MainVoid.InformationMessage("Комплекс обновлен");
+                    Title_preset.Text = "";
+                    Cost_preset.Text = "";
+                    NewPresetText.Text = "Создать комплекс";
+                    return;
+                }
+                HimBDEntities.GetContext().ServicePreset.AddRange(servicePresets);
+                HimBDEntities.GetContext().SaveChanges();
+                Title_preset.Text = "";
+                Cost_preset.Text = "";
+                MainVoid.InformationMessage($"Комплекс \"{presetGroup.title}\" создан");
             }
             catch (Exception ex)
             {
@@ -148,6 +195,8 @@ namespace HimApp.Views.Pages
                     category_name = category_name_add.Text.Trim(),
                 });
                 HimBDEntities.GetContext().SaveChanges();
+                MainVoid.InformationMessage($"Категория \"{category_name_add.Text.Trim()}\" создана");
+                updCategory();
             }
             catch (Exception ex)
             {
@@ -157,24 +206,46 @@ namespace HimApp.Views.Pages
 
         private void ShowService_Click(object sender, RoutedEventArgs e)
         {
-            LV_services_preset.ItemsSource = HimBDEntities.GetContext().Services.ToList();
+            List<ServicesModel> list = new List<ServicesModel>();
             sel_zone.Visibility = Visibility.Hidden;
             SV_services_preset.Visibility = Visibility.Visible;
-            int cost = int.Parse(Cost_preset.Text.Trim());
-            if (HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.title == Title_preset.Text.ToLower().Trim()) != null)
+            SV_services.Visibility = Visibility.Collapsed;
+            PresetGroup preset = HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.title == Title_preset.Text.ToLower().Trim());
+            if (preset != null)
             {
                 MessageBoxResult result = MessageBox.Show($"Комплекс услуг \"{Title_preset.Text.Trim()}\" уже существует. Изменить состав?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
                     return;
+                NewPresetText.Text = "Обновить комплекс";
+                Cost_preset.Text = preset.cost.ToString();
+                presetGroup = preset;
+                List<ServicePreset> lpres = HimBDEntities.GetContext().ServicePreset.Where(x => x.preset_group_id == preset.id).ToList();
+                servicePresets.AddRange(lpres);
+                List<int> selectedService = new List<int>();
+                foreach (Services item in lpres.Select(x => x.Services).ToList())
+                {
+                    list.Add(new ServicesModel()
+                    {
+                        isSelected = true,
+                        service = item,
+                    });
+                    selectedService.Add(item.id);
+                }
+                foreach (var item in HimBDEntities.GetContext().Services.ToList())
+                {
+                    if (!selectedService.Any(x => x == item.id))
+                        list.Add(new ServicesModel() { isSelected = false, service = item});
+                }
+                LV_services_preset.ItemsSource = list;
+                DG_SelectService.ItemsSource = servicePresets.ToList();
                 return;
             }
-
+            LV_services_preset.ItemsSource = HimBDEntities.GetContext().Services.ToList().ConvertAll(x => new ServicesModel { isSelected = false, service = x});
             try
             {
                 presetGroup = HimBDEntities.GetContext().PresetGroup.Add(new PresetGroup
                 {
                     title = Title_preset.Text.Trim(),
-                    cost = cost,
                 });
                 HimBDEntities.GetContext().SaveChanges();
             }
@@ -186,6 +257,7 @@ namespace HimApp.Views.Pages
 
         private void updDGservice()
         {
+            DG_SelectService.ItemsSource = null;
             DG_SelectService.ItemsSource = servicePresets.ToList();
         }
 
@@ -195,6 +267,7 @@ namespace HimApp.Views.Pages
             servicePresets.Add(new ServicePreset
             {
                 service_id = id,
+                Services = HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == id),
                 preset_group_id = presetGroup.id,
             });
             updDGservice();
@@ -205,6 +278,23 @@ namespace HimApp.Views.Pages
             int id = int.Parse(((CheckBox)sender).Tag.ToString());
             servicePresets.Remove(servicePresets.FirstOrDefault(x => x.service_id == id));
             updDGservice();
+        }
+
+        private void RemoveCategory_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((Button)sender).Tag.ToString());
+            if (HimBDEntities.GetContext().Services.Any(x => x.category_id == id))
+            {
+                MainVoid.ErrorMessage("Невозможно удалить категорию из за ее принадлежности к одному или нескольким сервисам");
+                return;
+            }
+            ServiceCategory serviceCategory = HimBDEntities.GetContext().ServiceCategory.FirstOrDefault(x => x.id == id);
+            MessageBoxResult result = MessageBox.Show($"Удалить запись \"{serviceCategory.category_name}\"?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+                return;
+            HimBDEntities.GetContext().ServiceCategory.Remove(serviceCategory);
+            HimBDEntities.GetContext().SaveChanges();
+            updCategory();
         }
     }
 }

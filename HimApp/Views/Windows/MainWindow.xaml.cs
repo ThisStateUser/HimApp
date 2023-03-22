@@ -144,7 +144,6 @@ namespace HimApp.Views.Windows
             FrameM.Navigate(new AddOrder());
         }
 
-
         private void HomePage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new HomePage());

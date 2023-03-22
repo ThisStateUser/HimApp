@@ -388,6 +388,7 @@
     <Compile Include="Controllers\UIObj.cs" />
     <Compile Include="Controllers\UserObj.cs" />
     <Compile Include="Controllers\WConnect.cs" />
+    <Compile Include="Models\ServicesModel.cs" />
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
