@@ -36,7 +36,7 @@ namespace HimApp.Views.Pages
         private void PreLoad()
         {
             RBService.IsChecked = true;
-            firstloadcheck.IsChecked = true;
+            RBLV_service.IsChecked = true;
             updCategory();
             UpdLVSource();
         }
@@ -49,20 +49,28 @@ namespace HimApp.Views.Pages
 
         private void UpdLVSource()
         {
-            if (secondloadcheck.IsChecked == true)
+            if (RBLV_service.IsChecked == true)
                 LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
             else
-                LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
+                LV_preset.ItemsSource = HimBDEntities.GetContext().PresetGroup.ToList();
         }
 
-        private void firstloadcheck_Checked(object sender, RoutedEventArgs e)
+        private void SwapLV_Checked(object sender, RoutedEventArgs e)
         {
+            switch (((RadioButton)sender).Name)
+            {
+                case "RBLV_service":
+                    LV_services.Visibility = Visibility.Visible;
+                    LV_preset.Visibility = Visibility.Collapsed;
+                    UpdLVSource();
+                    break;
+                case "RBLV_preset":
+                    LV_preset.Visibility = Visibility.Visible;
+                    LV_services.Visibility = Visibility.Collapsed;
+                    UpdLVSource();
+                    break;
+            }
             LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
-        }
-
-        private void secondloadcheck_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void NewService_Click(object sender, RoutedEventArgs e)
@@ -118,11 +126,11 @@ namespace HimApp.Views.Pages
 
         private void AddAllHide()
         {
-            RBS_Service     .Visibility = Visibility.Collapsed;
-            RBS_Preset      .Visibility = Visibility.Collapsed;
-            RBS_Category    .Visibility = Visibility.Collapsed;
+            RBS_Service.Visibility = Visibility.Collapsed;
+            RBS_Preset.Visibility = Visibility.Collapsed;
+            RBS_Category.Visibility = Visibility.Collapsed;
             DG_SelectService.Visibility = Visibility.Collapsed;
-            DG_Category     .Visibility = Visibility.Collapsed;
+            DG_Category.Visibility = Visibility.Collapsed;
         }
 
         private void RBS_Checked(object sender, RoutedEventArgs e)
@@ -146,6 +154,22 @@ namespace HimApp.Views.Pages
             }
         }
 
+        private void ShowHideLV(bool hide)
+        {
+            if (hide)
+            {
+                sel_zone.Visibility = Visibility.Hidden;
+                LV_services_preset.Visibility = Visibility.Visible;
+                LV_services.Visibility = Visibility.Collapsed;
+                LV_preset.Visibility = Visibility.Collapsed;
+                return;
+            }
+            sel_zone.Visibility = Visibility.Visible;
+            LV_services_preset.Visibility = Visibility.Collapsed;
+            LV_services.Visibility = Visibility.Visible;
+            LV_preset.Visibility = Visibility.Visible;
+        }
+
         private void NewPreset_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -154,7 +178,7 @@ namespace HimApp.Views.Pages
                 presetGroup.cost = cost;
                 List<ServicePreset> list = HimBDEntities.GetContext().ServicePreset.Where(x => x.preset_group_id == presetGroup.id).ToList();
                 if (list.Count != 0)
-                { 
+                {
                     foreach (var item in servicePresets)
                     {
                         if (list.FirstOrDefault(s => s.service_id == item.service_id) != null)
@@ -168,6 +192,7 @@ namespace HimApp.Views.Pages
                             HimBDEntities.GetContext().ServicePreset.Remove(item);
                     }
                     HimBDEntities.GetContext().SaveChanges();
+                    ShowHideLV(false);
                     MainVoid.InformationMessage("Комплекс обновлен");
                     Title_preset.Text = "";
                     Cost_preset.Text = "";
@@ -178,6 +203,7 @@ namespace HimApp.Views.Pages
                 HimBDEntities.GetContext().SaveChanges();
                 Title_preset.Text = "";
                 Cost_preset.Text = "";
+                ShowHideLV(false);
                 MainVoid.InformationMessage($"Комплекс \"{presetGroup.title}\" создан");
             }
             catch (Exception ex)
@@ -207,9 +233,12 @@ namespace HimApp.Views.Pages
         private void ShowService_Click(object sender, RoutedEventArgs e)
         {
             List<ServicesModel> list = new List<ServicesModel>();
-            sel_zone.Visibility = Visibility.Hidden;
-            SV_services_preset.Visibility = Visibility.Visible;
-            SV_services.Visibility = Visibility.Collapsed;
+            ShowHideLV(true);
+            if (Title_preset.Text.Length < 1)
+            {
+                MainVoid.ErrorMessage("Название не может быть пустым");
+                return;
+            }
             PresetGroup preset = HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.title == Title_preset.Text.ToLower().Trim());
             if (preset != null)
             {
@@ -234,13 +263,18 @@ namespace HimApp.Views.Pages
                 foreach (var item in HimBDEntities.GetContext().Services.ToList())
                 {
                     if (!selectedService.Any(x => x == item.id))
-                        list.Add(new ServicesModel() { isSelected = false, service = item});
+                        list.Add(new ServicesModel() { isSelected = false, service = item });
                 }
                 LV_services_preset.ItemsSource = list;
                 DG_SelectService.ItemsSource = servicePresets.ToList();
                 return;
             }
-            LV_services_preset.ItemsSource = HimBDEntities.GetContext().Services.ToList().ConvertAll(x => new ServicesModel { isSelected = false, service = x});
+            if(Cost_preset.Text.Length < 1)
+            {
+                MainVoid.ErrorMessage("Укажите стоимость комплекса");
+                return;
+            }
+            LV_services_preset.ItemsSource = HimBDEntities.GetContext().Services.ToList().ConvertAll(x => new ServicesModel { isSelected = false, service = x });
             try
             {
                 presetGroup = HimBDEntities.GetContext().PresetGroup.Add(new PresetGroup
