@@ -35,6 +35,7 @@ namespace HimApp.Views.Pages
 
         private void PreLoad()
         {
+            WConnect.MainWindowMethod.PageTitle.Text = "Услуги";
             RBService.IsChecked = true;
             RBLV_service.IsChecked = true;
             updCategory();

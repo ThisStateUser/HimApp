@@ -87,21 +87,14 @@
                         <TextBlock Text="Страница" x:Name="PageTitle" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-                            <Button Margin="0 0 20 0" Click="AddOrder_Click">
+                            <TextBlock x:Name="UserName" Margin="0 0 20 0" Style="{DynamicResource TitleText}" Text="Пользователь" VerticalAlignment="Center"/>
+                            
+                            <Button Click="AddOrder_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Новый заказ" Foreground="{DynamicResource TextBtn}" Margin="0 0 10 0"/>
                                     <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
-                            
-                            <TextBlock x:Name="UserName" Style="{DynamicResource TitleText}" Text="Пользователь" VerticalAlignment="Center"/>
-                            <Border CornerRadius="50" Width="48" Height="48" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black">
-                                <Ellipse Width="44" Height="44">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="/Resources/icon.png"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Border>
                         </StackPanel>
 
                     </DockPanel>

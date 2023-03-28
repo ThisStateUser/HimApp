@@ -17,9 +17,6 @@
         <Setter Property="FontSize" Value="12"/>
     </Style>
 
-    
-
-    
     <Style TargetType="Border" x:Key="BorderPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
         <Setter Property="CornerRadius" Value="10"/>
@@ -31,7 +28,6 @@
     <Style TargetType="Border" x:Key="ShadowPanel">
         <Setter Property="Background" Value="{DynamicResource Panel1}"/>
     </Style>
-    
    
     <Style x:Key="Search" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource Panel2}"/>

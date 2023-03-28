@@ -211,7 +211,8 @@ namespace HimApp.Views.Pages.FnPages
 
                 OrderComplit.order.executor_id = ((Users)executor.SelectedItem).id;
                 OrderComplit.order.custom_cost = double.Parse(cost.Text);
-                OrderComplit.order.prepayment = double.Parse(prepay.Text);
+                if (!string.IsNullOrEmpty(prepay.Text))
+                    OrderComplit.order.prepayment = double.Parse(prepay.Text);
                 OrderComplit.order.arrival_date = arrival.SelectedDate;
                 OrderComplit.order.departure_date = departure.SelectedDate;
                 OrderComplit.order.status_id = 3;

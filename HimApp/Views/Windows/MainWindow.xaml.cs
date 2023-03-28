@@ -31,12 +31,21 @@ namespace HimApp.Views.Windows
             InitializeComponent();
             WConnect.MainWindowMethod = this;
             UpdIconTheme();
-            UserName.Text = UserObj.UserAcc.UserInfo.last_name + " " + UserObj.UserAcc.UserInfo.first_name;
+            UserName.Text = ($"{UserObj.UserAcc.UserInfo.last_name} {UserObj.UserAcc.UserInfo.first_name} ({UserObj.UserAcc.UserInfo.Roles.role_name})");
             RdStartPage();
         }
 
         private void RdStartPage()
         {
+            if (UserObj.UserAcc.UserInfo.Roles.id == 2)
+            {
+                AdminPageBtn.Visibility = Visibility.Collapsed;
+                if (Properties.Settings.Default.StartupPage == "AdminPage")
+                    Properties.Settings.Default.StartupPage = "HomePage";
+            }
+            else
+                AdminPageBtn.Visibility = Visibility.Visible;
+
             switch (Properties.Settings.Default.StartupPage)
             {
                 case "HomePage":
@@ -71,7 +80,6 @@ namespace HimApp.Views.Windows
         {
             Application.Current.Shutdown();
         }
-
 
         private void CollapseWin_Click(object sender, RoutedEventArgs e)
         {

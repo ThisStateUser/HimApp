@@ -157,7 +157,7 @@
                             <TextBlock x:Name="info_ClientCarNumber" Text=""/>
                         </Border>
                     </StackPanel>
-                    <StackPanel Visibility="Visible" x:Name="ServicePageOther">
+                    <StackPanel Visibility="Collapsed" x:Name="ServicePageOther">
                         <TextBox Style="{DynamicResource Search}" TextChanged="SearchService_TextChanged"/>
                         <ScrollViewer Margin="0 5" Height="450">
                             <ListView Margin="0 0 7 0" x:Name="LV_services" d:ItemsSource="{d:SampleData ItemCount=1}" Background="Transparent" BorderThickness="0">
