@@ -10,7 +10,7 @@
       Title="ServicePage">
 
     <Grid>
-        <Border Background="{DynamicResource Panel1}" CornerRadius="10" Width="1080" Height="650" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Background="{DynamicResource Panel1}" CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -131,13 +131,13 @@
                 </Border>
                 
                 <StackPanel Grid.Column="1" Margin="15">
-                    <TextBox Style="{DynamicResource Search}"/>
+                    <TextBox Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
                     <StackPanel x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
                         <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_service" Checked="SwapLV_Checked" Content="Услуги"/>
                         <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_preset" Checked="SwapLV_Checked" Margin="5 0 0 0" Content="Комплексы"/>
                     </StackPanel>
                     
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Height="545" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -170,7 +170,7 @@
                                             </StackPanel>
 
                                             <StackPanel Grid.Column="0" Grid.Row="1">
-                                                <TextBlock MaxWidth="530" Text="{Binding description}" TextWrapping="Wrap"/>
+                                            <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" MaxWidth="1000" Text="{Binding description}"/>
                                             </StackPanel>
                                             <StackPanel Grid.Column="1" Grid.Row="1">
                                                 <TextBlock HorizontalAlignment="Right" Text="{Binding ServiceCategory.category_name}"/>
@@ -181,7 +181,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Height="545" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
                         <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

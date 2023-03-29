@@ -58,6 +58,7 @@ namespace HimApp.Views.Pages
 
         private void SwapLV_Checked(object sender, RoutedEventArgs e)
         {
+            updLV();
             switch (((RadioButton)sender).Name)
             {
                 case "RBLV_service":
@@ -71,7 +72,6 @@ namespace HimApp.Views.Pages
                     UpdLVSource();
                     break;
             }
-            LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
         }
 
         private void NewService_Click(object sender, RoutedEventArgs e)
@@ -330,6 +330,36 @@ namespace HimApp.Views.Pages
             HimBDEntities.GetContext().ServiceCategory.Remove(serviceCategory);
             HimBDEntities.GetContext().SaveChanges();
             updCategory();
+        }
+
+        private void updLV(string search = "")
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                LV_services.ItemsSource = HimBDEntities.GetContext().Services.ToList();
+                LV_preset.ItemsSource = HimBDEntities.GetContext().PresetGroup.ToList();
+                
+                return;
+            }
+            if (LV_services.Visibility == Visibility.Visible)
+            {
+                LV_services.ItemsSource = HimBDEntities.GetContext().Services.Where(x => x.title        .Contains(search.Trim().ToLower()) ||
+                                                                                         x.description  .Contains(search.Trim().ToLower())
+                                                                                   ).ToList();
+            }
+            if (LV_preset.Visibility == Visibility.Visible)
+            {
+                LV_preset.ItemsSource = HimBDEntities.GetContext().PresetGroup.Where(x => x.title.Contains(search.Trim().ToLower())).ToList();
+            }
+            if (LV_services_preset.Visibility == Visibility.Visible)
+            {
+
+            }
+        }
+
+        private void Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            updLV(((TextBox)sender).Text.Trim().ToLower());
         }
     }
 }
