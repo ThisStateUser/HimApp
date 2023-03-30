@@ -1,4 +1,5 @@
-﻿using HimApp.Controllers;
+﻿using HimApp.BD;
+using HimApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace HimApp.Views.Pages
         {
             InitializeComponent();
             WConnect.MainWindowMethod.PageTitle.Text = "Главная";
+            orderFirst.ItemsSource = HimBDEntities.GetContext().Order.ToList();
         }
 
         private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
