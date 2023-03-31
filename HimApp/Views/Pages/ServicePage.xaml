@@ -159,14 +159,9 @@
 
                                             <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
                                             <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
-                                                <ComboBox Background="{DynamicResource Panel1}" HorizontalAlignment="Stretch" Width="150" Style="{DynamicResource DropDownMenu}">
-                                                    <ComboBoxItem>
-                                                        <TextBlock Text="Редактировать"/>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem>
-                                                        <TextBlock Text="Удалить"/>
-                                                    </ComboBoxItem>
-                                                </ComboBox>
+                                                <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveService_Click" HorizontalAlignment="Right">
+                                                    <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                                </Button>
                                             </StackPanel>
 
                                             <StackPanel Grid.Column="0" Grid.Row="1">
@@ -203,15 +198,10 @@
 
                                             <TextBlock Margin="0 0 0 0" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
                                             <StackPanel Margin="0 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
-                                                <ComboBox Background="{DynamicResource Panel1}" HorizontalAlignment="Stretch" Width="150" Style="{DynamicResource DropDownMenu}">
-                                                    <ComboBoxItem>
-                                                        <TextBlock Text="Редактировать"/>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem>
-                                                        <TextBlock Text="Удалить"/>
-                                                    </ComboBoxItem>
-                                                </ComboBox>
-                                            </StackPanel>
+                                            <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemovePreset_Click" HorizontalAlignment="Right">
+                                                <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                            </Button>
+                                        </StackPanel>
 
                                             <StackPanel Grid.Column="0" Grid.Row="1">
                                                 <DataGrid ItemsSource="{Binding ServicePreset}" AutoGenerateColumns="False" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
