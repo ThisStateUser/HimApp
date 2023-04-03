@@ -26,7 +26,13 @@ namespace HimApp.Views.Pages
         {
             InitializeComponent();
             WConnect.MainWindowMethod.PageTitle.Text = "Главная";
-            orderFirst.ItemsSource = HimBDEntities.GetContext().Order.ToList();
+            PreLoad();
+        }
+
+        private void PreLoad()
+        {
+            DateTime overdate = DateTime.Today.AddDays(5);
+            orderFirst.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.arrival_date >= DateTime.Today && x.status_id == 3 && x.arrival_date <= overdate).ToList().OrderBy(x => x.arrival_date);
         }
 
         private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

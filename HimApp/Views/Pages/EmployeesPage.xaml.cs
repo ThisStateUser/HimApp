@@ -29,6 +29,12 @@ namespace HimApp.Views.Pages
             EmployUser.ItemsSource = HimBDEntities.GetContext().Users.Where(x => x.UserInfo.role_id == 2).ToList();
         }
 
+        private void showprofile()
+        {
+            profile_info.Visibility = Visibility.Visible;
+            profile_btn.Visibility = Visibility.Visible;
+        }
+
         private void MoreInfo_Click(object sender, RoutedEventArgs e)
         {
             WConnect.MainWindowMethod.FrameM.Navigate(new ClientPage());

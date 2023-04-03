@@ -72,9 +72,6 @@ namespace HimApp.Views.Pages
                 case "ServicePage":
                     ServicePageIcon.SetResourceReference(PackIconMaterial.ForegroundProperty, "Basic");
                     break;
-                case "AdminPage":
-                    AdminPageIcon.SetResourceReference(PackIconMaterial.ForegroundProperty, "Basic");
-                    break;
             }
         }
 
@@ -85,7 +82,6 @@ namespace HimApp.Views.Pages
             ProductPageIcon.SetResourceReference(PackIconMaterial.ForegroundProperty, "Text");
             EmployeesPageIcon.SetResourceReference(PackIconMaterial.ForegroundProperty, "Text");
             ServicePageIcon.SetResourceReference(PackIconMaterial.ForegroundProperty, "Text");
-            AdminPageIcon.SetResourceReference(PackIconMaterial.ForegroundProperty, "Text");
         }
 
         private void BlueColor_MouseDown(object sender, MouseButtonEventArgs e)
@@ -155,11 +151,6 @@ namespace HimApp.Views.Pages
         private void ServicePage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             UIObj.StartUp("ServicePage");
-            RdStartPage();
-        }
-        private void AdminPage_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            UIObj.StartUp("AdminPage");
             RdStartPage();
         }
 

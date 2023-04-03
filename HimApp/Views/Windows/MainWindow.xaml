@@ -71,9 +71,6 @@
                             <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="ServicePageBtn" Click="ServicePage_Click">
                                 <Icon:PackIconMaterial Kind="Bookmark" Style="{DynamicResource menuBtnIcon}"/>
                             </RadioButton>
-                            <RadioButton GroupName="MenuRB" Style="{DynamicResource MenuBtn}" x:Name="AdminPageBtn" Click="AdminPage_Click">
-                                <Icon:PackIconMaterial Kind="ShieldKey" Style="{DynamicResource menuBtnIcon}"/>
-                            </RadioButton>
                         </StackPanel>
                     </DockPanel>
                 </Border>

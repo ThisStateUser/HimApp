@@ -502,12 +502,7 @@ namespace HimApp.Views.Pages.FnPages
             TB_orderbox_executer.Text = ($"{((Users)executor.SelectedItem).UserInfo.first_name} {((Users)executor.SelectedItem).UserInfo.last_name}");
         }
 
-        private void cost_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            MainVoid.OnlyNumber((TextBox)sender, e);
-        }
-
-        private void prepay_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void onlynum_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             MainVoid.OnlyNumber((TextBox)sender, e);
         }

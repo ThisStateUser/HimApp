@@ -274,7 +274,7 @@ namespace HimApp.Views.Pages
                     if (!selectedService.Any(x => x == item.id))
                         PresetServicelist.Add(new ServicesModel() { isSelected = false, service = item });
                 }
-                LV_services_preset.ItemsSource = PresetServicelist;
+                LV_services_preset.ItemsSource = PresetServicelist.ToList();
                 DG_SelectService.ItemsSource = servicePresets.ToList();
                 return;
             }
@@ -336,8 +336,15 @@ namespace HimApp.Views.Pages
             MessageBoxResult result = MessageBox.Show($"Удалить запись \"{serviceCategory.category_name}\"?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.No)
                 return;
-            HimBDEntities.GetContext().ServiceCategory.Remove(serviceCategory);
-            HimBDEntities.GetContext().SaveChanges();
+            try
+            {
+                HimBDEntities.GetContext().ServiceCategory.Remove(serviceCategory);
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
             updCategory();
         }
 
@@ -373,12 +380,48 @@ namespace HimApp.Views.Pages
 
         private void RemoveService_Click(object sender, RoutedEventArgs e)
         {
-            
+            int id = int.Parse(((Button)sender).Tag.ToString());
+            if (HimBDEntities.GetContext().ServicePreset.Any(x => x.service_id == id))
+            {
+                MainVoid.ErrorMessage("Невозможно удалить услугу из за ее принадлежности к одному или нескольким комплексам");
+                return;
+            }
+            Services services = HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == id);
+            MessageBoxResult result = MessageBox.Show($"Удалить запись \"{services.title}\"?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+                return;
+            try
+            {
+                HimBDEntities.GetContext().Services.Remove(services);
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+            updLV();
         }
 
         private void RemovePreset_Click(object sender, RoutedEventArgs e)
         {
+            int id = int.Parse(((Button)sender).Tag.ToString());
 
+            PresetGroup presetGroup = HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.id == id);
+            MessageBoxResult result = MessageBox.Show($"Удалить комплекс \"{presetGroup.title}\"?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+                return;
+            try
+            {
+                if (HimBDEntities.GetContext().ServicePreset.Any(x => x.preset_group_id == id))
+                    HimBDEntities.GetContext().ServicePreset.RemoveRange(HimBDEntities.GetContext().ServicePreset.Where(x => x.preset_group_id == id).ToList());
+                HimBDEntities.GetContext().PresetGroup.Remove(presetGroup);
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+            updLV();
         }
     }
 }

@@ -39,12 +39,12 @@ namespace HimApp.Views.Windows
         {
             if (UserObj.UserAcc.UserInfo.Roles.id == 2)
             {
-                AdminPageBtn.Visibility = Visibility.Collapsed;
-                if (Properties.Settings.Default.StartupPage == "AdminPage")
+                EmployessPageBtn.Visibility = Visibility.Collapsed;
+                if (Properties.Settings.Default.StartupPage == "EmployessPage")
                     Properties.Settings.Default.StartupPage = "HomePage";
             }
             else
-                AdminPageBtn.Visibility = Visibility.Visible;
+                EmployessPageBtn.Visibility = Visibility.Visible;
 
             switch (Properties.Settings.Default.StartupPage)
             {
@@ -67,10 +67,6 @@ namespace HimApp.Views.Windows
                 case "ServicePage":
                     FrameM.Navigate(new ServicePage());
                     ServicePageBtn.IsChecked = true;
-                    break;
-                case "AdminPage":
-                    FrameM.Navigate(new AdminPage());
-                    AdminPageBtn.IsChecked = true;
                     break;
             }
         }
@@ -171,10 +167,6 @@ namespace HimApp.Views.Windows
         private void ServicePage_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new ServicePage());
-        }
-        private void AdminPage_Click(object sender, RoutedEventArgs e)
-        {
-            FrameM.Navigate(new AdminPage());
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {

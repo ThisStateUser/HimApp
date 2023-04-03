@@ -129,15 +129,15 @@
                         </Grid>
                     </Grid>
                 </Border>
-                
-                <StackPanel Grid.Column="1" Margin="15">
-                    <TextBox Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
-                    <StackPanel x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
+
+                <DockPanel Grid.Column="1" Margin="15">
+                    <TextBox DockPanel.Dock="Top" Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
+                    <StackPanel DockPanel.Dock="Top" x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
                         <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_service" Checked="SwapLV_Checked" Content="Услуги"/>
                         <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_preset" Checked="SwapLV_Checked" Margin="5 0 0 0" Content="Комплексы"/>
                     </StackPanel>
-                    
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
+
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=10}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -176,7 +176,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
                         <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -218,7 +218,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" Visibility="Collapsed" Height="545" Margin="0 0 7 0" x:Name="LV_services_preset" Background="Transparent" BorderThickness="0">
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services_preset" Background="Transparent" BorderThickness="0">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -249,7 +249,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                </StackPanel>
+                </DockPanel>
 
                 
             </Grid>

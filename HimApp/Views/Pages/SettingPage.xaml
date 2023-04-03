@@ -72,9 +72,6 @@
                     <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="ServicePage_MouseDown">
                         <Icon:PackIconMaterial Kind="Bookmark" x:Name="ServicePageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
                     </Border>
-                    <Border Style="{DynamicResource SetElipBorder}" Background="Transparent" MouseDown="AdminPage_MouseDown">
-                        <Icon:PackIconMaterial Kind="ShieldKey" x:Name="AdminPageIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
-                    </Border>
                 </StackPanel>
 
                 <TextBlock Text="Аккаунт" Style="{DynamicResource TitleText}" Margin="0 10 0 0"/>
