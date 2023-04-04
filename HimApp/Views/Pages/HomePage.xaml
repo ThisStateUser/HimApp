@@ -14,7 +14,7 @@
             <TextBlock Text="Ближайшие записи" Style="{DynamicResource TitleText}"/>
             <ScrollViewer Style="{DynamicResource ScrollViewerShow}" VerticalAlignment="Top" Background="Transparent" 
                           HorizontalScrollBarVisibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" 
-                          PreviewMouseWheel="FOrder_PreviewMouseWheel" Margin="0 10 0 20" Height="180">
+                          PreviewMouseWheel="FOrder_PreviewMouseWheel" Margin="0 20 0 20" Height="190">
                 <ListView BorderThickness="0" Background="Transparent" d:ItemsSource="{d:SampleData ItemCount=3}" x:Name="orderFirst" >
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -60,10 +60,68 @@
                         </ListView.ItemTemplate>
                     </ListView>
             </ScrollViewer>
-            <TextBlock Text="Готовы" Margin="0 0 0 20" Style="{DynamicResource TitleText}"/>
-            <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Самые активные клиенты" Margin="0 20 0 20" Style="{DynamicResource TitleText}"/>
+            <Border CornerRadius="10" Padding="5" Background="{DynamicResource Panel1}" Width="550" HorizontalAlignment="Left">
+                <DataGrid x:Name="DG_bestActivClient" d:ItemsSource="{d:SampleData ItemCount=5}" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="1"/>
+                    
+                    <DataGridTemplateColumn Width="2*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="№"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-            </StackPanel>
+                    <DataGridTemplateColumn Width="8*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Клиент"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding ClientCar.Client.first_name}"/>
+                                    <TextBlock VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding ClientCar.Client.last_name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="6*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Номер"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding ClientCar.Client.phone}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Style="{DynamicResource TitleText}" Text="Прочее"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button HorizontalAlignment="Left" Margin="0 5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Подробнее" Foreground="{DynamicResource TextBtn}"/>
+                                        <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="1"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Page>

@@ -33,6 +33,7 @@ namespace HimApp.Views.Pages
         {
             DateTime overdate = DateTime.Today.AddDays(Properties.Settings.Default.AddDays);
             orderFirst.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.arrival_date >= DateTime.Today && x.status_id == 3 && x.arrival_date <= overdate).ToList().OrderBy(x => x.arrival_date);
+            
         }
 
         private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

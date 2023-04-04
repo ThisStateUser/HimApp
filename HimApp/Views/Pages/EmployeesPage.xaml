@@ -58,6 +58,9 @@
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
             <DataGrid d:ItemsSource="{d:SampleData ItemCount=2}" x:Name="EmployUser" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
+                    
+                    <DataGridTemplateColumn Width="1"/>
+                    
                     <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.Header>
                             <TextBlock Style="{DynamicResource TitleText}" Text="№"/>

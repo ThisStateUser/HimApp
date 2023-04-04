@@ -76,9 +76,9 @@
 
                 <TextBlock Text="Ближайшие записи" Margin="0 0 0 10"/>
                 <DockPanel Margin="0 0 0 10">
-                    <TextBlock HorizontalAlignment="Left" Text="Выводить записи за " VerticalAlignment="Center"/>
+                    <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Left" Text="Выводить записи за " VerticalAlignment="Center"/>
                     <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="5" x:Name="DayOfFast" PreviewTextInput="OnlyNum_PreviewTextInput" TextChanged="DayOfFast_TextChanged" Text="" Width="30" MaxLength="2"/>
-                    <TextBlock HorizontalAlignment="Left" Text=" дней от настоящего времени" VerticalAlignment="Center"/>
+                    <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Left" Text=" дней от настоящего времени" VerticalAlignment="Center"/>
                 </DockPanel>
 
                 <TextBlock Text="Аккаунт" Style="{DynamicResource TitleText}" Margin="0 10 0 0"/>
