@@ -9,7 +9,7 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="SettingPage">
     <DockPanel>
-        <Border Style="{DynamicResource BorderPanel}" Width="500" Height="324">
+        <Border Style="{DynamicResource BorderPanel}" Width="500" Height="390">
             <StackPanel>
                 <TextBlock Text="Приложение" Style="{DynamicResource TitleText}"/>
                 <Separator Background="{DynamicResource Panel2}" Height="1"  Margin="0 5"/>
@@ -74,13 +74,20 @@
                     </Border>
                 </StackPanel>
 
+                <TextBlock Text="Ближайшие записи" Margin="0 0 0 10"/>
+                <DockPanel Margin="0 0 0 10">
+                    <TextBlock HorizontalAlignment="Left" Text="Выводить записи за " VerticalAlignment="Center"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="5" x:Name="DayOfFast" PreviewTextInput="OnlyNum_PreviewTextInput" TextChanged="DayOfFast_TextChanged" Text="" Width="30" MaxLength="2"/>
+                    <TextBlock HorizontalAlignment="Left" Text=" дней от настоящего времени" VerticalAlignment="Center"/>
+                </DockPanel>
+
                 <TextBlock Text="Аккаунт" Style="{DynamicResource TitleText}" Margin="0 10 0 0"/>
                 <Separator Background="{DynamicResource Panel2}" Height="1"  Margin="0 5"/>
 
                 <StackPanel>
                     <DockPanel Margin="0 0 0 10">
                         <TextBlock HorizontalAlignment="Left" Text="Не выходить из аккаунта" VerticalAlignment="Center"/>
-                        <ToggleButton Style="{DynamicResource ToggleSettings}" x:Name="RememberUser" HorizontalAlignment="Right"/>
+                        <ToggleButton Style="{DynamicResource ToggleSettings}" x:Name="RememberUser" Click="RememberUser_Click" HorizontalAlignment="Right"/>
                     </DockPanel>
                     <DockPanel>
                         <TextBlock HorizontalAlignment="Left" Text="Двухфакторная аутентификация" VerticalAlignment="Center"/>

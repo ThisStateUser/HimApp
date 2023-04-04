@@ -36,6 +36,7 @@ namespace HimApp.Views.Pages
             WConnect.MainWindowMethod.PageTitle.Text = "Настройки";
             RdStartPage();
             initDouble();
+            PreLoad();
         }
 
         public void initDouble()
@@ -50,6 +51,15 @@ namespace HimApp.Views.Pages
                 SetFactorCode.Visibility = Visibility.Visible;
                 DelFactorCode.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void PreLoad()
+        {
+            DayOfFast.Tag = Properties.Settings.Default.AddDays.ToString();
+            if (Properties.Settings.Default.IsRemember)
+                RememberUser.IsChecked = true;
+            else
+                RememberUser.IsChecked = false;
         }
 
         public void RdStartPage()
@@ -195,6 +205,34 @@ namespace HimApp.Views.Pages
                     }
                 }
             }
+        }
+
+        private void OnlyNum_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            MainVoid.OnlyNumber((TextBox)sender, e);
+        }
+
+        private void DayOfFast_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int day = 0;
+            int.TryParse(DayOfFast.Text.Trim(), out day);
+            Properties.Settings.Default.AddDays = day;
+            Properties.Settings.Default.Save();
+        }
+
+        private void RememberUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (RememberUser.IsChecked == false)
+            {
+                Properties.Settings.Default.Login = "";
+                Properties.Settings.Default.IsRemember = false;
+            }
+            else
+            {
+                Properties.Settings.Default.IsRemember = true;
+                Properties.Settings.Default.Login = UserObj.UserAcc.login;
+            }
+            Properties.Settings.Default.Save();
         }
     }
 }

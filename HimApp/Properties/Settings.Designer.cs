@@ -82,5 +82,17 @@ namespace HimApp.Properties {
                 this["StartupPage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int AddDays {
+            get {
+                return ((int)(this["AddDays"]));
+            }
+            set {
+                this["AddDays"] = value;
+            }
+        }
     }
 }

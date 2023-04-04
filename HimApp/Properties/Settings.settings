@@ -17,5 +17,8 @@
     <Setting Name="StartupPage" Type="System.String" Scope="User">
       <Value Profile="(Default)">HomePage</Value>
     </Setting>
+    <Setting Name="AddDays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

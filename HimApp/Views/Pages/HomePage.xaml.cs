@@ -31,7 +31,7 @@ namespace HimApp.Views.Pages
 
         private void PreLoad()
         {
-            DateTime overdate = DateTime.Today.AddDays(5);
+            DateTime overdate = DateTime.Today.AddDays(Properties.Settings.Default.AddDays);
             orderFirst.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.arrival_date >= DateTime.Today && x.status_id == 3 && x.arrival_date <= overdate).ToList().OrderBy(x => x.arrival_date);
         }
 
