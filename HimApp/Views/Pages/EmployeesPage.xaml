@@ -21,26 +21,26 @@
                         <Icon:PackIconMaterial Kind="Account" Width="128" VerticalAlignment="Center" Foreground="{DynamicResource Text}" HorizontalAlignment="Center" Height="128"/>
                     </Border>
                     <StackPanel x:Name="profile_info" Visibility="Collapsed">
-                        <TextBlock x:Name="FirstName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 5" Text="Имя"/>
-                        <TextBlock x:Name="LastName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 15" Text="Фамилия"/>
-                        <TextBlock x:Name="role" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="Сотрудник"/>
-                        <TextBlock x:Name="personal_account" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="154785621458"/>
-                        <TextBlock x:Name="location" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="Вольск"/>
-                        <TextBlock x:Name="salary" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="32000,50 руб"/>
-                        <TextBlock x:Name="schedule" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text="2/2"/>
-                        <TextBlock x:Name="Phone" HorizontalAlignment="Center" Margin="0 10 0 5" Text="+7 999 999 99 99"/>
+                        <TextBlock x:Name="FirstName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 5" Text=""/>
+                        <TextBlock x:Name="LastName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 15" Text=""/>
+                        <TextBlock x:Name="role" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
+                        <TextBlock x:Name="personal_account" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
+                        <TextBlock x:Name="location" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
+                        <TextBlock x:Name="salary" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
+                        <TextBlock x:Name="schedule" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
+                        <TextBlock x:Name="Phone" HorizontalAlignment="Center" Margin="0 10 0 5" Text=""/>
                     </StackPanel>
                 </DockPanel>
             </Border>
             <StackPanel x:Name="profile_btn" Visibility="Collapsed">
-                <Button x:Name="edit" Margin="0 0 0 20" Width="200">
+                <Button x:Name="edituser" Margin="0 0 0 20" Click="edituser_Click" Width="200">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock Text="Редактировать" Foreground="{DynamicResource TextBtn}"/>
                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="Pencil" Margin="10 0 0 0"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="delete" Style="{StaticResource DeleteBtn}" Width="200">
+                <Button x:Name="deleteuser" Style="{StaticResource DeleteBtn}" Click="deleteuser_Click" Width="200">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock Text="Удалить" Foreground="#fbfcfd"/>
                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="TrashCan" Margin="10 0 0 0"/>
@@ -48,16 +48,17 @@
                 </Button>
             </StackPanel>
         </StackPanel>
-        <Button x:Name="add" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
-                <Icon:PackIconMaterial VerticalAlignment="Center" Kind="Plus" Margin="10 0 0 0"/>
-            </StackPanel>
+        <Button x:Name="addEmployees" HorizontalAlignment="Left" Click="addEmployees_Click" VerticalAlignment="Bottom" Width="200">
+            <TextBlock Text="Добавить сотрудника" HorizontalAlignment="Center" Foreground="{DynamicResource TextBtn}"/>
+        </Button>
+        <Button x:Name="cancelEmployees" HorizontalAlignment="Left" Visibility="Collapsed" Style="{DynamicResource DeleteBtn}" Click="cancelEmployees_Click" VerticalAlignment="Bottom" Width="200">
+            <TextBlock Text="Отмена" HorizontalAlignment="Center" Foreground="{DynamicResource TextBtn}"/>
         </Button>
 
         <Border Style="{DynamicResource BorderPanel}" Grid.Column="1">
-            <DataGrid d:ItemsSource="{d:SampleData ItemCount=2}" x:Name="EmployUser" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
-                <DataGrid.Columns>
+            <Grid>
+                <DataGrid d:ItemsSource="{d:SampleData ItemCount=2}" x:Name="EmployUser" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                    <DataGrid.Columns>
                     
                     <DataGridTemplateColumn Width="1"/>
                     
@@ -119,7 +120,7 @@
                     <DataGridTemplateColumn Width="5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button HorizontalAlignment="Right" Margin="0 5" Click="MoreInfo_Click">
+                                <Button HorizontalAlignment="Right" Margin="0 5" Tag="{Binding id}" Click="MoreInfo_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Подробнее" Foreground="{DynamicResource TextBtn}"/>
                                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>
@@ -131,7 +132,30 @@
                     
                     <DataGridTemplateColumn Width="1"/>
                 </DataGrid.Columns>
-            </DataGrid>
+                </DataGrid>
+                
+                <StackPanel Width="400" HorizontalAlignment="Center" x:Name="addemp" Visibility="Collapsed" VerticalAlignment="Center">
+                    <TextBlock Text="Добавление сотрудника" x:Name="titleaddedit" Style="{DynamicResource TitleText}" Margin="0 0 0 20"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Логин" x:Name="login_user" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Пароль" x:Name="password_user" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Имя" x:Name="first_name" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Фамилия" x:Name="last_name" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Телефон" x:Name="phone" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Лицевой счет" x:Name="personal_acc" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Место жительства" x:Name="location_user" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="График работы" x:Name="schedule_user" Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Оклад" x:Name="salary_user" Margin="0 0 0 10"/>
+                    <Grid>
+                        
+                    </Grid>
+                    <Button HorizontalAlignment="Left" Width="120" x:Name="addEmployeesBD" Click="addEmployeesBD_Click">
+                        <TextBlock Text="Добавить" HorizontalAlignment="Center" Foreground="{DynamicResource TextBtn}"/>
+                    </Button>
+                    <Button HorizontalAlignment="Left" Width="120" x:Name="editEmployeesBD" Click="editEmployeesBD_Click">
+                        <TextBlock Text="Сохранить" HorizontalAlignment="Center" Foreground="{DynamicResource TextBtn}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </Page>
