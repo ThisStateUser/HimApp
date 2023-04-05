@@ -27,7 +27,6 @@
                         <TextBlock x:Name="role" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 5" Text=""/>
                         <TextBlock x:Name="personal_account" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
                         <TextBlock x:Name="location" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
-                        <TextBlock x:Name="salary" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
                         <TextBlock x:Name="schedule" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 5" Text=""/>
                         <TextBlock x:Name="Phone" HorizontalAlignment="Center" Margin="0 10 0 5" Text=""/>
                     </StackPanel>
@@ -145,7 +144,6 @@
                     <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Лицевой счет" x:Name="personal_acc" Margin="0 0 0 10"/>
                     <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Место жительства" x:Name="location_user" Margin="0 0 0 10"/>
                     <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="График работы" x:Name="schedule_user" Margin="0 0 0 10"/>
-                    <TextBox Style="{DynamicResource TbPlaceholderTag}" KeyDown="preview_KeyDown" TextChanged="preview_TextChanged" Tag="Оклад" x:Name="salary_user" Margin="0 0 0 10"/>
                     <Grid>
                         
                     </Grid>

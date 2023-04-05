@@ -62,7 +62,6 @@ namespace HimApp.Views.Pages
             role.Text             = user.Roles.role_name;
             personal_account.Text = user.personal_account;
             location.Text         = user.location;
-            salary.Text           = user.salary.ToString();
             schedule.Text         = user.schedule;
             Phone.Text            = user.phone;
 
@@ -93,7 +92,6 @@ namespace HimApp.Views.Pages
             role.Text = "";
             personal_account.Text = "";
             location.Text = "";
-            salary.Text = "";
             schedule.Text = "";
             Phone.Text = "";
         }
@@ -132,8 +130,6 @@ namespace HimApp.Views.Pages
                 list.Add("Вы не указали место жительства сотрудника");
             if (schedule_user.Text.Length < 1)
                 list.Add("Вы не указали график работы сотрудника");
-            if (salary_user.Text.Length < 1)
-                list.Add("Вы не указали оклад сотрудника");
             if (list.Count > 0)
             {
                 string result = "Вы допустили данные ошибки: \n";
@@ -163,7 +159,6 @@ namespace HimApp.Views.Pages
                     schedule = schedule.Text.Trim(),
                     role_id = 2,
                     created_at = DateTime.Now,
-                    salary = double.Parse(salary_user.Text.Trim()),
                 });
                 HimBDEntities.GetContext().SaveChanges();
                 HimBDEntities.GetContext().Users.Add(new Users()
@@ -201,7 +196,6 @@ namespace HimApp.Views.Pages
             role.Text = user.Roles.role_name;
             personal_acc.Text = user.personal_account;
             location_user.Text = user.location;
-            salary_user.Text = user.salary.ToString();
             schedule_user.Text = user.schedule;
             phone.Text = user.phone;
         }
@@ -262,7 +256,6 @@ namespace HimApp.Views.Pages
                 user.location = location_user.Text.Trim();
                 user.schedule = schedule.Text.Trim();
                 user.updated_at = DateTime.Now;
-                user.salary = double.Parse(salary_user.Text.Trim());
 
                 HimBDEntities.GetContext().SaveChanges();
                 MainVoid.InformationMessage($"Данные обновлены");
@@ -296,9 +289,6 @@ namespace HimApp.Views.Pages
                     break;
                 case "schedule_user":
                     schedule.Text = ((TextBox)sender).Text.Trim();
-                    break;
-                case "salary_user":
-                    salary.Text = ((TextBox)sender).Text.Trim();
                     break;
             }
         }
@@ -334,10 +324,6 @@ namespace HimApp.Views.Pages
                 case "location_user":
                     if (e.Key == Key.Enter)
                         schedule_user.Focus();
-                    break;
-                case "schedule_user":
-                    if (e.Key == Key.Enter)
-                        salary_user.Focus();
                     break;
             }
         }
