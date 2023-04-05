@@ -16,7 +16,7 @@ namespace HimApp.BD
     {
         public int id { get; set; }
         public int client_id { get; set; }
-        public Nullable<int> orders { get; set; }
+        public int orders { get; set; }
         public Nullable<double> spent { get; set; }
     
         public virtual Client Client { get; set; }

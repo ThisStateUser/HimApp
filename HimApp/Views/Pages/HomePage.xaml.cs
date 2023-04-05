@@ -32,8 +32,18 @@ namespace HimApp.Views.Pages
         private void PreLoad()
         {
             DateTime overdate = DateTime.Today.AddDays(Properties.Settings.Default.AddDays);
-            orderFirst.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.arrival_date >= DateTime.Today && x.status_id == 3 && x.arrival_date <= overdate).ToList().OrderBy(x => x.arrival_date);
+            List<Order> orders = HimBDEntities.GetContext().Order.Where(x => x.arrival_date >= DateTime.Today && x.status_id == 3 && x.arrival_date <= overdate).OrderBy(x => x.arrival_date).ToList();
+            if (orders.Count == 0)
+            {
+                emptyborder.Visibility = Visibility.Visible;
+                FOrder.Visibility = Visibility.Collapsed;
             
+            } else
+            {
+                emptyborder.Visibility = Visibility.Collapsed;
+                FOrder.Visibility = Visibility.Visible;
+                orderFirst.ItemsSource = orders;
+            }
         }
 
         private void FOrder_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

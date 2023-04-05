@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="body_name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Cars">
@@ -53,7 +53,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="orders" Type="int" />
+          <Property Name="orders" Type="int" Nullable="false" />
           <Property Name="spent" Type="float" />
         </EntityType>
         <EntityType Name="Conditions">
@@ -102,7 +102,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="cost" Type="float" Nullable="false" />
+          <Property Name="cost" Type="float" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -601,7 +601,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="body_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_CarBody" FromRole="CarBody" ToRole="Cars" />
         </EntityType>
@@ -645,7 +645,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="orders" Type="Int32" />
+          <Property Name="orders" Type="Int32" Nullable="false" />
           <Property Name="spent" Type="Double" />
           <NavigationProperty Name="Client" Relationship="Self.FK_ClientStat_Client" FromRole="ClientStat" ToRole="Client" />
         </EntityType>
@@ -706,7 +706,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cost" Type="Double" Nullable="false" />
+          <Property Name="cost" Type="Double" />
           <NavigationProperty Name="OrderSet" Relationship="Self.FK_OrderSet_PresetGroup" FromRole="PresetGroup" ToRole="OrderSet" />
           <NavigationProperty Name="ServicePreset" Relationship="Self.FK_ServicePreset_PresetGroup" FromRole="PresetGroup" ToRole="ServicePreset" />
         </EntityType>

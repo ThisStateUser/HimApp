@@ -131,6 +131,7 @@ namespace HimApp.Views.Pages
             RBS_Preset.Visibility = Visibility.Collapsed;
             RBS_Category.Visibility = Visibility.Collapsed;
             DG_SelectService.Visibility = Visibility.Collapsed;
+            sumpres.Visibility = Visibility.Collapsed;
             DG_Category.Visibility = Visibility.Collapsed;
         }
 
@@ -146,6 +147,7 @@ namespace HimApp.Views.Pages
                     AddAllHide();
                     RBS_Preset.Visibility = Visibility.Visible;
                     DG_SelectService.Visibility = Visibility.Visible;
+                    sumpres.Visibility = Visibility.Visible;
                     break;
                 case "RBCategory":
                     AddAllHide();
@@ -276,11 +278,13 @@ namespace HimApp.Views.Pages
                 }
                 LV_services_preset.ItemsSource = PresetServicelist.ToList();
                 DG_SelectService.ItemsSource = servicePresets.ToList();
+
                 return;
             }
             if(Cost_preset.Text.Length < 1)
             {
                 MainVoid.ErrorMessage("Укажите стоимость комплекса");
+                ShowHideLV(false);
                 return;
             }
             PresetServicelist.AddRange(HimBDEntities.GetContext().Services.ToList().ConvertAll(x => new ServicesModel { isSelected = false, service = x }));
@@ -303,17 +307,22 @@ namespace HimApp.Views.Pages
         {
             DG_SelectService.ItemsSource = null;
             DG_SelectService.ItemsSource = servicePresets.ToList();
+            sumpres.Text = "Итого: " + sum.ToString();
         }
 
+        double sum = 0;
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(((CheckBox)sender).Tag.ToString());
+            Services service = HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == id);
             servicePresets.Add(new ServicePreset
             {
                 service_id = id,
-                Services = HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == id),
+                Services = service,
                 preset_group_id = presetGroup.id,
             });
+            
+            sum += service.cost;
             updDGservice();
         }
 
@@ -321,6 +330,7 @@ namespace HimApp.Views.Pages
         {
             int id = int.Parse(((CheckBox)sender).Tag.ToString());
             servicePresets.Remove(servicePresets.FirstOrDefault(x => x.service_id == id));
+            sum -= HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == id).cost;
             updDGservice();
         }
 

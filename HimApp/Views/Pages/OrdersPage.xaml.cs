@@ -33,7 +33,17 @@ namespace HimApp.Views.Pages
         
         private void PreLoad()
         {
-            updDGOrder();
+            if (HimBDEntities.GetContext().Order.ToList().Count == 0)
+            {
+                emptyborder.Visibility = Visibility.Visible;
+                DG_orders.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                updDGOrder();
+                emptyborder.Visibility = Visibility.Collapsed;
+                DG_orders.Visibility = Visibility.Visible;
+            }
         }
 
         private void updDGOrder(string search = "")

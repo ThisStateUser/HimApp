@@ -59,7 +59,7 @@ namespace HimApp.Views.Pages.FnPages
             ShowPage();
             executor.ItemsSource = HimBDEntities.GetContext().Users.ToList();
             category_car.ItemsSource = HimBDEntities.GetContext().CarBody.ToList();
-            ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
+            updDGClient();
             condition.ItemsSource = HimBDEntities.GetContext().Conditions.ToList();
             additionalVis(true);
             updLVservice();
@@ -70,7 +70,7 @@ namespace HimApp.Views.Pages.FnPages
             foreach (var item in HimBDEntities.GetContext().Services.ToList())
                 listService.Add(new SorP() { tag = $"S{item.id}", title = item.title, cost = item.cost });
             foreach (var item in HimBDEntities.GetContext().PresetGroup.ToList())
-                listService.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost });
+                listService.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost.Value });
             searchService();
         }
         private void searchService(string search = "")
@@ -184,6 +184,7 @@ namespace HimApp.Views.Pages.FnPages
                 OrderComplit.order.comments = comments.Text;
                 PageNextIcon.Kind = PackIconMaterialKind.Check;
                 PageNextTxt.Text = "Готово";
+                HideOtherPage();
             }
 
             if (PageSetIndex == 1)
@@ -226,6 +227,7 @@ namespace HimApp.Views.Pages.FnPages
                 catch (Exception ex)
                 {
                     MainVoid.FatalErrorMessage(ex.Message);
+                    return;
                 }
                 MainVoid.InformationMessage("Заказ добавлен");
                 WConnect.MainWindowMethod.FrameM.Navigate(new HomePage());
@@ -264,7 +266,7 @@ namespace HimApp.Views.Pages.FnPages
             HideOtherPage();
             TitleOther.Text = "Выбор клиента";
             ClientPageOther.Visibility = Visibility.Visible;
-            ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
+            updDGClient();
         }
 
         private void SelectAutoForm_Click(object sender, RoutedEventArgs e)
@@ -326,10 +328,11 @@ namespace HimApp.Views.Pages.FnPages
                 HimBDEntities.GetContext().ClientStat.Add(new ClientStat()
                 {
                     client_id = client.id,
+                    orders = 0,
                 });
                 HimBDEntities.GetContext().SaveChanges();
                 MainVoid.InformationMessage($"Клиент \"{phone_client.Text.Trim()}\" добавлен.");
-                ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
+                updDGClient();
             }
             catch (Exception ex)
             {
@@ -474,7 +477,7 @@ namespace HimApp.Views.Pages.FnPages
                 add();
                 MainVoid.InformationMessage($"Автомобиль \"{brand_car.Text} {model_car.Text}\" добавлен клиенту \"{OrderComplit.client.first_name} {OrderComplit.client.last_name}\".");
                 secondloadcheck.IsChecked = true;
-
+                updDGcar();
             }
             catch (Exception ex)
             {
@@ -616,6 +619,24 @@ namespace HimApp.Views.Pages.FnPages
         private void SearchCar_TextChanged(object sender, TextChangedEventArgs e)
         {
             updDGcar(((TextBox)sender).Text.Trim().ToLower());
+        }
+
+        private void updDGClient(string search = "")
+        {
+            if (search == "")
+            {
+                ClientList.ItemsSource = HimBDEntities.GetContext().Client.ToList();
+                return;
+            }
+            ClientList.ItemsSource = HimBDEntities.GetContext().Client.Where(x => x.first_name.Contains(search.Trim().ToLower()) ||
+                                                                                  x.last_name.Contains(search.Trim().ToLower()) ||
+                                                                                  x.phone.Contains(search.Trim().ToLower())
+                                                                          ).ToList();
+        }
+
+        private void SearchOrder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            updDGClient(((TextBox)sender).Text.Trim().ToLower());
         }
     }
 }

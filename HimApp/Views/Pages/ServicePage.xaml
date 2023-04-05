@@ -77,7 +77,7 @@
                         <Grid Grid.Row="2">
                             <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
                                 <StackPanel>
-                                    <DataGrid IsReadOnly="True" Visibility="Collapsed" x:Name="DG_SelectService" Height="145" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{DynamicResource DataGridShow}">
+                                    <DataGrid IsReadOnly="True" Visibility="Collapsed" x:Name="DG_SelectService" Height="125" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{DynamicResource DataGridShow}">
                                         <DataGrid.Columns>
                                             <DataGridTemplateColumn Width="1*">
                                                 <DataGridTemplateColumn.Header>
@@ -101,7 +101,8 @@
                                             </DataGridTemplateColumn>
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                    <DataGrid x:Name="DG_Category" Visibility="Visible" Height="145" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                                    <TextBlock Text="Итого" x:Name="sumpres" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0 3 0 0"/>
+                                    <DataGrid x:Name="DG_Category" Visibility="Collapsed" Height="145" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                                         <DataGrid.Columns>
                                             <DataGridTemplateColumn>
                                                 <DataGridTemplateColumn.Header>

@@ -23,7 +23,7 @@ namespace HimApp.BD
     
         public int id { get; set; }
         public string title { get; set; }
-        public double cost { get; set; }
+        public Nullable<double> cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderSet> OrderSet { get; set; }

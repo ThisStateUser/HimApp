@@ -12,8 +12,11 @@
     <ScrollViewer VerticalScrollBarVisibility="Hidden" Style="{DynamicResource ScrollViewerShow}">
         <StackPanel>
             <TextBlock Text="Ближайшие записи" Style="{DynamicResource TitleText}"/>
+            <Border Style="{DynamicResource BorderPanel}" x:Name="emptyborder" Visibility="Collapsed" Margin="0 20 0 20" Height="150">
+                <TextBlock Text="Заказов нет" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
+            </Border>
             <ScrollViewer Style="{DynamicResource ScrollViewerShow}" VerticalAlignment="Top" Background="Transparent" 
-                          HorizontalScrollBarVisibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" 
+                          HorizontalScrollBarVisibility="Visible" Visibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" 
                           PreviewMouseWheel="FOrder_PreviewMouseWheel" Margin="0 20 0 20" Height="190">
                 <ListView BorderThickness="0" Background="Transparent" d:ItemsSource="{d:SampleData ItemCount=3}" x:Name="orderFirst" >
                     <ListView.ItemsPanel>
