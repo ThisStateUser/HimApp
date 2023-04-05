@@ -83,6 +83,19 @@ namespace HimApp.Views.Pages
             addEmployees.Visibility = Visibility.Collapsed;
             cancelEmployees.Visibility= Visibility.Visible;
             profile_info.Visibility = Visibility.Visible;
+            clearinfo();
+        }
+
+        private void clearinfo()
+        {
+            FirstName.Text = "";
+            LastName.Text = "";
+            role.Text = "";
+            personal_account.Text = "";
+            location.Text = "";
+            salary.Text = "";
+            schedule.Text = "";
+            Phone.Text = "";
         }
         private void cancelEmployees_Click(object sender, RoutedEventArgs e)
         {
@@ -92,15 +105,7 @@ namespace HimApp.Views.Pages
             cancelEmployees.Visibility = Visibility.Collapsed;
             profile_btn.Visibility = Visibility.Collapsed;
             profile_info.Visibility = Visibility.Collapsed;
-
-            FirstName.Text = "";
-            LastName.Text = "";
-            role.Text = "";
-            personal_account.Text = "";
-            location.Text = "";
-            salary.Text = "";
-            schedule.Text = "";
-            Phone.Text = "";
+            clearinfo();
         }
 
         private string Valid(bool s = true)
@@ -208,10 +213,30 @@ namespace HimApp.Views.Pages
                 return;
             try
             {
-                HimBDEntities.GetContext().Users.Remove(HimBDEntities.GetContext().Users.FirstOrDefault(x => x.userinfo_id == user.id));
-                HimBDEntities.GetContext().UserInfo.Remove(user);
-                HimBDEntities.GetContext().SaveChanges();
-                MainVoid.InformationMessage("Сотрудник удален.");
+                Users userobj = HimBDEntities.GetContext().Users.FirstOrDefault(x => x.userinfo_id == user.id);
+                void removeuser()
+                {
+                    HimBDEntities.GetContext().Users.Remove(userobj);
+                    HimBDEntities.GetContext().UserInfo.Remove(user);
+                    HimBDEntities.GetContext().SaveChanges();
+                    MainVoid.InformationMessage("Сотрудник удален.");
+                }
+
+                if (HimBDEntities.GetContext().Order.Any(x => x.executor_id == userobj.id))
+                {
+                    MessageBoxResult userresult = MessageBox.Show("Пользователь является исполнителем в нескольких заказах, заменить исполнителя на администратора?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (userresult == MessageBoxResult.No)
+                        return;
+                    foreach (var item in HimBDEntities.GetContext().Order.Where(x => x.executor_id == userobj.id))
+                    {
+                        item.executor_id = UserObj.UserAcc.id;
+                    }
+                    HimBDEntities.GetContext().SaveChanges();
+                    updDG();
+                    removeuser();
+                    return;
+                }
+                removeuser();
             }
             catch (Exception ex)
             {
