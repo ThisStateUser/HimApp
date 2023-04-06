@@ -31,6 +31,7 @@ namespace HimApp.Views.Pages.FnPages
         public static Client client;
         public static Cars car;
         public static ClientCar client_car;
+        //order
         public static Order order = new Order();
         public static OrderGroup orderGroup;
         public static List<OrderSet> orderSet = new List<OrderSet>();
@@ -47,6 +48,8 @@ namespace HimApp.Views.Pages.FnPages
     {
         List<object> listService = new List<object>();
         int PageSetIndex = 0;
+        double fullcost = 0;
+
         public AddOrder()
         {
             InitializeComponent();
@@ -117,6 +120,7 @@ namespace HimApp.Views.Pages.FnPages
                     list.Add(HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == item.service_id));
             }
             DG_SelectService.ItemsSource = list;
+            cost_check.Text = "Итого: " + fullcost.ToString();
         }
 
         private void additionalVis(bool shide)
@@ -587,17 +591,23 @@ namespace HimApp.Views.Pages.FnPages
                 idpres = HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.id == OpenID);
 
             if (idpres != null)
+            {
                 OrderComplit.orderSet.Add(new OrderSet()
                 {
                     preset_id = OpenID,
                     group_id = OrderComplit.orderGroup.id,
                 });
+                fullcost += idpres.cost.Value; 
+            }
             if (idserv != null)
+            {
                 OrderComplit.orderSet.Add(new OrderSet()
                 {
                     service_id = OpenID,
                     group_id = OrderComplit.orderGroup.id,
                 });
+                fullcost += idserv.cost;
+            }
             updDGservice();
         }
 
@@ -606,9 +616,15 @@ namespace HimApp.Views.Pages.FnPages
             int OpenID = int.Parse(((CheckBox)sender).Tag.ToString().Remove(0, 1));
 
             if (((CheckBox)sender).Tag.ToString()[0] == 'S')
+            {
                 OrderComplit.orderSet.Remove(OrderComplit.orderSet.FirstOrDefault(x => x.service_id == OpenID));
+                fullcost -= OrderComplit.orderSet.FirstOrDefault(x => x.service_id == OpenID).Services.cost;
+            }
             else
+            {
                 OrderComplit.orderSet.Remove(OrderComplit.orderSet.FirstOrDefault(x => x.preset_id == OpenID));
+                fullcost -= OrderComplit.orderSet.FirstOrDefault(x => x.preset_id == OpenID).PresetGroup.cost.Value;
+            }
             updDGservice();
         }
 

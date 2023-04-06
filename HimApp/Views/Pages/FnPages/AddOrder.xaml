@@ -48,8 +48,9 @@
                             <TextBlock x:Name="TB_orderbox_departure"/>
                         </Border>
                         <TextBlock Text="Состав заказа" Margin="0 10 0 5"/>
-                        <Border CornerRadius="5" Height="128" Padding="5" Background="{DynamicResource Panel1}">
-                            <DataGrid IsReadOnly="True" x:Name="DG_SelectService" d:ItemsSource="{d:SampleData ItemCount=3}" Style="{DynamicResource DataGridShow}">
+                        <Grid>
+                            <Border CornerRadius="5" Height="128" Padding="5" Background="{DynamicResource Panel1}">
+                            <DataGrid IsReadOnly="True" x:Name="DG_SelectService" Style="{DynamicResource DataGridShow}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Width="1*">
                                         <DataGridTemplateColumn.Header>
@@ -74,12 +75,14 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Border>
+                            <TextBlock Text="Итого: " Margin="5" x:Name="cost_check" HorizontalAlignment="Right"/>
+                        </Grid>
                     </StackPanel>
                 </Border>
                 <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 15 0 0"/>
                 <StackPanel VerticalAlignment="Center" Grid.Column="1">
                     <StackPanel Margin="15">
-                        <ScrollViewer x:Name="SV_OrderSetPageOne" Visibility="Visible" MaxHeight="500" Padding="0 0 10 0">
+                        <ScrollViewer x:Name="SV_OrderSetPageOne" Visibility="Collapsed" MaxHeight="500" Padding="0 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Клиент"/>
                                 <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="SelectClientForm" Click="SelectClientForm_Click">
@@ -104,7 +107,7 @@
                                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="comments" Margin="0 5 0 0"/>
                             </StackPanel>
                         </ScrollViewer>
-                        <StackPanel x:Name="SV_OrderSetPageTwo" Visibility="Collapsed">
+                        <StackPanel x:Name="SV_OrderSetPageTwo" Visibility="Visible">
                             <ComboBox Tag="Ответственный за заказ" SelectionChanged="executor_SelectionChanged" x:Name="executor" Margin="0 5 0 10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -159,7 +162,7 @@
                     <StackPanel Visibility="Collapsed" x:Name="ServicePageOther">
                         <TextBox Style="{DynamicResource Search}" TextChanged="SearchService_TextChanged"/>
                         <ScrollViewer Margin="0 5" Height="450">
-                            <ListView Margin="0 0 7 0" x:Name="LV_services" d:ItemsSource="{d:SampleData ItemCount=1}" Background="Transparent" BorderThickness="0">
+                            <ListView Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
