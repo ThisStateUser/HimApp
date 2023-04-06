@@ -185,6 +185,7 @@ namespace HimApp.Views.Pages.FnPages
                 PageNextIcon.Kind = PackIconMaterialKind.Check;
                 PageNextTxt.Text = "Готово";
                 HideOtherPage();
+                DopPageOther.Visibility = Visibility.Visible;
             }
 
             if (PageSetIndex == 1)

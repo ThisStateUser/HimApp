@@ -9,251 +9,249 @@
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="ServicePage">
 
-    <Grid>
-        <Border Background="{DynamicResource Panel1}" CornerRadius="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="8*"/>
-                </Grid.ColumnDefinitions>
+    <Border Background="{DynamicResource Panel1}" CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
 
-                <Border Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
-                    <Grid Grid.Row="0" Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="5*"/>
-                            <RowDefinition Height="2*"/>
-                        </Grid.RowDefinitions>
-                        
-                        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Добавление данных" Style="{DynamicResource TitleText}"/>
-                        <Border Grid.Row="0" CornerRadius="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="{DynamicResource Panel1}" Padding="5">
-                            <StackPanel Orientation="Horizontal">
-                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBService" Checked="RBS_Checked" Content="Услуга"/>
-                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBPreset" Checked="RBS_Checked" Margin="5 0" Content="Комплекс"/>
-                                <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBCategory" Checked="RBS_Checked" Content="Категория"/>
-                            </StackPanel>
-                        </Border>
-                        
-                        <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                            <StackPanel Visibility="Collapsed" x:Name="RBS_Service">
-                                <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Название" x:Name="Title_service" Margin="0 10 0 5"/>
-                                <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Описание" x:Name="Description_service" Margin="0 5 0 5"/>
-                                <ComboBox Background="{DynamicResource Panel1}" Tag="Категория" x:Name="Category_service" Margin="0 5 0 5">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding category_name}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <TextBox Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="Cost_service_PreviewTextInput" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_service" Margin="0 5 0 10"/>
-                                <Button Click="NewService_Click">
-                                    <TextBlock Text="Создать услугу" Foreground="{DynamicResource TextBtn}"/>
+            <Border Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
+                <Grid Grid.Row="0" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Добавление данных" Style="{DynamicResource TitleText}"/>
+                    <Border Grid.Row="0" CornerRadius="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="{DynamicResource Panel1}" Padding="5">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBService" Checked="RBS_Checked" Content="Услуга"/>
+                            <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBPreset" Checked="RBS_Checked" Margin="5 0" Content="Комплекс"/>
+                            <RadioButton Style="{DynamicResource RBORTO}" GroupName="add" Name="RBCategory" Checked="RBS_Checked" Content="Категория"/>
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                        <StackPanel Visibility="Collapsed" x:Name="RBS_Service">
+                            <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Название" x:Name="Title_service" Margin="0 10 0 5"/>
+                            <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Описание" x:Name="Description_service" Margin="0 5 0 5"/>
+                            <ComboBox Background="{DynamicResource Panel1}" Tag="Категория" x:Name="Category_service" Margin="0 5 0 5">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding category_name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="Cost_service_PreviewTextInput" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_service" Margin="0 5 0 10"/>
+                            <Button Click="NewService_Click">
+                                <TextBlock Text="Создать услугу" Foreground="{DynamicResource TextBtn}"/>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel Visibility="Collapsed" x:Name="RBS_Preset">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название" x:Name="Title_preset" Margin="0 10 0 5"/>
+                                <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_preset" Margin="0 5 0 10"/>
+                                <Button HorizontalAlignment="Left" Click="ShowService_Click" Margin="0 5 0 5">
+                                    <TextBlock Text="Список услуг" Foreground="{DynamicResource TextBtn}"/>
                                 </Button>
-                            </StackPanel>
-
-                            <StackPanel Visibility="Collapsed" x:Name="RBS_Preset">
-                                <StackPanel VerticalAlignment="Center">
-                                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название" x:Name="Title_preset" Margin="0 10 0 5"/>
-                                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Цена" x:Name="Cost_preset" Margin="0 5 0 10"/>
-                                    <Button HorizontalAlignment="Left" Click="ShowService_Click" Margin="0 5 0 5">
-                                        <TextBlock Text="Список услуг" Foreground="{DynamicResource TextBtn}"/>
-                                    </Button>
-                                    <Button Click="NewPreset_Click">
-                                        <TextBlock Text="Создать комплекс" x:Name="NewPresetText" Foreground="{DynamicResource TextBtn}"/>
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                            
-                            <StackPanel Visibility="Collapsed" x:Name="RBS_Category">
-                                <StackPanel>
-                                    <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название категории" x:Name="category_name_add" Margin="0 5 0 10"/>
-                                    <Button Click="NewCategory_Click">
-                                        <TextBlock Text="Создать категорию" Foreground="{DynamicResource TextBtn}"/>
-                                    </Button>
-                                </StackPanel>
+                                <Button Click="NewPreset_Click">
+                                    <TextBlock Text="Создать комплекс" x:Name="NewPresetText" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
                             </StackPanel>
                         </StackPanel>
 
-                        <Grid Grid.Row="2">
-                            <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
-                                <StackPanel>
-                                    <DataGrid IsReadOnly="True" Visibility="Collapsed" x:Name="DG_SelectService" Height="125" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{DynamicResource DataGridShow}">
-                                        <DataGrid.Columns>
-                                            <DataGridTemplateColumn Width="1*">
-                                                <DataGridTemplateColumn.Header>
-                                                    <TextBlock Text="№"/>
-                                                </DataGridTemplateColumn.Header>
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock VerticalAlignment="Center" Text="{Binding Services.id}"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn Width="5*">
-                                                <DataGridTemplateColumn.Header>
-                                                    <TextBlock Text="Услуги"/>
-                                                </DataGridTemplateColumn.Header>
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock VerticalAlignment="Center" Text="{Binding Services.title}"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                    <TextBlock Text="Итого" x:Name="sumpres" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0 3 0 0"/>
-                                    <DataGrid x:Name="DG_Category" Visibility="Collapsed" Height="145" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
-                                        <DataGrid.Columns>
-                                            <DataGridTemplateColumn>
-                                                <DataGridTemplateColumn.Header>
-                                                    <TextBlock Style="{DynamicResource TitleText}" Text="Категории"/>
-                                                </DataGridTemplateColumn.Header>
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <DockPanel LastChildFill="True" Width="210" HorizontalAlignment="Stretch">
-                                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="2" TextWrapping="Wrap" Text="{Binding category_name}"/>
-                                                            <DockPanel HorizontalAlignment="Right">
-                                                                <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveCategory_Click" HorizontalAlignment="Right">
-                                                                    <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
-                                                                </Button>
-                                                            </DockPanel>
-                                                        </DockPanel>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-
-                                            <DataGridTemplateColumn Width="1"/>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </Grid>
-                </Border>
-
-                <DockPanel Grid.Column="1" Margin="15">
-                    <TextBox DockPanel.Dock="Top" Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
-                    <StackPanel DockPanel.Dock="Top" x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
-                        <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_service" Checked="SwapLV_Checked" Content="Услуги"/>
-                        <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_preset" Checked="SwapLV_Checked" Margin="5 0 0 0" Content="Комплексы"/>
+                        <StackPanel Visibility="Collapsed" x:Name="RBS_Category">
+                            <StackPanel>
+                                <TextBox Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" Tag="Название категории" x:Name="category_name_add" Margin="0 5 0 10"/>
+                                <Button Click="NewCategory_Click">
+                                    <TextBlock Text="Создать категорию" Foreground="{DynamicResource TextBtn}"/>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
 
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=10}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="Margin" Value="-5 0" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="3*"/>
-                                                <ColumnDefinition Width="1*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="1*"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
+                    <Grid Grid.Row="2">
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Text="Итого" DockPanel.Dock="Bottom" x:Name="sumpres" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0 3 0 0"/>
+                                <DataGrid x:Name="DG_Category" DockPanel.Dock="Top" Visibility="Collapsed" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Style="{DynamicResource TitleText}" Text="Категории"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <DockPanel LastChildFill="True" Width="210" HorizontalAlignment="Stretch">
+                                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="2" TextWrapping="Wrap" Text="{Binding category_name}"/>
+                                                        <DockPanel HorizontalAlignment="Right">
+                                                            <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveCategory_Click" HorizontalAlignment="Right">
+                                                                <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                                            </Button>
+                                                        </DockPanel>
+                                                    </DockPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
 
-                                            <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
-                                            <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
-                                                <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveService_Click" HorizontalAlignment="Right">
-                                                    <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
-                                                </Button>
-                                            </StackPanel>
+                                        <DataGridTemplateColumn Width="1"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid IsReadOnly="True" Visibility="Collapsed" x:Name="DG_SelectService" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{DynamicResource DataGridShow}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Width="1*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="№"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Services.id}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Width="5*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="Услуги"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Services.title}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
 
-                                            <StackPanel Grid.Column="0" Grid.Row="1">
-                                            <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" MaxWidth="1000" Text="{Binding description}"/>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                                <TextBlock HorizontalAlignment="Right" Text="{Binding ServiceCategory.category_name}"/>
-                                                <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
-                        <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="Margin" Value="-5 0 5 0" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="3*"/>
-                                                <ColumnDefinition Width="1*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="1*"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
+            <DockPanel Grid.Column="1" Margin="15">
+                <TextBox DockPanel.Dock="Top" Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
+                <StackPanel DockPanel.Dock="Top" x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
+                    <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_service" Checked="SwapLV_Checked" Content="Услуги"/>
+                    <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_preset" Checked="SwapLV_Checked" Margin="5 0 0 0" Content="Комплексы"/>
+                </StackPanel>
 
-                                            <TextBlock Margin="0 0 0 0" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
-                                            <StackPanel Margin="0 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
-                                            <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemovePreset_Click" HorizontalAlignment="Right">
-                                                <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
-                                            </Button>
-                                        </StackPanel>
+                <ListView d:ItemsSource="{d:SampleData ItemCount=10}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="-5 0 5 0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
-                                            <StackPanel Grid.Column="0" Grid.Row="1">
-                                                <DataGrid ItemsSource="{Binding ServicePreset}" AutoGenerateColumns="False" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
-                                                    <DataGrid.Columns>
-                                                        <DataGridTextColumn Binding="{Binding Services.title}" Header="Состав комплекса:"/>
-                                                    </DataGrid.Columns>
-                                                </DataGrid>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                                <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services_preset" Background="Transparent" BorderThickness="0">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="Margin" Value="-5 0" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="25"/>
-                                                <ColumnDefinition Width="3*"/>
-                                                <ColumnDefinition Width="1*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="1*"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
+                                    <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
+                                    <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
+                                        <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveService_Click" HorizontalAlignment="Right">
+                                            <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                        </Button>
+                                    </StackPanel>
 
-                                            <CheckBox Checked="CheckBox_Checked" IsChecked="{Binding isSelected}" Unchecked="CheckBox_Unchecked" Tag="{Binding service.id}" Grid.Column="0" Margin="0 3 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource Remember}"/>
-                                            <TextBlock Margin="0 0 0 5" Grid.Column="1" Grid.Row="0" Text="{Binding service.title}" Style="{DynamicResource TitleText}"/>
-                                            <TextBlock HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" Text="{Binding service.ServiceCategory.category_name}"/>
-                                            <TextBlock MaxWidth="530" Grid.Column="1" Grid.Row="1" Text="{Binding service.description}" TextWrapping="Wrap"/>
-                                            <TextBlock HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" Margin="0 10 0 0" Text="{Binding service.cost}"/>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                </DockPanel>
+                                    <StackPanel Grid.Column="0" Grid.Row="1">
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" MaxWidth="1000" Text="{Binding description}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Grid.Row="1">
+                                        <TextBlock HorizontalAlignment="Right" Text="{Binding ServiceCategory.category_name}"/>
+                                        <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="-5 0 5 0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
 
-                
-            </Grid>
-        </Border>
-    </Grid>
+                                    <TextBlock Margin="0 0 0 0" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
+                                    <StackPanel Margin="0 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
+                                        <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemovePreset_Click" HorizontalAlignment="Right">
+                                            <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                        </Button>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="0" Grid.Row="1">
+                                        <DataGrid ItemsSource="{Binding ServicePreset}" AutoGenerateColumns="False" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Binding="{Binding Services.title}" Header="Состав комплекса:"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Grid.Row="1">
+                                        <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services_preset" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="-5 0 5 0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <CheckBox Checked="CheckBox_Checked" IsChecked="{Binding isSelected}" Unchecked="CheckBox_Unchecked" Tag="{Binding service.id}" Grid.Column="0" Margin="0 3 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource Remember}"/>
+                                    <TextBlock Margin="0 0 0 5" Grid.Column="1" Grid.Row="0" Text="{Binding service.title}" Style="{DynamicResource TitleText}"/>
+                                    <TextBlock HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0" Text="{Binding service.ServiceCategory.category_name}"/>
+                                    <TextBlock MaxWidth="530" Grid.Column="1" Grid.Row="1" Text="{Binding service.description}" TextWrapping="Wrap"/>
+                                    <TextBlock HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1" Margin="0 10 0 0" Text="{Binding service.cost}"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+
+
+        </Grid>
+    </Border>
 </Page>

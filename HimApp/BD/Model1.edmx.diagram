@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e9f3b3dccf6412ba52e94e06c3c8e4b" Name="Diagram1">
-        <EntityTypeShape EntityType="HimBDModel.AuthDouble" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
+      <Diagram DiagramId="05363cba066742108633fe17acab50f1" Name="Diagram1">
+        <EntityTypeShape EntityType="HimBDModel.AuthDouble" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.CarBody" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.Cars" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.Client" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="HimBDModel.PresetGroup" Width="1.5" PointX="10" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.Product" Width="1.5" PointX="8" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.ProductCategory" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HimBDModel.Roles" Width="1.5" PointX="1.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HimBDModel.Roles" Width="1.5" PointX="1.5" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.ServiceCategory" Width="1.5" PointX="7.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.ServicePreset" Width="1.5" PointX="12.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HimBDModel.Services" Width="1.5" PointX="10" PointY="2.625" IsExpanded="true" />

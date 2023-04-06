@@ -194,7 +194,6 @@
           <Property Name="personal_account" Type="nvarchar" MaxLength="50" />
           <Property Name="location" Type="nvarchar" MaxLength="50" />
           <Property Name="schedule" Type="text" />
-          <Property Name="salary" Type="float" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -812,7 +811,6 @@
           <Property Name="personal_account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="schedule" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="salary" Type="Double" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_UserInfo_Roles" FromRole="UserInfo" ToRole="Roles" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserInfo" FromRole="UserInfo" ToRole="Users" />
         </EntityType>
@@ -1430,7 +1428,6 @@
                 <ScalarProperty Name="personal_account" ColumnName="personal_account" />
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="schedule" ColumnName="schedule" />
-                <ScalarProperty Name="salary" ColumnName="salary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
