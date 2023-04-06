@@ -70,11 +70,18 @@ namespace HimApp.Views.Pages.FnPages
 
         private void updLVservice()
         {
-            foreach (var item in HimBDEntities.GetContext().Services.ToList())
-                listService.Add(new SorP() { tag = $"S{item.id}", title = item.title, cost = item.cost });
-            foreach (var item in HimBDEntities.GetContext().PresetGroup.ToList())
-                listService.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost.Value });
-            searchService();
+            try
+            {
+                foreach (var item in HimBDEntities.GetContext().Services.ToList())
+                    listService.Add(new SorP() { tag = $"S{item.id}", title = item.title, cost = item.cost });
+                foreach (var item in HimBDEntities.GetContext().PresetGroup.ToList())
+                    listService.Add(new SorP() { tag = $"P{item.id}", title = item.title, cost = item.cost.Value });
+                searchService();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
         }
         private void searchService(string search = "")
         {
@@ -617,13 +624,13 @@ namespace HimApp.Views.Pages.FnPages
 
             if (((CheckBox)sender).Tag.ToString()[0] == 'S')
             {
+                fullcost -= HimBDEntities.GetContext().Services.FirstOrDefault(x => x.id == OpenID).cost;
                 OrderComplit.orderSet.Remove(OrderComplit.orderSet.FirstOrDefault(x => x.service_id == OpenID));
-                fullcost -= OrderComplit.orderSet.FirstOrDefault(x => x.service_id == OpenID).Services.cost;
             }
             else
             {
+                fullcost -= HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.id == OpenID).cost.Value;
                 OrderComplit.orderSet.Remove(OrderComplit.orderSet.FirstOrDefault(x => x.preset_id == OpenID));
-                fullcost -= OrderComplit.orderSet.FirstOrDefault(x => x.preset_id == OpenID).PresetGroup.cost.Value;
             }
             updDGservice();
         }

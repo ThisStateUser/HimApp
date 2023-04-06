@@ -180,6 +180,16 @@ namespace HimApp.Views.Pages
         {
             try
             {
+                if (string.IsNullOrEmpty(Title_preset.Text))
+                {
+                    MainVoid.ErrorMessage("Укажите название комплекса");
+                    return;
+                }
+                if (string.IsNullOrEmpty(Cost_preset.Text))
+                {
+                    MainVoid.ErrorMessage("Укажите стоимость комплекса");
+                    return;
+                }
                 int cost = int.Parse(Cost_preset.Text.Trim());
                 presetGroup.cost = cost;
                 List<ServicePreset> list = HimBDEntities.GetContext().ServicePreset.Where(x => x.preset_group_id == presetGroup.id).ToList();
@@ -222,6 +232,11 @@ namespace HimApp.Views.Pages
         {
             try
             {
+                if (string.IsNullOrEmpty(category_name_add.Text))
+                {
+                    MainVoid.ErrorMessage("Укажите название категории");
+                    return;
+                }
                 HimBDEntities.GetContext().ServiceCategory.Add(new ServiceCategory
                 {
                     category_name = category_name_add.Text.Trim(),

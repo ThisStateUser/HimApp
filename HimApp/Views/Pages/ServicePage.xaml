@@ -77,7 +77,7 @@
                         <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
                             <DockPanel LastChildFill="True">
                                 <TextBlock Text="Итого" DockPanel.Dock="Bottom" x:Name="sumpres" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0 3 0 0"/>
-                                <DataGrid x:Name="DG_Category" DockPanel.Dock="Top" Visibility="Collapsed" d:ItemsSource="{d:SampleData ItemCount=4}" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                                <DataGrid x:Name="DG_Category" DockPanel.Dock="Top" Visibility="Collapsed" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.Header>
@@ -100,7 +100,7 @@
                                         <DataGridTemplateColumn Width="1"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <DataGrid IsReadOnly="True" Visibility="Collapsed" x:Name="DG_SelectService" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{DynamicResource DataGridShow}">
+                                <DataGrid IsReadOnly="True" Visibility="Collapsed" x:Name="DG_SelectService" Style="{DynamicResource DataGridShow}">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Width="1*">
                                             <DataGridTemplateColumn.Header>
@@ -137,7 +137,7 @@
                     <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_preset" Checked="SwapLV_Checked" Margin="5 0 0 0" Content="Комплексы"/>
                 </StackPanel>
 
-                <ListView d:ItemsSource="{d:SampleData ItemCount=10}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
+                <ListView DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services" Background="Transparent" BorderThickness="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -176,7 +176,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
+                <ListView DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_preset" Background="Transparent" BorderThickness="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -218,7 +218,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView d:ItemsSource="{d:SampleData ItemCount=2}" DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services_preset" Background="Transparent" BorderThickness="0">
+                <ListView DockPanel.Dock="Top" Visibility="Collapsed" Margin="0 0 7 0" x:Name="LV_services_preset" Background="Transparent" BorderThickness="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
