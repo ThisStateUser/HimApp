@@ -95,29 +95,18 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="5*">
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock Style="{DynamicResource TitleText}" Text="Телефон"/>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.phone}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="5*">
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock Style="{DynamicResource TitleText}" Text="Телефон"/>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.phone}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="5*">
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock Style="{DynamicResource TitleText}" Text="Средний оклад"/>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding UserInfo.salary}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn Width="5*">
+                        <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button HorizontalAlignment="Right" Margin="0 5" Tag="{Binding id}" Click="MoreInfo_Click">

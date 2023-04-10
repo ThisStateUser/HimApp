@@ -50,22 +50,22 @@
                     
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Товар"/>
-                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Артикул*" x:Name="article_product" Margin="0 10 0 5"/>
-                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Название*" x:Name="name_product" Margin="0 10 0 5"/>
-                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Марка" x:Name="brand_product" Margin="0 5 0 5"/>
-                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="OnlyNum_PreviewTextInput" Tag="Колличество*" x:Name="count_product" Margin="0 5 0 5"/>
-                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Цена*" x:Name="price" Margin="0 5 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" KeyDown="NextTxt_KeyDown" Style="{DynamicResource TbPlaceholderTag}" Tag="Артикул*" x:Name="article_product" Margin="0 10 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" KeyDown="NextTxt_KeyDown" Style="{DynamicResource TbPlaceholderTag}" Tag="Название*" x:Name="name_product" Margin="0 5 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" KeyDown="NextTxt_KeyDown" Style="{DynamicResource TbPlaceholderTag}" Tag="Марка" x:Name="brand_product" Margin="0 5 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" KeyDown="NextTxt_KeyDown" Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="OnlyNum_PreviewTextInput" Tag="Колличество*" x:Name="count_product" Margin="0 5 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" KeyDown="NextTxt_KeyDown" Style="{DynamicResource TbPlaceholderTag}" Tag="Цена*" x:Name="price" Margin="0 5 0 5"/>
                         <ComboBox Background="{DynamicResource Panel1}" Tag="Единица измерения*" x:Name="unit" Margin="0 5 0 5">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding Unit.unit_name}"/>
+                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding unit_name}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                         <ComboBox Background="{DynamicResource Panel1}" Tag="Категория*" x:Name="category" Margin="0 5 0 10">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding ProductCategory.category_name}"/>
+                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding category_name}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -79,16 +79,23 @@
             <DockPanel Grid.Column="1" Margin="15">
                 <TextBox DockPanel.Dock="Top" Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
 
-                <ListView DockPanel.Dock="Top" Visibility="Visible" Margin="0 0 7 0" x:Name="LV_Product" Background="Transparent" BorderThickness="0">
+                <ListView DockPanel.Dock="Top" d:ItemsSource="{d:SampleData ItemCount=30}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0 0 7 0" x:Name="LV_Product" Background="Transparent" BorderThickness="0">
+                    
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding ActualWidth, ElementName=LV_Product}"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="-5 0 5 0" />
+                            <Setter Property="Margin" Value="-5 10 10 5" />
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
+                            <Border Padding="5" CornerRadius="10" Width="360" Background="{DynamicResource Panel2}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"/>
@@ -99,19 +106,35 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
+                                    <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding name}" Style="{DynamicResource TitleText}"/>
                                     <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
-                                        <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" HorizontalAlignment="Right">
+                                        <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveProduct_Click" HorizontalAlignment="Right">
                                             <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
                                         </Button>
                                     </StackPanel>
+                                    
+                                    <TextBlock TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Text="{Binding price}"/>
 
-                                    <StackPanel Grid.Column="0" Grid.Row="1">
-                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" MaxWidth="1000" Text="{Binding description}"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="1" Grid.Row="1">
-                                        <TextBlock HorizontalAlignment="Right" Text="{Binding ServiceCategory.category_name}"/>
-                                        <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
+                                    <StackPanel Grid.ColumnSpan="2" Grid.Row="1">
+                                        <TextBlock TextWrapping="Wrap" Margin="0 0 0 5" Text="{Binding article}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding brand}"/>
+                                        <DockPanel Margin="0 10 0 0">
+                                            <TextBlock DockPanel.Dock="Left" Text="{Binding ProductCategory.category_name}" HorizontalAlignment="Left"/>
+                                            <Border DockPanel.Dock="Right" CornerRadius="6" Background="{DynamicResource Panel1}" Width="130" HorizontalAlignment="Right">
+                                                <StackPanel Orientation="Horizontal" Tag="{Binding id}" Height="30">
+                                                    <Button Width="30" Height="30" Click="Minus_Click" Margin="-8">
+                                                        <Icon:PackIconMaterial HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Minus"/>
+                                                    </Button>
+                                                    <StackPanel Width="58" Orientation="Horizontal" HorizontalAlignment="Center" Margin="2 0" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding count}"/>
+                                                        <TextBlock Margin="5 0 0 0" Text="{Binding Unit.unit_name}"/>
+                                                    </StackPanel>
+                                                    <Button Margin="-8" Click="Plus_Click" Width="30" Height="30">
+                                                        <Icon:PackIconMaterial Kind="Plus" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+                                        </DockPanel>
                                     </StackPanel>
                                 </Grid>
                             </Border>

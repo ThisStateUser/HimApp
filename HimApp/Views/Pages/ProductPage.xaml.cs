@@ -33,11 +33,13 @@ namespace HimApp.Views.Pages
         {
             updLV();
             updDGCategory();
+            unit.ItemsSource = HimBDEntities.GetContext().Unit.ToList();
         }
 
         private void updDGCategory()
         {
             DG_Category.ItemsSource = HimBDEntities.GetContext().ProductCategory.ToList();
+            category.ItemsSource = HimBDEntities.GetContext().ProductCategory.ToList();
         }
 
         private bool valid()
@@ -77,7 +79,7 @@ namespace HimApp.Views.Pages
             {
                 HimBDEntities.GetContext().Product.Add(new Product()
                 {
-                    article = article_product.Text.Trim(),
+                    article = article_product.Text.Trim().ToUpper(),
                     name = name_product.Text.Trim(),
                     brand = brand_product.Text.Trim(),
                     count = int.Parse(count_product.Text.Trim()),
@@ -164,6 +166,92 @@ namespace HimApp.Views.Pages
             catch (Exception ex)
             {
                 MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        private void Minus_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parrent = (StackPanel)((Button)sender).Parent;
+            int id = int.Parse(parrent.Tag.ToString());
+            TextBlock text = ((TextBlock)((StackPanel)parrent.Children[1]).Children[0]);
+            int count = int.Parse(text.Text);
+            if (count >= 1)
+            {
+                count--;
+                text.Text = count.ToString();
+            }
+            try
+            {
+                HimBDEntities.GetContext().Product.FirstOrDefault(x => x.id == id).count = count;
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        private void Plus_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parrent = (StackPanel)((Button)sender).Parent;
+            int id = int.Parse(parrent.Tag.ToString());
+            TextBlock text = ((TextBlock)((StackPanel)parrent.Children[1]).Children[0]);
+            int count = int.Parse(text.Text);
+            if (count < 1000)
+            {
+                count++;
+                text.Text = count.ToString();
+            }
+            try
+            {
+                HimBDEntities.GetContext().Product.FirstOrDefault(x => x.id == id).count = count;
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        private void RemoveProduct_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((Button)sender).Tag.ToString());
+            Product product = HimBDEntities.GetContext().Product.FirstOrDefault(x => x.id == id);
+            MessageBoxResult result = MessageBox.Show($"Удалить запись \"{product.name}\"?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+                return;
+            try
+            {
+                HimBDEntities.GetContext().Product.Remove(product);
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+            updLV();
+        }
+
+        private void NextTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (((TextBox)sender).Name)
+            {
+                case "article_product":
+                    if (e.Key == Key.Enter)
+                        name_product.Focus();
+                    break;
+                case "name_product":
+                    if (e.Key == Key.Enter)
+                        brand_product.Focus();
+                    break;
+                case "brand_product":
+                    if (e.Key == Key.Enter)
+                        count_product.Focus();
+                    break;
+                case "count_product":
+                    if (e.Key == Key.Enter)
+                        price.Focus();
+                    break;
             }
         }
     }
