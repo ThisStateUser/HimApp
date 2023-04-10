@@ -86,7 +86,7 @@
 
                             <TextBlock x:Name="UserName" Margin="0 0 20 0" Style="{DynamicResource TitleText}" Text="Пользователь" VerticalAlignment="Center"/>
                             
-                            <Button Click="AddOrder_Click">
+                            <Button Click="AddOrder_Click" x:Name="addOrder">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Новый заказ" Foreground="{DynamicResource TextBtn}" Margin="0 0 10 0"/>
                                     <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center"/>

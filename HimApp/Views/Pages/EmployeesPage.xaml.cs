@@ -191,6 +191,7 @@ namespace HimApp.Views.Pages
             profile_info.Visibility = Visibility.Visible;
 
             login_user.Text = HimBDEntities.GetContext().Users.FirstOrDefault(x => x.userinfo_id == user.id).login;
+            password_user.Text = HimBDEntities.GetContext().Users.FirstOrDefault(x => x.userinfo_id == user.id).password;
             first_name.Text = user.first_name;
             last_name.Text = user.last_name;
             role.Text = user.Roles.role_name;
@@ -249,6 +250,7 @@ namespace HimApp.Views.Pages
             try
             {
                 HimBDEntities.GetContext().Users.FirstOrDefault(x => x.userinfo_id == user.id).login = login_user.Text.Trim();
+                HimBDEntities.GetContext().Users.FirstOrDefault(x => x.userinfo_id == user.id).password = password_user.Text.Trim();
                 user.first_name = first_name.Text.Trim();
                 user.last_name = last_name.Text.Trim();
                 user.phone = phone.Text.Trim();

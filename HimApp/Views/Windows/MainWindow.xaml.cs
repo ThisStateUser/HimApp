@@ -33,6 +33,23 @@ namespace HimApp.Views.Windows
             UpdIconTheme();
             UserName.Text = $"{UserObj.UserAcc.UserInfo.last_name} {UserObj.UserAcc.UserInfo.first_name} ({UserObj.UserAcc.UserInfo.Roles.role_name})";
             RdStartPage();
+            init();
+        }
+
+        private void init()
+        {
+            if (UserObj.UserAcc.UserInfo.role_id == 2)
+            {
+                addOrder.Visibility = Visibility.Collapsed;
+                ProductPageBtn.Visibility = Visibility.Collapsed;
+                EmployessPageBtn.Visibility = Visibility.Collapsed;
+            } 
+            else
+            {
+                addOrder.Visibility = Visibility.Visible;
+                ProductPageBtn.Visibility = Visibility.Visible;
+                EmployessPageBtn.Visibility = Visibility.Visible;
+            }
         }
 
         private void RdStartPage()

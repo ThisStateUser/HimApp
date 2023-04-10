@@ -74,8 +74,8 @@
                     </Border>
                 </StackPanel>
 
-                <TextBlock Text="Ближайшие записи" Margin="0 0 0 10"/>
                 <DockPanel Margin="0 0 0 10">
+                    <TextBlock DockPanel.Dock="Top" Text="Ближайшие записи" Margin="0 0 0 10"/>
                     <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Left" Text="Выводить записи за " VerticalAlignment="Center"/>
                     <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="5" x:Name="DayOfFast" PreviewTextInput="OnlyNum_PreviewTextInput" TextChanged="DayOfFast_TextChanged" Text="" Width="30" MaxLength="2"/>
                     <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Left" Text=" дней от настоящего времени" VerticalAlignment="Center"/>

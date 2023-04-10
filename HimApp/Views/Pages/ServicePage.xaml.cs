@@ -40,6 +40,18 @@ namespace HimApp.Views.Pages
             RBLV_service.IsChecked = true;
             updCategory();
             UpdLVSource();
+            if (UserObj.UserAcc.UserInfo.role_id == 2)
+            {
+                adminzone.Visibility = Visibility.Collapsed;
+                Grid.SetColumn(seezone, 0);
+                Grid.SetColumnSpan(seezone, 2);
+            }
+            else
+            {
+                adminzone.Visibility = Visibility.Visible;
+                Grid.SetColumn(seezone, 1);
+                Grid.SetColumnSpan(seezone, 1);
+            }
         }
 
         private void updCategory()

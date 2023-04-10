@@ -106,7 +106,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Width="2*">
+                        <DataGridTemplateColumn Width="4*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button HorizontalAlignment="Right" Margin="0 5" Tag="{Binding id}" Click="MoreInfo_Click">

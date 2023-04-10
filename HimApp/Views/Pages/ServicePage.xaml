@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
+            <Border x:Name="adminzone" Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
                 <Grid Grid.Row="0" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
@@ -130,7 +130,7 @@
                 </Grid>
             </Border>
 
-            <DockPanel Grid.Column="1" Margin="15">
+            <DockPanel x:Name="seezone" Grid.Column="1" Margin="15">
                 <TextBox DockPanel.Dock="Top" Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
                 <StackPanel DockPanel.Dock="Top" x:Name="sel_zone" Orientation="Horizontal" Margin="0 10 0 0">
                     <RadioButton Style="{DynamicResource RBORTO}" GroupName="sel" x:Name="RBLV_service" Checked="SwapLV_Checked" Content="Услуги"/>

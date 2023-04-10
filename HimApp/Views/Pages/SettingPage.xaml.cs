@@ -60,6 +60,17 @@ namespace HimApp.Views.Pages
                 RememberUser.IsChecked = true;
             else
                 RememberUser.IsChecked = false;
+
+            if (UserObj.UserAcc.UserInfo.role_id == 2)
+            {
+                DayOfFast.IsEnabled = false;
+                SetFactorCode.IsEnabled = false;
+            }
+            else
+            {
+                DayOfFast.IsEnabled = true;
+                SetFactorCode.IsEnabled = true;
+            }
         }
 
         public void RdStartPage()
