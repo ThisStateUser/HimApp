@@ -156,10 +156,6 @@ namespace HimApp.Views.Windows
         {
             FrameM.Navigate(new SettingPage());
         }
-        private void GoClientPage_Click(object sender, RoutedEventArgs e)
-        {
-            FrameM.Navigate(new ClientPage());
-        }
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
             FrameM.Navigate(new AddOrder());

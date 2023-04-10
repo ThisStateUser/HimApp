@@ -66,5 +66,12 @@ namespace HimApp.Views.Pages
         {
             updDGOrder(((TextBox)sender).Text.Trim().ToLower());
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((Button)sender).Tag.ToString());
+            Client client = HimBDEntities.GetContext().Order.FirstOrDefault(x => x.id == id).ClientCar.Client;
+            NavigationService.Navigate(new ClientPage(client));
+        }
     }
 }

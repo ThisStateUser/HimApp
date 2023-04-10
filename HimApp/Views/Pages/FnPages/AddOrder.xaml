@@ -82,7 +82,7 @@
                 <TextBlock Text="Заполните данные" Style="{DynamicResource TitleText}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 15 0 0"/>
                 <StackPanel VerticalAlignment="Center" Grid.Column="1">
                     <StackPanel Margin="15">
-                        <ScrollViewer x:Name="SV_OrderSetPageOne" Visibility="Collapsed" MaxHeight="500" Padding="0 0 10 0">
+                        <ScrollViewer x:Name="SV_OrderSetPageOne" Visibility="Visible" MaxHeight="500" Padding="0 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Клиент"/>
                                 <Button Margin="0 5 0 10" HorizontalAlignment="Left" x:Name="SelectClientForm" Click="SelectClientForm_Click">
@@ -107,7 +107,7 @@
                                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="comments" Margin="0 5 0 0"/>
                             </StackPanel>
                         </ScrollViewer>
-                        <StackPanel x:Name="SV_OrderSetPageTwo" Visibility="Visible">
+                        <StackPanel x:Name="SV_OrderSetPageTwo" Visibility="Collapsed">
                             <ComboBox Tag="Ответственный за заказ" SelectionChanged="executor_SelectionChanged" x:Name="executor" Margin="0 5 0 10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>

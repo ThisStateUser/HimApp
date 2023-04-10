@@ -10,11 +10,11 @@
       Title="OrdersPage">
 
     <Grid>
-        <TextBlock Text="Заказов нет" x:Name="emptyborder" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
+        <TextBlock Text="Заказов нет" x:Name="emptyborder" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TitleText}"/>
         <Border Style="{DynamicResource BorderPanel}">
             <StackPanel>
                 <TextBox Style="{DynamicResource Search}" TextChanged="SearchOrder_TextChanged" Margin="0 0 0 10"/>
-                <DataGrid x:Name="DG_orders" Visibility="Collapsed" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                <DataGrid x:Name="DG_orders" Visibility="Visible" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="1"/>
                     
@@ -98,7 +98,7 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button HorizontalAlignment="Left" Margin="0 5">
+                                <Button HorizontalAlignment="Left" Tag="{Binding id}" Click="Button_Click" Margin="0 5">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Подробнее" Foreground="{DynamicResource TextBtn}"/>
                                         <Icon:PackIconMaterial VerticalAlignment="Center" Kind="FormatListText" Margin="10 0 0 0"/>
