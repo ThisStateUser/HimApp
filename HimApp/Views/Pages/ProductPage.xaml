@@ -8,7 +8,118 @@
       mc:Ignorable="d"
       d:DesignHeight="660" d:DesignWidth="1104"
       Title="ProductPage">
-    <Grid>
-        
-    </Grid>
+
+    <Border Background="{DynamicResource Panel1}" CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Padding="15" CornerRadius="10 0 0 10" Grid.Column="0" Background="{DynamicResource Panel2}">
+                <DockPanel LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Добавление данных" Style="{DynamicResource TitleText}"/>
+                    <DockPanel DockPanel.Dock="Bottom" Height="240" Margin="0 10 0 0">
+                        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Категория"/>
+                        <TextBox DockPanel.Dock="Top" Style="{DynamicResource TbPlaceholderTag}" Background="{DynamicResource Panel1}" x:Name="category_product" Tag="Название*" Margin="0 5 0 10"/>
+                        <Button DockPanel.Dock="Bottom" Margin="0 10 0 0" Click="NewCategory_Click">
+                            <TextBlock Text="Создать категорию" Foreground="{DynamicResource TextBtn}"/>
+                        </Button>
+                        <Border CornerRadius="5" Padding="5" Background="{DynamicResource Panel1}">
+                            <DataGrid x:Name="DG_Category" Visibility="Visible" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderShow}" Style="{DynamicResource DataGridShow}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DockPanel LastChildFill="True" Width="210" HorizontalAlignment="Stretch">
+                                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="2" TextWrapping="Wrap" Text="{Binding category_name}"/>
+                                                    <DockPanel HorizontalAlignment="Right">
+                                                        <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" Click="RemoveCategory_Click" HorizontalAlignment="Right">
+                                                            <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                                        </Button>
+                                                    </DockPanel>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="1"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </DockPanel>
+                    
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Товар"/>
+                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Артикул*" x:Name="article_product" Margin="0 10 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Название*" x:Name="name_product" Margin="0 10 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Марка" x:Name="brand_product" Margin="0 5 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" PreviewTextInput="OnlyNum_PreviewTextInput" Tag="Колличество*" x:Name="count_product" Margin="0 5 0 5"/>
+                        <TextBox Background="{DynamicResource Panel1}" Style="{DynamicResource TbPlaceholderTag}" Tag="Цена*" x:Name="price" Margin="0 5 0 5"/>
+                        <ComboBox Background="{DynamicResource Panel1}" Tag="Единица измерения*" x:Name="unit" Margin="0 5 0 5">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding Unit.unit_name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox Background="{DynamicResource Panel1}" Tag="Категория*" x:Name="category" Margin="0 5 0 10">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="{DynamicResource Text}" Margin="5 0 0 0" Text="{Binding ProductCategory.category_name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Click="NewProduct_Click">
+                            <TextBlock Text="Добавить товар" Foreground="{DynamicResource TextBtn}"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <DockPanel Grid.Column="1" Margin="15">
+                <TextBox DockPanel.Dock="Top" Style="{DynamicResource Search}" TextChanged="Search_TextChanged"/>
+
+                <ListView DockPanel.Dock="Top" Visibility="Visible" Margin="0 0 7 0" x:Name="LV_Product" Background="Transparent" BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="-5 0 5 0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5" CornerRadius="5" Background="{DynamicResource Panel2}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Margin="0 0 0 5" Grid.Column="0" Grid.Row="0" Text="{Binding title}" Style="{DynamicResource TitleText}"/>
+                                    <StackPanel Margin="0 0 0 5" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
+                                        <Button Style="{DynamicResource DeleteBtn}" Tag="{Binding id}" HorizontalAlignment="Right">
+                                            <Icon:PackIconMaterial Kind="TrashCan" Foreground="{DynamicResource TextBtn}"/>
+                                        </Button>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="0" Grid.Row="1">
+                                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" MaxWidth="1000" Text="{Binding description}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Grid.Row="1">
+                                        <TextBlock HorizontalAlignment="Right" Text="{Binding ServiceCategory.category_name}"/>
+                                        <TextBlock HorizontalAlignment="Right" Margin="0 10 0 0" Text="{Binding cost}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+        </Grid>
+    </Border>
 </Page>
+

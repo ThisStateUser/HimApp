@@ -78,7 +78,7 @@
                               IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-            <TextBlock Visibility="Collapsed" Opacity="0.7" Margin="5 0 0 0" x:Name="placeholder" Text="{TemplateBinding Tag}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Visibility="Collapsed" Opacity="0.7" Margin="5 0 0 0" x:Name="placeholder" Text="{TemplateBinding Tag}" HorizontalAlignment="Left" FontFamily="Trebuchet MS" Foreground="{DynamicResource Text}" FontSize="16" VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasItems" Value="false">

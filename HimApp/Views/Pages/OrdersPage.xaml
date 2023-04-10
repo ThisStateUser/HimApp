@@ -14,7 +14,7 @@
         <Border Style="{DynamicResource BorderPanel}">
             <StackPanel>
                 <TextBox Style="{DynamicResource Search}" TextChanged="SearchOrder_TextChanged" Margin="0 0 0 10"/>
-                <DataGrid x:Name="DG_orders" Visibility="Collapsed" d:ItemsSource="{d:SampleData ItemCount=2}" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                <DataGrid x:Name="DG_orders" Visibility="Collapsed" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="1"/>
                     

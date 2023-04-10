@@ -18,7 +18,7 @@
             <ScrollViewer Style="{DynamicResource ScrollViewerShow}" VerticalAlignment="Top" Background="Transparent" 
                           HorizontalScrollBarVisibility="Visible" Visibility="Visible" x:Name="FOrder" VerticalScrollBarVisibility="Disabled" 
                           PreviewMouseWheel="FOrder_PreviewMouseWheel" Margin="0 20 0 20" Height="190">
-                <ListView BorderThickness="0" Background="Transparent" d:ItemsSource="{d:SampleData ItemCount=3}" x:Name="orderFirst" >
+                <ListView BorderThickness="0" Background="Transparent" x:Name="orderFirst" >
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>
@@ -67,7 +67,7 @@
                 <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left">
                     <TextBlock Text="Самые активные клиенты" Margin="0 20 0 20"  Style="{DynamicResource TitleText}"/>
                     <Border CornerRadius="10" Padding="5" Width="550" Background="{DynamicResource Panel1}" HorizontalAlignment="Left">
-                        <DataGrid x:Name="DG_bestActivClien4t" d:ItemsSource="{d:SampleData ItemCount=5}" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                        <DataGrid x:Name="DG_bestActivClien4t" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="1"/>
 
@@ -131,7 +131,7 @@
                 <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
                     <TextBlock Text="Информация о записи" Margin="0 20 0 20" Style="{DynamicResource TitleText}"/>
                     <Border CornerRadius="10" Width="550" Padding="5" Background="{DynamicResource Panel1}" HorizontalAlignment="Left">
-                        <DataGrid x:Name="DG_bestActivClient" d:ItemsSource="{d:SampleData ItemCount=5}" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
+                        <DataGrid x:Name="DG_bestActivClient" IsReadOnly="True" Style="{DynamicResource DataGridShow}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="1"/>
                     
