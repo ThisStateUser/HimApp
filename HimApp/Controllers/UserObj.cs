@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace HimApp.Controllers
 {
-    internal class UserObj
+    public class UserObj
     {
+        public static Users FindUser(string login, string password)
+        {
+            Users user = HimBDEntities.GetContext().Users.FirstOrDefault
+                            (x =>
+                                x.login == login.Trim() &&
+                                x.password == password.Trim()
+                            );
+            return user;
+        }
+
         public static Users UserAcc;
     }
 }

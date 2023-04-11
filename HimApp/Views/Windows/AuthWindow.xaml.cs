@@ -187,7 +187,7 @@ namespace HimApp.Views.Windows
             if (!UserAuth())
                 return;
             LoaderShow("Вход в аккаунт");
-            Users user = FindUser();
+            Users user = UserObj.FindUser(login.Text, password_visible.Text);
             if (user.UserInfo.role_id == 1
                 && HimBDEntities.GetContext().AuthDouble.Where(x => x.user_id == user.id).FirstOrDefault() != null)
             {
@@ -241,7 +241,7 @@ namespace HimApp.Views.Windows
                     break;
             }
 
-            Users user = FindUser();
+            Users user = UserObj.FindUser(login.Text, password_visible.Text);
 
             if (user == null)
             {
@@ -299,16 +299,6 @@ namespace HimApp.Views.Windows
                 LoadPage.Visibility = Visibility.Collapsed;
                 AuthForm.Visibility = Visibility.Visible;
             });
-        }
-
-        private Users FindUser()
-        {
-            Users user = HimBDEntities.GetContext().Users.Where
-                            (x =>
-                                x.login == login.Text.Trim() &&
-                                x.password == password_visible.Text.Trim()
-                            ).FirstOrDefault();
-            return user;
         }
     }
 }

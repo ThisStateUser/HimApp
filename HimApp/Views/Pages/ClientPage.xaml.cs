@@ -30,13 +30,27 @@ namespace HimApp.Views.Pages
             InitializeComponent();
             client = clientObj;
             PreLoad();
+            WConnect.MainWindowMethod.PageTitle.Text = "Информация о клиенте";
         }
 
         private void PreLoad()
         {
+            try
+            {
+                client.ClientStat.First().spent = HimBDEntities.GetContext().Order.Where(x => x.ClientCar.Client.id == client.id).Sum(x => x.custom_cost);
+                HimBDEntities.GetContext().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+                return;
+            }
+
             ClientFirstName.Text = client.first_name;
             ClientLastName.Text = client.last_name;
             ClientPhone.Text = client.phone;
+            ClientVisit.Text = "Заказов: " + client.ClientStat.First().orders.ToString();
+            ClientSpent.Text = "Потрачено: " + client.ClientStat.First().spent.ToString() + " руб.";
             status.ItemsSource = HimBDEntities.GetContext().Status.ToList();
             upgDG();
 
@@ -44,6 +58,7 @@ namespace HimApp.Views.Pages
                 edit.Visibility = Visibility.Collapsed;
             else
                 edit.Visibility = Visibility.Visible;
+
         }
         
         private void upgDG()

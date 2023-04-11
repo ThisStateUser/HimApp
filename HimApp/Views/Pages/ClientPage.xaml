@@ -21,7 +21,9 @@
                     </Border>
                     <StackPanel>
                         <TextBlock x:Name="ClientFirstName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 10 0 5" Text="Имя"/>
-                        <TextBlock x:Name="ClientLastName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 15" Text="Фамилия"/>
+                        <TextBlock x:Name="ClientLastName" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 10" Text="Фамилия"/>
+                        <TextBlock x:Name="ClientVisit" HorizontalAlignment="Center" Text="Заказов" Margin="0 0 0 5"/>
+                        <TextBlock x:Name="ClientSpent" TextWrapping="Wrap" HorizontalAlignment="Center" Text="Потрачено" Margin="0 0 0 15"/>
                         <TextBlock x:Name="ClientPhone" HorizontalAlignment="Center" Text="+7 999 999 99 99"/>
                     </StackPanel>
                 </DockPanel>
