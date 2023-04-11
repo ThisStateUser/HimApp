@@ -112,11 +112,17 @@ namespace HimApp.Views.Pages
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GoClient_Click(object sender, RoutedEventArgs e)
         {
             Client client = HimBDEntities.GetContext().Order.FirstOrDefault(x => x.id == openorder.id).ClientCar.Client;
             NavigationService.Navigate(new ClientPage(client));
             orderinfo.Visibility = Visibility.Visible;
+        }
+
+        private void CheckOut_Click(object sender, RoutedEventArgs e)
+        {
+            var application = new Microsoft.Office.Interop.Word.Application();
+            var document = application.Documents.Add();
         }
     }
 }
