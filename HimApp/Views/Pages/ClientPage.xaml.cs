@@ -37,6 +37,17 @@ namespace HimApp.Views.Pages
             ClientFirstName.Text = client.first_name;
             ClientLastName.Text = client.last_name;
             ClientPhone.Text = client.phone;
+            status.ItemsSource = HimBDEntities.GetContext().Status.ToList();
+            upgDG();
+
+            if (UserObj.UserAcc.UserInfo.role_id == 2)
+                edit.Visibility = Visibility.Collapsed;
+            else
+                edit.Visibility = Visibility.Visible;
+        }
+        
+        private void upgDG()
+        {
             DG_Order.ItemsSource = HimBDEntities.GetContext().Order.Where(x => x.ClientCar.client_id == client.id).ToList();
         }
 
@@ -65,6 +76,49 @@ namespace HimApp.Views.Pages
                 HimBDEntities.GetContext().SaveChanges();
                 MainVoid.InformationMessage("Данные обновлены");
 
+            }
+            catch (Exception ex)
+            {
+                MainVoid.FatalErrorMessage(ex.Message);
+            }
+        }
+
+        Order openorder;
+        private void DG_Order_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((Order)DG_Order.SelectedItem).id;
+            Order order = HimBDEntities.GetContext().Order.FirstOrDefault(x => x.id == id);
+            if (order == null)
+            {
+                MainVoid.ErrorMessage("Заказ не найден");
+                return;
+            }
+
+            openorder = order;
+            Order_num.Text = $"Заказ № {order.id}";
+            executer.Text = $"Исполнитель: {order.Users.UserInfo.last_name} {order.Users.UserInfo.first_name}";
+            client_zone.Text = $"Клиент: {order.ClientCar.Client.last_name} {order.ClientCar.Client.first_name} {order.ClientCar.Client.phone}";
+            client_car.Text = $"Автомобиль клиента: {order.ClientCar.Cars.car_brand} {order.ClientCar.Cars.car_model} {order.ClientCar.car_number}";
+            condition.Text = $"Состояние автомобиля: {order.Conditions.condition_rate}";
+            cost.Text = $"Стоимость работ: {order.custom_cost}";
+            prepay.Text = $"Предоплата: {order.prepayment}";
+            arrival.Text = $"Дата принятия: {order.arrival_date.Value.ToShortDateString()}";
+            departure.Text = $"Дата выдачи: {order.departure_date.Value.ToShortDateString()}";
+            List<OrderSet> orderSet = HimBDEntities.GetContext().OrderSet.Where(x => x.group_id == order.order_group_id).ToList();
+            var list = from t in orderSet select new { title = (t.PresetGroup == null ? t.Services.title : t.PresetGroup.title) };
+            DG_Service.ItemsSource = list;
+            status.SelectedItem = order.Status;
+            comment.Text = $"Комментарий к заказу: {order.comments}";
+            orderinfo.Visibility = Visibility.Visible;
+        }
+
+        private void status_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                openorder.status_id = ((Status)status.SelectedItem).id;
+                HimBDEntities.GetContext().SaveChanges();
+                upgDG();
             }
             catch (Exception ex)
             {

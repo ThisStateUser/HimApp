@@ -23,7 +23,7 @@ namespace HimApp.Views.Pages
     /// </summary>
     public partial class EmployeesPage : Page
     {
-        UserInfo user;
+        UserInfo user = null;
 
         public EmployeesPage()
         {
@@ -43,34 +43,6 @@ namespace HimApp.Views.Pages
             profile_btn.Visibility = Visibility.Visible;
         }
 
-        private void MoreInfo_Click(object sender, RoutedEventArgs e)
-        {
-            int id = int.Parse(((Button)sender).Tag.ToString());
-
-            user = HimBDEntities.GetContext().UserInfo.FirstOrDefault(x => x.id == id);
-            if (user == null)
-            {
-                MainVoid.ErrorMessage("Пользователь не найден");
-                return;
-            }
-
-            addEmployees.Visibility = Visibility.Collapsed;
-            cancelEmployees.Visibility = Visibility.Visible;
-
-            FirstName.Text        = user.first_name;
-            LastName.Text         = user.last_name;
-            role.Text             = user.Roles.role_name;
-            personal_account.Text = user.personal_account;
-            location.Text         = user.location;
-            schedule.Text         = user.schedule;
-            Phone.Text            = user.phone;
-
-            profile_btn.Visibility = Visibility.Visible;
-            profile_info.Visibility = Visibility.Visible;
-
-
-            //WConnect.MainWindowMethod.FrameM.Navigate(new ClientPage());
-        }
 
         private void addEmployees_Click(object sender, RoutedEventArgs e)
         {
@@ -328,6 +300,32 @@ namespace HimApp.Views.Pages
                         schedule_user.Focus();
                     break;
             }
+        }
+
+        private void EmployUser_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((Users)EmployUser.SelectedItem).id;
+
+            user = HimBDEntities.GetContext().UserInfo.FirstOrDefault(x => x.id == id);
+            if (user == null)
+            {
+                MainVoid.ErrorMessage("Пользователь не найден");
+                return;
+            }
+
+            addEmployees.Visibility = Visibility.Collapsed;
+            cancelEmployees.Visibility = Visibility.Visible;
+
+            FirstName.Text = user.first_name;
+            LastName.Text = user.last_name;
+            role.Text = user.Roles.role_name;
+            personal_account.Text = user.personal_account;
+            location.Text = user.location;
+            schedule.Text = user.schedule;
+            Phone.Text = user.phone;
+
+            profile_btn.Visibility = Visibility.Visible;
+            profile_info.Visibility = Visibility.Visible;
         }
     }
 }

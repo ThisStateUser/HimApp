@@ -418,6 +418,11 @@ namespace HimApp.Views.Pages
         private void RemoveService_Click(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(((Button)sender).Tag.ToString());
+            if (UserObj.UserAcc.UserInfo.role_id == 2)
+            {
+                MainVoid.ErrorMessage("Недостаточно прав");
+                return;
+            }
             if (HimBDEntities.GetContext().ServicePreset.Any(x => x.service_id == id))
             {
                 MainVoid.ErrorMessage("Невозможно удалить услугу из за ее принадлежности к одному или нескольким комплексам");
@@ -442,7 +447,11 @@ namespace HimApp.Views.Pages
         private void RemovePreset_Click(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(((Button)sender).Tag.ToString());
-
+            if (UserObj.UserAcc.UserInfo.role_id == 2)
+            {
+                MainVoid.ErrorMessage("Недостаточно прав");
+                return;
+            }
             PresetGroup presetGroup = HimBDEntities.GetContext().PresetGroup.FirstOrDefault(x => x.id == id);
             MessageBoxResult result = MessageBox.Show($"Удалить комплекс \"{presetGroup.title}\"?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.No)
