@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HimApp", "HimApp\HimApp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{BFB1C52F-780D-4415-9440-E46FCE2B078F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{B8FA19AD-B564-4640-9CC4-1956041DD203}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{BFB1C52F-780D-4415-9440-E46FCE2B078F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFB1C52F-780D-4415-9440-E46FCE2B078F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFB1C52F-780D-4415-9440-E46FCE2B078F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8FA19AD-B564-4640-9CC4-1956041DD203}.Debug|Any CPU.ActiveCfg = Debug
+		{B8FA19AD-B564-4640-9CC4-1956041DD203}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

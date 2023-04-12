@@ -59,6 +59,14 @@ namespace HimApp.Views.Pages
 
         private void clearinfo()
         {
+            login_user.Text = "";
+            password_user.Text = "";
+            first_name.Text = "";
+            last_name.Text = "";
+            phone.Text = "";
+            schedule_user.Text = "";
+            location_user.Text = "";
+            personal_acc.Text = "";
             FirstName.Text = "";
             LastName.Text = "";
             role.Text = "";
