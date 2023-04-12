@@ -49,7 +49,9 @@
                     <TextBox Margin="0 5" Style="{DynamicResource TbPlaceholderTag}" Tag="Имя" x:Name="f_name"/>
                     <TextBox Margin="0 5" Style="{DynamicResource TbPlaceholderTag}" Tag="Фамилия" x:Name="l_name"/>
                     <TextBox Margin="0 5" Style="{DynamicResource TbPlaceholderTag}" Tag="Телефон" x:Name="e_phone"/>
-                    <Button Content="Сохранить" Click="save_Click" Margin="0 10"/>
+                    <Button Click="save_Click" Margin="0 10">
+                        <TextBlock Text="Сохранить" Foreground="{DynamicResource TextBtn}"/>
+                    </Button>
                 </StackPanel>
             </Border>
 

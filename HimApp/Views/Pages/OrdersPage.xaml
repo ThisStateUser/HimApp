@@ -63,8 +63,12 @@
                                     </DataGrid>
                                 </Border>
                                 <StackPanel Margin="0 10 0 0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <Button Content="Перейти к клиенту" Click="GoClient_Click"/>
-                                    <Button Margin="10 0 0 0" Content="Создать чек" Click="CheckOut_Click"/>
+                                    <Button Click="GoClient_Click">
+                                        <TextBlock Text="Перейти к клиенту" Foreground="{DynamicResource TextBtn}"/>
+                                    </Button>
+                                    <Button Margin="10 0 0 0" Click="CheckOut_Click">
+                                        <TextBlock Text="Заказ наряд" Foreground="{DynamicResource TextBtn}"/>
+                                    </Button>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
