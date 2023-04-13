@@ -250,8 +250,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </DockPanel>
-
-
         </Grid>
     </Border>
 </Page>

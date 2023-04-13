@@ -50,31 +50,31 @@
                         <TextBlock Text="Состав заказа" Margin="0 10 0 5"/>
                         <Grid>
                             <Border CornerRadius="5" Height="128" Padding="5" Background="{DynamicResource Panel1}">
-                            <DataGrid IsReadOnly="True" x:Name="DG_SelectService" Style="{DynamicResource DataGridShow}">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn Width="1*">
-                                        <DataGridTemplateColumn.Header>
-                                            <TextBlock Text="№"/>
-                                        </DataGridTemplateColumn.Header>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="5*">
-                                        <DataGridTemplateColumn.Header>
-                                            <TextBlock Text="Услуги"/>
-                                        </DataGridTemplateColumn.Header>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock VerticalAlignment="Center" Text="{Binding title}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Border>
+                                <DataGrid IsReadOnly="True" x:Name="DG_SelectService" Style="{DynamicResource DataGridShow}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Width="1*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="№"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding id}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Width="5*">
+                                            <DataGridTemplateColumn.Header>
+                                                <TextBlock Text="Услуги"/>
+                                            </DataGridTemplateColumn.Header>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding title}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Border>
                             <TextBlock Text="Итого: " Margin="5" x:Name="cost_check" HorizontalAlignment="Right"/>
                         </Grid>
                     </StackPanel>
@@ -192,7 +192,7 @@
                         </ScrollViewer>
                     </StackPanel>
                     <StackPanel Visibility="Collapsed" x:Name="AutoPageOther">
-                            <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Добавить" Margin="0 5 0 10" HorizontalAlignment="Center"/>
                         <StackPanel Visibility="Visible" x:Name="MainAddCar">
                             <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Марка*" x:Name="brand_car" Margin="0 5 0 10"/>
                             <TextBox Style="{DynamicResource TbPlaceholderTag}" Tag="Модель*" x:Name="model_car" Margin="0 5 0 10"/>
@@ -350,85 +350,4 @@
             </Grid>
         </Border>
     </Grid>
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-    
-    <TextBlock Text="Заметка к заказу"/>
-                            <RichTextBox x:Name="comments" Margin="0 5 0 10"/>
-    
-        <Border Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource BorderPanel}" Width="400" Height="560">
-            <ScrollViewer>
-                <StackPanel Width="350" HorizontalAlignment="Left">
-                    <TextBlock Text="Заказ" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
-                    <TextBlock Text="Ответственный за заказ"/>
-                    <Border CornerRadius="5" Height="30" Padding="5" Margin="0 5 0 10" Background="{DynamicResource Panel2}">
-                        <TextBlock VerticalAlignment="Center"/>
-                    </Border>
-
-                    <TextBlock Text="Состав заказа"/>
-                    <TextBlock Text="Заметка к заказу"/>
-                    <RichTextBox x:Name="comments"/>
-                    <TextBlock Text="Стоимость работ"/>
-                    <TextBox x:Name="cost"/>
-                    <TextBlock Text="Предоплата (при наличии)"/>
-                    <TextBox x:Name="prepay"/>
-                    <TextBlock Text="Дата записи"/>
-                    <DatePicker CalendarStyle="{DynamicResource Calendars}" x:Name="arrival"/>
-                    <TextBlock Text="Дата выдачи"/>
-                    <DatePicker CalendarStyle="{DynamicResource Calendars}" SelectedDate="10 10" x:Name="departure"/>
-                    <Button Margin="0 10 0 0">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-            </ScrollViewer>
-        </Border>
-
-        <Border Grid.Column="0" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
-            <StackPanel>
-                <TextBlock Text="Автомобиль" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
-                <TextBlock Text="Автомобиль"/>
-                <ComboBox x:Name="car"/>
-                <TextBlock Text="Номер автомобиля"/>
-                <TextBox x:Name="car_num"/>
-                <TextBlock Text="Состояние автомобиля"/>
-                <ComboBox x:Name="condition">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Foreground="{DynamicResource Text}" Text="{Binding condition_rate}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <Button HorizontalAlignment="Right">
-                    <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
-                </Button>
-            </StackPanel>
-        </Border>
-
-        <Border Grid.Column="0" Grid.Row="1" Style="{DynamicResource BorderPanel}" Width="400" Height="270">
-            <StackPanel>
-                <TextBlock Text="Добавление автомобиля" Style="{DynamicResource TitleText}" Margin="0 0 0 5"/>
-                <TextBlock Text="Марка"/>
-                <ComboBox x:Name="car_brand" Margin="0 5 0 10">
-                </ComboBox>
-                <TextBlock Text="Модель"/>
-                <TextBox x:Name="car_model" Margin="0 5 0 10"/>
-                <TextBlock Text="Категория автомобиля"/>
-                <ComboBox x:Name="body_name" Margin="0 5 0 10"/>
-                <Button HorizontalAlignment="Right">
-                    <TextBlock Text="Добавить" Foreground="{DynamicResource TextBtn}"/>
-                </Button>
-            </StackPanel>
-        </Border>
-        
-    </Grid>-->
 </Page>
