@@ -17,6 +17,7 @@
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Panel2}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Text}"/>
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="BorderBrush" Value="Transparent"/>
